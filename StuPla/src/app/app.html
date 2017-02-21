@@ -5,8 +5,9 @@
     </ion-toolbar>
   </ion-header>
 
+<!-- Sidebar stuff, ngFor loops through pages (i.e. assignments, subjects etc), if a page is clicked then it opens-->
   <ion-content>
-    <ion-list>
+    <ion-list> 
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
       </button>

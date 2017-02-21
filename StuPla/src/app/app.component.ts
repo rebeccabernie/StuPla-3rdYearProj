@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
+import { Assignments } from '../pages/assignments/assignments';
 import { Subjects } from '../pages/subjects/subjects';
 import { Timetable } from '../pages/timetable/timetable';
 
@@ -13,15 +14,18 @@ import { Timetable } from '../pages/timetable/timetable';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = Timetable;
+  rootPage: any = Assignments; // Want the app to start on the assignments tab so set that to the root page 
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any}>; 
+  // array of pages, page has a string for title and a component - i.e. the page itself? get confirmation
 
   constructor(public platform: Platform) {
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
+    // Navigation through pages on the sidebar
+    
     this.pages = [
+      { title: 'Assignments', component: Assignments },
       { title: 'Timetable', component: Timetable },
       { title: 'Subjects', component: Subjects }
     ];
@@ -30,16 +34,14 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
+      // Platform initialised, status bar (signal/carrier/notifs etc? that bar?) currently set to default style of platform, no splashscreen at the moment
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
+    // Reset the content nav to have just this page, don't want back button to show in this case
     this.nav.setRoot(page.component);
   }
 }
