@@ -28,6 +28,8 @@ export class Assignments {
         this.assignments = af.database.list('/assignments');
     } // end constructor
 
+// Basic Add / Read / Update / Delete functions adapted from https://www.joshmorony.com/building-a-crud-ionic-2-application-with-firebase-angularfire/
+
 
 // Add Assignment to database
     addAssignment(){
