@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 
 import { NavController, AlertController } from 'ionic-angular';
 
+// Import AF2 List Observable for displaying contents of database
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
+
+
 /*
   Generated class for the Assignments page through CLI.
 
@@ -15,75 +19,46 @@ import { NavController, AlertController } from 'ionic-angular';
 })
 export class Assignments {
 
-  assignments: any = []; // create an empty array of assignments
-  //localStorage.setItem("assignmentsList", JSON.stringify(assignments));
+    assignments: FirebaseListObservable<any>; // populate assignments var
 
-  constructor(public navCtrl: NavController , public alertCtrl: AlertController) {
-      // NavController allows navigation between pages, in this case the menu
-      // AlertController used for the pop up when user wants to add/update/delete
-  }
+    constructor(public navCtrl: NavController, public alertCtrl: AlertController, af: AngularFire) {
+        // NavController allows navigation between pages, in this case the menu
 
-// Add / Update / Delete adapted from https://www.joshmorony.com/an-introduction-to-lists-in-ionic-2/
+        // Database reference, listens to "assignments" node in the Firebase database
+        this.assignments = af.database.list('/assignments');
+    } // end constructor
 
-  addAssignment(){
-    let prompt = this.alertCtrl.create({ // let prompt variable equal this alert stuff
-            title: 'Add Assignment',
-            inputs: [{
-                name: 'title' // Single input for now, will work on times etc later
-            }],
-            // Cancel and Add buttons
-            buttons: [
-                {
-                    text: 'Cancel' // No handler = no change to anything, just closes the popup
-                },
-                {
-                    text: 'Add Assignment', // Title displayed on pop up
-                    handler: data => {
-                        this.assignments.push(data); // pushes the data to the assignments array when user clicks "Add Assignment"
-                    }
-                }
-            ]
-        });
- 
-        prompt.present(); // Displays prompt containing info above
-
-  } // End Add Assignment
-
-  editAssignment(a){
- 
+    addAssignment(){
         let prompt = this.alertCtrl.create({
-            title: 'Edit Assignment',
-            inputs: [{
-                name: 'title'
-            }],
-            buttons: [
-                {
-                    text: 'Cancel'
-                },
-                {
-                    text: 'Save',
-                    handler: data => {
-                        let index = this.assignments.indexOf(a); // indexOf returns index number of the given view controller, i.e. a
-                        this.assignments[index] = data; // when the user clicks "Save", new data overwrites old data in the given index 
-                        
-                    }
-                }
-            ]
-        });
- 
-        prompt.present();       
- 
-    } // End Edit Assignment
+            title: 'New Assignment',
+            message: "New A",
+            inputs: [
+            {
+                name: 'title',
+                placeholder: 'Title'
+            },
+            ], // end inputs
 
-    deleteAssignment(a){
- 
-        let index = this.assignments.indexOf(a);
- 
-        this.assignments.splice(index, 1);
-        /* splice() changes content of an array, 
-        *  index = index # at which to start
-        *  1 = how many elements are changed
-        */
+            buttons: [
+              {
+                text: 'Cancel',
+                //handler: data => {
+                //console.log('Cancel clicked');
+                //}
+              }, // end Cancel button
+              {
+                text: 'Save',
+                handler: data => {
+                    // pushes the data to the assignments database when user clicks "Add Assignment"
+                this.assignments.push({
+                    title: data.title // Title in database = title in data, firebase creates object and assigns it an ID
+                });   
+                }
+              } // End save button
+            ] // End buttons
+        });
+
+    prompt.present(); // Display prompt
 
     }
 

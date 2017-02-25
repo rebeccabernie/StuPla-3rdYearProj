@@ -16,20 +16,16 @@
 </ion-header>
 
 <ion-content>
+
   <ion-list>
-    <ion-item-sliding *ngFor="let a of assignments">
-
-      <ion-item>{{a.title}}</ion-item>
-
-      <ion-item-options>
-          <button ion-button icon-only (click)="editAssignment(a)" light>
-              <ion-icon name="paper"></ion-icon>
-          </button>
-          <button ion-button icon-only (click)="deleteAssignment(a)" danger>
-              <ion-icon name="trash"></ion-icon>
-          </button>
-      </ion-item-options>
-      
-    </ion-item-sliding>
+    <!-- list of all assignments found in the array
+         use async pipe - retrieve list of assignments and display when they become available
+         click handler for options to delete or update
+         $key = item id in list?
+    -->
+    <ion-item *ngFor="let a of assignments | async" (click)="showOptions(a.$key, a.title)">
+      {{a.title}}
+    </ion-item>
   </ion-list>
+
 </ion-content>
