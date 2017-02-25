@@ -4,14 +4,32 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Assignments</ion-title>
+
+<!-- ion-buttons end: button displayed at end of navbar -->
+    <ion-buttons end>
+      <button ion-button (click)="addAssignment()">
+        <ion-icon name="md-add"></ion-icon>
+      </button>
+    </ion-buttons>
+
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Assignments</h3>
+<ion-content>
+  <ion-list>
+    <ion-item-sliding *ngFor="let a of assignments">
 
-  <p>
-      List of assignments etc
-  </p>
+      <ion-item>{{a.title}}</ion-item>
 
+      <ion-item-options>
+          <button ion-button icon-only (click)="editAssignment(a)" light>
+              <ion-icon name="paper"></ion-icon>
+          </button>
+          <button ion-button icon-only (click)="deleteAssignment(a)" danger>
+              <ion-icon name="trash"></ion-icon>
+          </button>
+      </ion-item-options>
+      
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
