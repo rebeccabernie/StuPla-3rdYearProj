@@ -23,8 +23,8 @@
          click handler for options to delete or update
          $key = item id in list?
     -->
-    <ion-item *ngFor="let a of assignments | async" (click)="showOptions(a.$key, a.title)">
-      {{a.title}}
+    <ion-item *ngFor="let a of assignments | async" (click)="showOptions(a.$key, a.title, a.date)">
+      {{a.title}}{{a.date}}
     </ion-item>
   </ion-list>
 

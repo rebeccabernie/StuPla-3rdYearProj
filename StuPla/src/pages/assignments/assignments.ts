@@ -37,7 +37,7 @@ export class Assignments {
     this.navCtrl.push(AddUpcoming); // use navCtrl to open page associated with AddUpcoming import
   }
 
-
+/*
 // Add Assignment to database
     addAssignment(){
       let prompt = this.alertCtrl.create({
@@ -71,6 +71,7 @@ export class Assignments {
       prompt.present(); // Display prompt
 
     } // End addAssignment
+*/
 
 // Show options when assignment is clicked
     showOptions(assignmentID, assignmentTitle) { // pass these to del/update functions

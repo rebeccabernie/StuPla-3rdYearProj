@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 
 // Import AF2 List Observable for displaying contents of database
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
@@ -23,12 +23,15 @@ export class AddUpcoming {
         // NavController allows navigation between pages, in this case the menu
 
         // Database reference, listens to "assignments" node in the Firebase database
-        this.assignments = af.database.list('/assignments');
+        //this.assignments = af.database.list('/assignments');
     } // end constructor
 
   //constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
-  saveItem(){
-  
+  saveItem(name, due){
+    this.assignments.push({
+         title: name,
+         date: due
+    }); 
   }
 }

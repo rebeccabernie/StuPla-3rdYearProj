@@ -18,7 +18,7 @@
 
     <ion-item>
       <ion-label floating>Assignment Title</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="name" name="name"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -26,11 +26,11 @@
       <!-- ngModel used to create two-way data bindings for reading and writing input
            displayFormat taken from https://ionicframework.com/docs/v2/api/components/datetime/DateTime/
       -->
-       <ion-datetime displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="myDate" name="date"></ion-datetime>   
+       <ion-datetime displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="due" name="due"></ion-datetime>   
     </ion-item>
 
   <div padding>
-    <button ion-button color="primary" block type="submit">Save</button>
+    <button ion-button color="primary" block (click)="saveItem()">Save</button>
   </div>
 
   </form>
