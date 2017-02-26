@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 
 import { NavController, AlertController, ActionSheetController } from 'ionic-angular';
 
-// Import AF2 List Observable for displaying contents of database
+// Import AF2 List Observable for getting contents of database
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
+
+import { AddUpcoming } from '../add-upcoming/add-upcoming';
 
 
 /*
@@ -29,6 +31,11 @@ export class Assignments {
     } // end constructor
 
 // Basic Add / Read / Update / Delete functions adapted from https://www.joshmorony.com/building-a-crud-ionic-2-application-with-firebase-angularfire/
+
+// Using a separate page for adding stuff rather than an alert pop up because Ionic 2 won't allow varied input types in one alert, i.e. has to be all radio OR all text OR all checkbox etc, can't have text and date and radio etc
+  openAddPage(){
+    this.navCtrl.push(AddUpcoming); // use navCtrl to open page associated with AddUpcoming import
+  }
 
 
 // Add Assignment to database
@@ -68,7 +75,7 @@ export class Assignments {
 // Show options when assignment is clicked
     showOptions(assignmentID, assignmentTitle) { // pass these to del/update functions
       let actionSheet = this.asCtrl.create({
-        title: 'What do you want to do?',
+        //title: 'What do you want to do?',
         buttons: [
         {
             text: 'Delete Assignment',

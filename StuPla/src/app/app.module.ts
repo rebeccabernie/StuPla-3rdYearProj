@@ -4,6 +4,8 @@ import { MyApp } from './app.component';
 import { Assignments } from '../pages/assignments/assignments';
 import { Timetable } from '../pages/timetable/timetable';
 import { Subjects } from '../pages/subjects/subjects';
+import { AddUpcoming } from '../pages/add-upcoming/add-upcoming';
+
 
 // Firebase / AngularFire2 Stuff
 // Adapted from https://www.joshmorony.com/building-a-crud-ionic-2-application-with-firebase-angularfire/
@@ -27,6 +29,7 @@ export const firebaseConfig = {
   declarations: [   // What's part of the module / what defines it
     MyApp,
     Assignments,
+    AddUpcoming,
     Timetable,
     Subjects
   ],
@@ -38,6 +41,7 @@ export const firebaseConfig = {
   entryComponents: [    // entryComponents tells the offline template compiler to compile the components and create factories for them
     MyApp,
     Assignments,
+    AddUpcoming,
     Timetable,
     Subjects
   ],
