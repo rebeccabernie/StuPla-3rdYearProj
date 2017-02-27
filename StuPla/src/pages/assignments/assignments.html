@@ -22,9 +22,10 @@
          use async pipe - retrieve list of assignments and display when they become available
          click handler for options to delete or update
          $key = item id in list?
+         {{a.date}} a.date
     -->
-    <ion-item *ngFor="let a of assignments | async" (click)="showOptions(a.$key, a.title, a.date)">
-      {{a.title}}{{a.date}}
+    <ion-item *ngFor="let a of assignments | async" (click)="showOptions(a.$key, a.title)">
+      {{a.title}}
     </ion-item>
   </ion-list>
 

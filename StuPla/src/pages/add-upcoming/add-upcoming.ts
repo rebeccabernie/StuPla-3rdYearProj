@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-
+import { NavController, AlertController } from 'ionic-angular';
+import { Assignments } from '../assignments/assignments';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 // Import AF2 List Observable for displaying contents of database
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
@@ -17,21 +18,25 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 })
 export class AddUpcoming {
 
+  //addNew : FormGroup;
+  addNew = {
+    title: ''
+  };
+
   assignments: FirebaseListObservable<any>;
 
-  constructor(public navCtrl: NavController, af: AngularFire) {
+  constructor(public navCtrl: NavController, public alCtrl:  AlertController, af: AngularFire, public formBuilder: FormBuilder ) {
         // NavController allows navigation between pages, in this case the menu
 
         // Database reference, listens to "assignments" node in the Firebase database
-        //this.assignments = af.database.list('/assignments');
+        this.assignments = af.database.list('/assignments');
+
+        //this.addNew = this.formBuilder.group({
+          //title: ['']
+        //});
     } // end constructor
 
-  //constructor(public navCtrl: NavController, public navParams: NavParams) {}
-
-  saveItem(name, due){
-    this.assignments.push({
-         title: name,
-         date: due
-    }); 
+  saveItem(){
+    console.log(this.addNew)
   }
 }
