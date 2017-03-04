@@ -18,10 +18,8 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 })
 export class AddUpcoming {
 
-  //addNew : FormGroup;
-  addNew = {
-    title: ''
-  };
+  public title: String;
+  public due: Date;
 
   assignments: FirebaseListObservable<any>;
 
@@ -31,12 +29,19 @@ export class AddUpcoming {
         // Database reference, listens to "assignments" node in the Firebase database
         this.assignments = af.database.list('/assignments');
 
-        //this.addNew = this.formBuilder.group({
-          //title: ['']
-        //});
     } // end constructor
 
   saveItem(){
-    console.log(this.addNew)
+    var assignment = {
+      title : this.title,
+      due : this.due,
+    }
+
+    this.assignments.push({
+               assignment, // Title in database = title in data, firebase creates object and assigns it an ID
+            });  
+
+    this.navCtrl.push(Assignments); // go back to assignments page when user saves new
   }
+
 }

@@ -24,8 +24,8 @@
          $key = item id in list?
          {{a.date}} a.date
     -->
-    <ion-item *ngFor="let a of assignments | async" (click)="showOptions(a.$key, a.title)">
-      {{a.title}}
+    <ion-item *ngFor="let a of assignments | async" (click)="showOptions(a.$key, a.title, a.due)">
+      {{a.assignment}}
     </ion-item>
   </ion-list>
 
