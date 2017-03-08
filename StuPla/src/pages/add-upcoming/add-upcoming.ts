@@ -38,7 +38,8 @@ export class AddUpcoming {
     }
 
     this.assignments.push({
-               assignment, // Title in database = title in data, firebase creates object and assigns it an ID
+               title:this.title,
+               due:this.due, // Title in database = title in data, firebase creates object and assigns it an ID
             });  
 
     this.navCtrl.push(Assignments); // go back to assignments page when user saves new

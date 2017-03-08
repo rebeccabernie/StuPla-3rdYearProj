@@ -74,7 +74,7 @@ export class Assignments {
 */
 
 // Show options when assignment is clicked
-    showOptions(assignmentID, assignmentTitle) { // pass these to del/update functions
+    showOptions(assignmentID, assignmentTitle, assignmentDue) { // pass these to del/update functions
       let actionSheet = this.asCtrl.create({
         //title: 'What do you want to do?',
         buttons: [
@@ -82,12 +82,17 @@ export class Assignments {
             text: 'Delete Assignment',
             role: 'destructive',
             handler: () => {
-            this.deleteAssignment(assignmentID);
+            this.deleteAssignment(assignmentID); // delete function only needs to know id
             }
         },{
-            text: 'Edit Assignment',
+            text: 'Edit Title',
             handler: () => {
-            this.editAssignment(assignmentID, assignmentTitle);
+            this.editTitle(assignmentID, assignmentTitle);
+            }
+        },{
+            text: 'Edit Date',
+            handler: () => {
+            this.editDue(assignmentID, assignmentDue);
             }
         },{
             text: 'Cancel',
@@ -110,7 +115,7 @@ export class Assignments {
     }
 
   // Edit Assignment stuff
-    editAssignment(assignmentID, assignmentTitle){
+    editTitle(assignmentID, assignmentTitle){
       let prompt = this.alertCtrl.create({
         title: 'Assignment Name',
         message: "Update Assignment",
@@ -120,7 +125,7 @@ export class Assignments {
             placeholder: 'Title',
             value: assignmentTitle // passes input to current assignmentTitle
           },
-          ],
+        ],
 
         buttons: [
           {
@@ -143,6 +148,44 @@ export class Assignments {
 
     prompt.present();
 
-    } // End editAssignment
+  } // End editTitle
+  
+  editDue(assignmentID, assignmentDue){
+      let prompt = this.alertCtrl.create({
+        title: 'Assignment Date',
+        message: "Update Date Due",
+        inputs: [
+          {
+            name: 'due',
+            placeholder: 'Due',
+            value: assignmentDue, // passes input to current assignmentTitle
+            type: 'date'
+          },
+        ],
+
+        buttons: [
+          {
+            text: 'Cancel',
+            handler: data => {
+            console.log('Cancel clicked');
+            }
+          }, // End Cancel button
+          {
+            text: 'Save',
+            handler: data => {
+            // Passing updated assignment name to .update() function, which searches for ID and updates the name for it
+            this.assignments.update(assignmentID, {
+                due: data.due
+            });
+            }
+          } // End Save button
+        ] // End Buttons
+      });
+
+    prompt.present();
+
+    } // End editTitle
+
+
 
 } // End Assignments class
