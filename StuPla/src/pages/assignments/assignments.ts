@@ -158,8 +158,8 @@ export class Assignments {
           {
             name: 'due',
             placeholder: 'Due',
-            value: assignmentDue, // passes input to current assignmentTitle
-            type: 'date'
+            value: assignmentDue,   // passes input to current assignmentTitle
+            type: 'date'            // type: date workaround found on http://stackoverflow.com/questions/41263123/selecting-time-in-prompt-alert-ionic-2
           },
         ],
 
