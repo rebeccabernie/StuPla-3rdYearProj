@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { Assignments } from '../assignments/assignments';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 // Import AF2 List Observable for displaying contents of database
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
@@ -23,7 +23,7 @@ export class AddUpcoming {
 
   assignments: FirebaseListObservable<any>;
 
-  constructor(public navCtrl: NavController, public alCtrl:  AlertController, af: AngularFire, public formBuilder: FormBuilder ) {
+  constructor(public navCtrl: NavController, af: AngularFire, public formBuilder: FormBuilder ) {
         // NavController allows navigation between pages, in this case the menu
 
         // Database reference, listens to "assignments" node in the Firebase database
@@ -32,11 +32,7 @@ export class AddUpcoming {
     } // end constructor
 
   saveItem(){
-    var assignment = {
-      title : this.title,
-      due : this.due,
-    }
-
+    
     this.assignments.push({
                title:this.title,
                due:this.due, // Title in database = title in data, firebase creates object and assigns it an ID

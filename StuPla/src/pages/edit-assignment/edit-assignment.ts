@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { Assignments } from '../assignments/assignments';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 // Import AF2 List Observable for displaying contents of database
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
@@ -16,14 +16,15 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
   selector: 'page-edit-assignment',
   templateUrl: 'edit-assignment.html'
 })
-export class AddUpcoming {
+export class EditAssignment {
 
+  public id: String;
   public title: String;
   public due: Date;
 
   assignments: FirebaseListObservable<any>;
 
-  constructor(public navCtrl: NavController, public alCtrl:  AlertController, af: AngularFire, public formBuilder: FormBuilder ) {
+  constructor(public navCtrl: NavController, af: AngularFire, public formBuilder: FormBuilder ) {
         // NavController allows navigation between pages, in this case the menu
 
         // Database reference, listens to "assignments" node in the Firebase database
@@ -31,18 +32,14 @@ export class AddUpcoming {
 
     } // end constructor
 
-  saveItem(){
-    var assignment = {
-      title : this.title,
-      due : this.due,
-    }
+  editItem(assignmentID){
 
-    this.assignments.push({
-               title:this.title,
-               due:this.due, // Title in database = title in data, firebase creates object and assigns it an ID
-            });  
+    this.assignments.update(assignmentID, {
+                title: this.title,
+                due: this.due
+            });
 
-    this.navCtrl.push(Assignments); // go back to assignments page when user saves new
+    this.navCtrl.push(Assignments); // go back to assignments page when user saves new details
   }
 
 }

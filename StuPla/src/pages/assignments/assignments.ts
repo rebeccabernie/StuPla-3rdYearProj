@@ -7,7 +7,6 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 import { AddUpcoming } from '../add-upcoming/add-upcoming';
 
-
 /*
   Generated class for the Assignments page through CLI.
 
@@ -32,49 +31,15 @@ export class Assignments {
 
 // Basic Add / Read / Update / Delete functions adapted from https://www.joshmorony.com/building-a-crud-ionic-2-application-with-firebase-angularfire/
 
-// Using a separate page for adding stuff rather than an alert pop up because Ionic 2 won't allow varied input types in one alert, i.e. has to be all radio OR all text OR all checkbox etc, can't have text and date and radio etc
+// Using a separate page for adding/editing stuff rather than an alert pop up because Ionic 2 won't allow varied input types in one alert, i.e. has to be all radio OR all text OR all checkbox etc, can't have text and date and radio etc
+
   openAddPage(){
     this.navCtrl.push(AddUpcoming); // use navCtrl to open page associated with AddUpcoming import
   }
 
-/*
-// Add Assignment to database
-    addAssignment(){
-      let prompt = this.alertCtrl.create({
-        title: 'New Assignment',
-        inputs: [
-        {
-            name: 'title',
-            placeholder: 'Title'
-        },
-        ], // end inputs
-
-        buttons: [
-            {
-            text: 'Cancel',
-            //handler: data => {
-            //console.log('Cancel clicked');
-            //}
-            }, // end Cancel button
-            {
-            text: 'Save',
-            handler: data => {
-                // pushes the data to the assignments database when user clicks "Add Assignment"
-            this.assignments.push({
-                title: data.title // Title in database = title in data, firebase creates object and assigns it an ID
-            });   
-            }
-            } // End save button
-        ] // End buttons
-      });
-
-      prompt.present(); // Display prompt
-
-    } // End addAssignment
-*/
-
 // Show options when assignment is clicked
     showOptions(assignmentID, assignmentTitle, assignmentDue) { // pass these to del/update functions
+      
       let actionSheet = this.asCtrl.create({
         //title: 'What do you want to do?',
         buttons: [
@@ -84,23 +49,15 @@ export class Assignments {
             handler: () => {
             this.deleteAssignment(assignmentID); // delete function only needs to know id
             }
-        },{
-            text: 'Edit Title',
-            handler: () => {
-            this.editTitle(assignmentID, assignmentTitle);
-            }
-        },{
-            text: 'Edit Date',
-            handler: () => {
-            this.editDue(assignmentID, assignmentDue);
-            }
-        },{
+          },{
             text: 'Cancel',
             role: 'cancel',
             handler: () => {
             console.log('Cancel clicked');
             }
-        }
+          
+          }
+        
         ]
       }); // end actionSheet var
 
@@ -114,78 +71,29 @@ export class Assignments {
         // Searches database for assignment with correct ID and deletes
     }
 
-  // Edit Assignment stuff
-    editTitle(assignmentID, assignmentTitle){
-      let prompt = this.alertCtrl.create({
-        title: 'Assignment Name',
-        message: "Update Assignment",
-        inputs: [
-          {
-            name: 'title',
-            placeholder: 'Title',
-            value: assignmentTitle // passes input to current assignmentTitle
-          },
-        ],
-
-        buttons: [
-          {
-            text: 'Cancel',
-            handler: data => {
-            console.log('Cancel clicked');
-            }
-          }, // End Cancel button
-          {
-            text: 'Save',
-            handler: data => {
-            // Passing updated assignment name to .update() function, which searches for ID and updates the name for it
-            this.assignments.update(assignmentID, {
-                title: data.title
-            });
-            }
-          } // End Save button
-        ] // End Buttons
-      });
-
-    prompt.present();
-
-  } // End editTitle
-  
-  editDue(assignmentID, assignmentDue){
-      let prompt = this.alertCtrl.create({
-        title: 'Assignment Date',
-        message: "Update Date Due",
-        inputs: [
-          {
-            name: 'due',
-            placeholder: 'Due',
-            value: assignmentDue,   // passes input to current assignmentTitle
-            type: 'date'            // type: date workaround found on http://stackoverflow.com/questions/41263123/selecting-time-in-prompt-alert-ionic-2
-          },
-        ],
-
-        buttons: [
-          {
-            text: 'Cancel',
-            handler: data => {
-            console.log('Cancel clicked');
-            }
-          }, // End Cancel button
-          {
-            text: 'Save',
-            handler: data => {
-            // Passing updated assignment name to .update() function, which searches for ID and updates the name for it
-            this.assignments.update(assignmentID, {
-                due: data.due
-            });
-            }
-          } // End Save button
-        ] // End Buttons
-      });
-
-    prompt.present();
-
-    } // End editTitle
-
-
-
 } // End Assignments class
+
+/*
+Edit Assignment Functionality - Taken out because taking too long to get working. User will have to delete assignment and create a new one in order to edit.
+
+Import - 
+import { EditAssignment } from '../edit-assignment/edit-assignment';
+
+
+Alert Handler - 
+
+,{
+    text: 'Edit',
+    handler: (assignmentID) => {
+    this.openEditPage(assignmentID);
+    }
+  }
+
+
+Open Edit Page method - 
+
+openEditPage(assignmentID){
+    this.navCtrl.push(EditAssignment);
+  }
+
+*/
