@@ -1,11 +1,11 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="dark-raspberry">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Assignments</ion-title>
 
-<!-- ion-buttons end: button displayed at end of navbar -->
+<!-- ion-buttons end: button displayed at end/right of navbar -->
     <ion-buttons end>
       <button ion-button (click)="openAddPage()">
         <ion-icon name="md-add"></ion-icon>
@@ -22,10 +22,9 @@
          use async pipe - retrieve list of assignments and display when they become available
          click handler for options to delete or update
          $key = item id in list?
-         {{a.date}} a.date
     -->
     <ion-item *ngFor="let a of assignments | async" (click)="showOptions(a.$key, a.title, a.due)">
-      {{a.title}}
+      <h1 color="peach">{{a.title}}</h1>
       {{a.due}}
     </ion-item>
   </ion-list>

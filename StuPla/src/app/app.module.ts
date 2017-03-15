@@ -5,7 +5,6 @@ import { Assignments } from '../pages/assignments/assignments';
 import { Timetable } from '../pages/timetable/timetable';
 import { Subjects } from '../pages/subjects/subjects';
 import { AddUpcoming } from '../pages/add-upcoming/add-upcoming';
-import { EditAssignment } from '../pages/edit-assignment/edit-assignment';
 
 
 // Firebase / AngularFire2 Stuff
@@ -31,7 +30,6 @@ export const firebaseConfig = {
     MyApp,
     Assignments,
     AddUpcoming,
-    EditAssignment,
     Timetable,
     Subjects
   ],
@@ -44,7 +42,6 @@ export const firebaseConfig = {
     MyApp,
     Assignments,
     AddUpcoming,
-    EditAssignment,
     Timetable,
     Subjects
   ],
