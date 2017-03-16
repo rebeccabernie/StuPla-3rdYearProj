@@ -2,9 +2,10 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { Assignments } from '../pages/assignments/assignments';
-import { Timetable } from '../pages/timetable/timetable';
-import { Subjects } from '../pages/subjects/subjects';
+//import { Timetable } from '../pages/timetable/timetable';
+//import { Subjects } from '../pages/subjects/subjects';
 import { AddUpcoming } from '../pages/add-upcoming/add-upcoming';
+import { HowTo } from '../pages/how-to/how-to';
 
 
 // Firebase / AngularFire2 Stuff
@@ -30,8 +31,9 @@ export const firebaseConfig = {
     MyApp,
     Assignments,
     AddUpcoming,
-    Timetable,
-    Subjects
+    HowTo
+    //Timetable,
+    //Subjects
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -42,8 +44,9 @@ export const firebaseConfig = {
     MyApp,
     Assignments,
     AddUpcoming,
-    Timetable,
-    Subjects
+    HowTo
+    //Timetable,
+    //Subjects
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

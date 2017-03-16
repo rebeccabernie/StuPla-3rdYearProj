@@ -22,14 +22,29 @@
          use async pipe - retrieve list of assignments and display when they become available
          click handler for options to delete or update
          $key = item id in list?
-    -->
+
+-->
+
+
     <ion-item *ngFor="let a of assignments | async" (click)="showOptions(a.$key, a.title, a.due)">
-      <h1 color="blue">{{a.title}}</h1>
-      {{a.due | date:'MMM dd, yyyy HH:mm'}} 
-      <!-- Using pipe to display date, adapted from
-      https://forum.ionicframework.com/t/formatting-date-time-for-display/60671/6
-      answer from user "spera" -->
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <h1 color="blue">{{a.title}}</h1>
+            {{a.due | date:'MMM dd, yyyy HH:mm'}} 
+             <!--Using pipe to display date, adapted from
+            https://forum.ionicframework.com/t/formatting-date-time-for-display/60671/6
+            answer from user "spera" -->
+          </ion-col>
+
+          <ion-col>
+            countdown
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
     </ion-item>
+
   </ion-list>
 
 </ion-content>

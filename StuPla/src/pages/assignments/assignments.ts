@@ -53,7 +53,7 @@ export class Assignments {
             text: 'Cancel',
             role: 'cancel',
             handler: () => {
-            console.log('Cancel clicked');
+            console.log('Cancel clicked'); //making sure it works
             }
           
           }

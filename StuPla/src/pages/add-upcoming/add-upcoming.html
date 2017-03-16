@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="blue">
     <ion-title>Add New Item</ion-title>
   </ion-navbar>
 
@@ -23,13 +23,15 @@
     <ion-item>
       <ion-label floating>Date</ion-label>
        <!-- ngModel used to create two-way data bindings for reading and writing input
-           displayFormat taken from https://ionicframework.com/docs/v2/api/components/datetime/DateTime/ -->
+           displayFormat taken from https://ionicframework.com/docs/v2/api/components/datetime/DateTime/
+           -->
       
-       <ion-datetime min={{due}} max="2020-01-01" displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="due" name="due" ></ion-datetime>   
+       <ion-datetime min={{due}} max="2019-12-31" displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="due" name="due" ></ion-datetime> 
+       <!--  -->  
     </ion-item>
 
     <div padding>
-      <button type="submit" color="primary" block >Save</button>
+      <button ion-button type="submit" color="coral" block>Save</button>
     </div>
   </form>
 </ion-content>
