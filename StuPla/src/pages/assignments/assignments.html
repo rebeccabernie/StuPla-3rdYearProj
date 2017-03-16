@@ -25,7 +25,10 @@
     -->
     <ion-item *ngFor="let a of assignments | async" (click)="showOptions(a.$key, a.title, a.due)">
       <h1 color="blue">{{a.title}}</h1>
-      {{a.due}}
+      {{a.due | date:'MMM dd, yyyy HH:mm'}} 
+      <!-- Using pipe to display date, adapted from
+      https://forum.ionicframework.com/t/formatting-date-time-for-display/60671/6
+      answer from user "spera" -->
     </ion-item>
   </ion-list>
 
