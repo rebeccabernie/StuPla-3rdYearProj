@@ -27,8 +27,11 @@
 
 
     <ion-item *ngFor="let a of assignments | async" (click)="showOptions(a.$key, a.title, a.due)">
+      <!-- Grid adapted from https://ionicframework.com/docs/v2/components/#grid -->
+
       <ion-grid>
         <ion-row>
+          
           <ion-col>
             <h1 color="blue">{{a.title}}</h1>
             {{a.due | date:'MMM dd, yyyy HH:mm'}} 
@@ -43,6 +46,7 @@
 
         </ion-row>
       </ion-grid>
+
     </ion-item>
 
   </ion-list>

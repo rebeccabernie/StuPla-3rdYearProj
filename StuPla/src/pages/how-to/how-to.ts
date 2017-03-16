@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Assignments } from '../assignments/assignments';
 import { NavController, NavParams } from 'ionic-angular';
 
 /*
