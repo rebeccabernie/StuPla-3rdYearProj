@@ -4,6 +4,7 @@ import { Assignments } from '../assignments/assignments';
 import { FormBuilder } from '@angular/forms';
 // Import AF2 List Observable for displaying contents of database
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { DatePicker } from 'ionic-native';
 
 /*
   Generated class for the AddUpcoming page.
@@ -19,11 +20,10 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 export class AddUpcoming {
 
   public title: String;
-  public due: Date;
+  //public due: Date;
 
- // public due: String = new Date().toISOString(); from https://forum.ionicframework.com/t/datetime-default-to-todays-date/53178
-
-  defaultDate: String = new Date().toISOString();
+  public due: String = new Date().toISOString();
+  // set default datepicker date to today adapted from https://forum.ionicframework.com/t/datetime-default-to-todays-date/53178/2
 
 
   assignments: FirebaseListObservable<any>;
