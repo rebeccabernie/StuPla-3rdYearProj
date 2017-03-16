@@ -21,6 +21,11 @@ export class AddUpcoming {
   public title: String;
   public due: Date;
 
+ // public due: String = new Date().toISOString(); from https://forum.ionicframework.com/t/datetime-default-to-todays-date/53178
+
+  defaultDate: String = new Date().toISOString();
+
+
   assignments: FirebaseListObservable<any>;
 
   constructor(public navCtrl: NavController, af: AngularFire, public formBuilder: FormBuilder ) {
