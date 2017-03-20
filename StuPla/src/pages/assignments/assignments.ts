@@ -36,16 +36,14 @@ export class Assignments {
 
 // Using a separate page for adding/editing stuff rather than an alert pop up because Ionic 2 won't allow varied input types in one alert, i.e. has to be all radio OR all text OR all checkbox etc, can't have text and date and radio etc
 
+// Open add new assignment page when user clicks "+" button
   openAddPage(){
     this.navCtrl.push(AddUpcoming); // use navCtrl to open page associated with AddUpcoming import
   }
 
+// Calculate time left on assignment
   countdown(due){
-      //due = moment(due);
-      //assignmentEntered = moment([assignmentEntered]);
-
-      //let countdown = assignmentEntered.diff(assignmentDue, "hours");
-      let countdown = moment().to(due);
+      let countdown = moment().to(due);  // use momentjs to get time until due, set that value to countdown variable
       return countdown;
   }
   

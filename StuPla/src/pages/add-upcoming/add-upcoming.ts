@@ -27,7 +27,7 @@ export class AddUpcoming {
 
   assignments: FirebaseListObservable<any>;
 
-  public curDate: String = new Date().toISOString();
+  //public curDate: String = new Date().toISOString();
 
   constructor(public navCtrl: NavController, af: AngularFire, public formBuilder: FormBuilder ) {
         // NavController allows navigation between pages, in this case the menu
@@ -50,7 +50,6 @@ export class AddUpcoming {
       // "title" in database = "title" in data, firebase creates object and assigns it an ID
                title: this.title,
                due: this.due,
-               entered: this.curDate,
             });  
 
     this.navCtrl.push(Assignments); // go back to assignments page when user saves new

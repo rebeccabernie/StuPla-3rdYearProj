@@ -20,13 +20,11 @@
   <ion-list>
     <!-- list of all assignments found in the array
          use async pipe - retrieve list of assignments and display when they become available
-         click handler for options to delete or update
-         $key = item id in list?
+         click handler for options to delete or update, only needs to know item ID
+         $key = item id in firebase
+    -->
 
--->
-
-
-    <ion-item *ngFor="let a of assignments | async" (click)="showOptions(a.$key, a.title, a.due)">
+    <ion-item *ngFor="let a of assignments | async" (click)="showOptions(a.$key)">
       <!-- Grid adapted from https://ionicframework.com/docs/v2/components/#grid -->
 
       <ion-grid>
@@ -34,7 +32,7 @@
           
           <ion-col>
             <h1 color="blue">{{a.title}}</h1>
-            {{a.due}} 
+            {{a.due | date: 'MMM dd, yyyy HH:mm'}} 
              <!--Using pipe to display date, adapted from
             https://forum.ionicframework.com/t/formatting-date-time-for-display/60671/6
             answer from user "spera" -->
@@ -42,7 +40,6 @@
 
           <ion-col>
             {{countdown(a.due)}}
-            
           </ion-col>
 
         </ion-row>
