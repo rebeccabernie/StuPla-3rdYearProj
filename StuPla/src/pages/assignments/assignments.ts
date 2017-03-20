@@ -8,6 +8,7 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { AddUpcoming } from '../add-upcoming/add-upcoming';
 
 import * as moment from 'moment';
+//let now = moment().format('LLLL');
 
 /*
   Generated class for the Assignments page through CLI.
@@ -39,8 +40,12 @@ export class Assignments {
     this.navCtrl.push(AddUpcoming); // use navCtrl to open page associated with AddUpcoming import
   }
 
-  countdown(assignmentDue){
-      let countdown = moment(assignmentDue, "d H m").fromNow();
+  countdown(assignmentDue, assignmentEntered){
+      assignmentDue = moment(assignmentDue);
+      //assignmentEntered = moment([assignmentEntered]);
+
+      //let countdown = assignmentEntered.diff(assignmentDue, "hours");
+      let countdown = moment(assignmentDue).fromNow();
       return countdown;
   }
   
