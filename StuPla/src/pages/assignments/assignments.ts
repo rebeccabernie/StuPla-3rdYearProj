@@ -24,7 +24,7 @@ import * as moment from 'moment';
 export class Assignments {
 
     assignments: FirebaseListObservable<any>; // populate assignments var
-  
+
     constructor(public navCtrl: NavController, public alertCtrl: AlertController, public asCtrl: ActionSheetController, af: AngularFire) {
         // NavController allows navigation between pages, in this case the menu
 
@@ -40,17 +40,17 @@ export class Assignments {
     this.navCtrl.push(AddUpcoming); // use navCtrl to open page associated with AddUpcoming import
   }
 
-  countdown(assignmentDue, assignmentEntered){
-      assignmentDue = moment(assignmentDue);
+  countdown(due){
+      //due = moment(due);
       //assignmentEntered = moment([assignmentEntered]);
 
       //let countdown = assignmentEntered.diff(assignmentDue, "hours");
-      let countdown = moment(assignmentDue).fromNow();
+      let countdown = moment().to(due);
       return countdown;
   }
   
 // Show options when assignment is clicked
-    showOptions(assignmentID, assignmentTitle, assignmentDue) { // pass these to del/update functions
+    showOptions(assignmentID) { // pass these to del/update functions
       
       let actionSheet = this.asCtrl.create({
         //title: 'What do you want to do?',

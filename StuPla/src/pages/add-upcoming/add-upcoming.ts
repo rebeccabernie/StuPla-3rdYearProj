@@ -5,6 +5,7 @@ import { FormBuilder } from '@angular/forms';
 // Import AF2 List Observable for displaying contents of database
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
+
 /*
   Generated class for the AddUpcoming page.
 
@@ -44,11 +45,12 @@ export class AddUpcoming {
   }*/
 
   saveItem(){
-    
+
     this.assignments.push({
+      // "title" in database = "title" in data, firebase creates object and assigns it an ID
                title: this.title,
                due: this.due,
-               entered: this.curDate, // Title in database = title in data, firebase creates object and assigns it an ID
+               entered: this.curDate,
             });  
 
     this.navCtrl.push(Assignments); // go back to assignments page when user saves new

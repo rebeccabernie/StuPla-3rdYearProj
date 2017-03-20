@@ -34,14 +34,14 @@
           
           <ion-col>
             <h1 color="blue">{{a.title}}</h1>
-            {{a.due | date:'MMM dd, yyyy HH:mm'}} 
+            {{a.due}} 
              <!--Using pipe to display date, adapted from
             https://forum.ionicframework.com/t/formatting-date-time-for-display/60671/6
             answer from user "spera" -->
           </ion-col>
 
           <ion-col>
-            {{countdown()}}
+            {{countdown(a.due)}}
             
           </ion-col>
 
