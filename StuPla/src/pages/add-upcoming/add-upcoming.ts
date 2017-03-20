@@ -27,7 +27,6 @@ export class AddUpcoming {
   assignments: FirebaseListObservable<any>;
 
   public curDate: String = new Date().toISOString();
-  timeleft: Date;
 
   constructor(public navCtrl: NavController, af: AngularFire, public formBuilder: FormBuilder ) {
         // NavController allows navigation between pages, in this case the menu

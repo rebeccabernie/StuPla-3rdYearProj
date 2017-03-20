@@ -7,6 +7,8 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 import { AddUpcoming } from '../add-upcoming/add-upcoming';
 
+import * as moment from 'moment';
+
 /*
   Generated class for the Assignments page through CLI.
 
@@ -21,7 +23,7 @@ import { AddUpcoming } from '../add-upcoming/add-upcoming';
 export class Assignments {
 
     assignments: FirebaseListObservable<any>; // populate assignments var
-
+  
     constructor(public navCtrl: NavController, public alertCtrl: AlertController, public asCtrl: ActionSheetController, af: AngularFire) {
         // NavController allows navigation between pages, in this case the menu
 
@@ -37,6 +39,11 @@ export class Assignments {
     this.navCtrl.push(AddUpcoming); // use navCtrl to open page associated with AddUpcoming import
   }
 
+  countdown(assignmentDue){
+      let countdown = moment(assignmentDue, "d H m").fromNow();
+      return countdown;
+  }
+  
 // Show options when assignment is clicked
     showOptions(assignmentID, assignmentTitle, assignmentDue) { // pass these to del/update functions
       
