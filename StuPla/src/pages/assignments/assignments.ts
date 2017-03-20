@@ -21,6 +21,8 @@ import { AddUpcoming } from '../add-upcoming/add-upcoming';
 export class Assignments {
 
     assignments: FirebaseListObservable<any>; // populate assignments var
+    public curDate: String = new Date().toISOString();
+    timeleft: Date;
 
     constructor(public navCtrl: NavController, public alertCtrl: AlertController, public asCtrl: ActionSheetController, af: AngularFire) {
         // NavController allows navigation between pages, in this case the menu
@@ -69,6 +71,11 @@ export class Assignments {
     deleteAssignment(assignmentID){
         this.assignments.remove(assignmentID);
         // Searches database for assignment with correct ID and deletes
+    }
+
+    timeLeft(assignmentDue){
+      assignmentDue.toISOString();
+      timeleft: curDate - assignmentDue;
     }
 
 } // End Assignments class
