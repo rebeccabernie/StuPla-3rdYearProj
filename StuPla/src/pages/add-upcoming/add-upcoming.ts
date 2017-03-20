@@ -24,8 +24,10 @@ export class AddUpcoming {
   public due: String = new Date().toISOString();
   // set default datepicker date to today adapted from https://forum.ionicframework.com/t/datetime-default-to-todays-date/53178/2
 
-
   assignments: FirebaseListObservable<any>;
+
+  public curDate: String = new Date().toISOString();
+  timeleft: Date;
 
   constructor(public navCtrl: NavController, af: AngularFire, public formBuilder: FormBuilder ) {
         // NavController allows navigation between pages, in this case the menu
@@ -35,11 +37,19 @@ export class AddUpcoming {
 
     } // end constructor
 
+  /*timeLeft(assignmentDue, curDate){
+      let enddate = assignmentDue.toISOString();
+      let startdate = curDate;
+      let countdown = curDate.getDate() >= enddate.getDate();
+      return countdown;
+  }*/
+
   saveItem(){
     
     this.assignments.push({
                title: this.title,
-               due: this.due, // Title in database = title in data, firebase creates object and assigns it an ID
+               due: this.due,
+               entered: this.curDate, // Title in database = title in data, firebase creates object and assigns it an ID
             });  
 
     this.navCtrl.push(Assignments); // go back to assignments page when user saves new
