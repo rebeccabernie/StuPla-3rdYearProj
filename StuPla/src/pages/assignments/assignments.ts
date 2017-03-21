@@ -8,7 +8,7 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { AddUpcoming } from '../add-upcoming/add-upcoming';
 
 import * as moment from 'moment';
-//let now = moment().format('LLLL');
+//import 'moment-duration-format';
 
 /*
   Generated class for the Assignments page through CLI.
@@ -24,6 +24,8 @@ import * as moment from 'moment';
 export class Assignments {
 
     assignments: FirebaseListObservable<any>; // populate assignments var
+
+    public now = moment();
 
     constructor(public navCtrl: NavController, public alertCtrl: AlertController, public asCtrl: ActionSheetController, af: AngularFire) {
         // NavController allows navigation between pages, in this case the menu
@@ -42,10 +44,22 @@ export class Assignments {
   }
 
 // Calculate time left on assignment
+/*
   countdown(due){
-      let countdown = moment().to(due);  // use momentjs to get time until due, set that value to countdown variable
+      this.now = moment();
+      let end = moment(due);
+
+      let countdown = moment().to(end);
+      let minutes = moment.duration(123, "minutes").format("h:mm");
+      //let seconds = moment.duration(countdown, 'seconds');
+      //return seconds; // use momentjs to get time until due, set that value to countdown variable
+      //return moment(countdown).;
+
+      //let countdown = moment.duration(this.now.to(due)).asDays();
+
       return countdown;
-  }
+
+  }*/
   
 // Show options when assignment is clicked
     showOptions(assignmentID) { // pass these to del/update functions

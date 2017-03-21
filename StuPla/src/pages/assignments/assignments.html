@@ -1,3 +1,23 @@
+<html>
+  <script>
+    function countdown(due) {
+      this.now = moment();
+      let end = moment(due);
+
+      var left = moment(end).unix() - moment(now).unix();
+
+      var countdown = moment.duration(left, "minutes").format("d [days], h [hrs], m [min]");
+
+     
+      return countdown;
+    }
+    
+
+  </script>
+</html>
+
+
+
 <ion-header>
   <ion-navbar color="taupe">
     <button ion-button menuToggle>
@@ -35,11 +55,16 @@
             {{a.due | date: 'MMM dd, yyyy HH:mm'}} 
              <!--Using pipe to display date, adapted from
             https://forum.ionicframework.com/t/formatting-date-time-for-display/60671/6
-            answer from user "spera" -->
+            answer from user "spera" 
+            
+             -->
           </ion-col>
-
+          
           <ion-col>
-            {{countdown(a.due)}}
+            <script type="text/javascript">
+              left = countdown(a.due);
+            </script>
+           {{left}} 
           </ion-col>
 
         </ion-row>
