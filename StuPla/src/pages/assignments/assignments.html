@@ -30,7 +30,7 @@
       <ion-grid>
         <ion-row>
           
-          <ion-col width-60>
+          <ion-col width-50>
             <h2 color="blue">{{a.title}}</h2>
             <p>{{a.due | date: 'MMM dd, yyyy HH:mm'}}</p>
              <!--Using pipe to display date, adapted from
@@ -40,7 +40,7 @@
              -->
           </ion-col>
           
-          <ion-col width-20>
+          <ion-col width-30>
             <h3 color="blue">Due:</h3>
             <p>{{countdown(a.due)}}</p>
           </ion-col>
