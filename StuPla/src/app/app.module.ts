@@ -2,9 +2,8 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { Assignments } from '../pages/assignments/assignments';
-//import { Timetable } from '../pages/timetable/timetable';
-//import { Subjects } from '../pages/subjects/subjects';
 import { AddUpcoming } from '../pages/add-upcoming/add-upcoming';
+import { EditAssignment } from '../pages/edit-assignment/edit-assignment';
 import { HowTo } from '../pages/how-to/how-to';
 
 
@@ -31,6 +30,7 @@ export const firebaseConfig = {
     MyApp,
     Assignments,
     AddUpcoming,
+    EditAssignment,
     HowTo
     //Timetable,
     //Subjects
@@ -44,6 +44,7 @@ export const firebaseConfig = {
     MyApp,
     Assignments,
     AddUpcoming,
+    EditAssignment,
     HowTo
     //Timetable,
     //Subjects

@@ -31,8 +31,8 @@
         <ion-row>
           
           <ion-col width-60>
-            <h1 color="blue">{{a.title}}</h1>
-            {{a.due | date: 'MMM dd, yyyy HH:mm'}} 
+            <h2 color="blue">{{a.title}}</h2>
+            <p>{{a.due | date: 'MMM dd, yyyy HH:mm'}}</p>
              <!--Using pipe to display date, adapted from
             https://forum.ionicframework.com/t/formatting-date-time-for-display/60671/6
             answer from user "spera" 
@@ -41,13 +41,13 @@
           </ion-col>
           
           <ion-col width-20>
-            <h2 color="blue">Due:</h2>
-            {{countdown(a.due)}}
+            <h3 color="blue">Due:</h3>
+            <p>{{countdown(a.due)}}</p>
           </ion-col>
 
           <ion-col width-20>
-            <h2 color="blue">Worth:</h2>
-            {{a.worth}}%
+            <h3 color="blue">Worth:</h3>
+            <p>{{a.worth}}%</p>
           </ion-col>
 
         </ion-row>

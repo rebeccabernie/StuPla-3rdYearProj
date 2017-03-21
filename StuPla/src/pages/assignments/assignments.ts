@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
-
-import { NavController, AlertController, ActionSheetController } from 'ionic-angular';
-
+import { NavController, ActionSheetController } from 'ionic-angular';
 // Import AF2 List Observable for getting contents of database
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
-
 import { AddUpcoming } from '../add-upcoming/add-upcoming';
+import { EditAssignment } from '../edit-assignment/edit-assignment';
 
+// Import MomentJS
 import * as moment from 'moment';
-//import * as format from 'moment-duration-format';
+//import * as format from 'moment-duration-format'; // Doesn't seem to be working for typescript...
 
 /*
   Generated class for the Assignments page through CLI.
@@ -25,61 +24,61 @@ export class Assignments {
 
     assignments: FirebaseListObservable<any>; // populate assignments var
 
-    public now = moment();
-
-    constructor(public navCtrl: NavController, public alertCtrl: AlertController, public asCtrl: ActionSheetController, af: AngularFire) {
+    constructor(public navCtrl: NavController, public asCtrl: ActionSheetController, af: AngularFire) {
         // NavController allows navigation between pages, in this case the menu
 
         // Database reference, listens to "assignments" node in the Firebase database
         this.assignments = af.database.list('/assignments');
     } // end constructor
 
-// Basic Add / Read / Update / Delete functions adapted from https://www.joshmorony.com/building-a-crud-ionic-2-application-with-firebase-angularfire/
+// Basic Add / Read / Delete functions adapted from https://www.joshmorony.com/building-a-crud-ionic-2-application-with-firebase-angularfire/
 
 // Using a separate page for adding/editing stuff rather than an alert pop up because Ionic 2 won't allow varied input types in one alert, i.e. has to be all radio OR all text OR all checkbox etc, can't have text and date and radio etc
 
 // Open add new assignment page when user clicks "+" button
-
   openAddPage(){
     this.navCtrl.push(AddUpcoming); // use navCtrl to open page associated with AddUpcoming import
   }
 
 // Calculate time left on assignment
-
   countdown(due){
-      let now = moment();
-      let end = moment(due);
+      let now = moment(); // Gets current time
+      let end = moment(due);  //Convert due var into a momentjs var
 
-      let countdowndays = end.diff(now, 'days');
-      let countdownhours = end.diff(now, 'hours');
-      //let countdown = moment().to(due);
+      let countdowndays = end.diff(now, 'days');  // Get the difference between end and now (current time) in days
+      let countdownhours = end.diff(now, 'hours');  // Same as above but in hours
 
+      // Display in Days if more than 24 hours left
       if (countdownhours >= 24){
         if (countdowndays < 0)
-          return ( (countdowndays *-1) + " days ago");
+          return ( (countdowndays *-1) + " days ago");  // Multiplying by -1 because normally displays as -X days ago, looks better this way
         else
-          return ("in "+ countdowndays + " days");
+          return ("in "+ countdowndays + " days"); // Standard "Due in X days" output
       }
 
+      // Else display in hours
       else{
         if (countdownhours < 0)
-          return ( (countdownhours *-1) + " hours ago"); // displays as -X normally, looks better to display "X hours ago"
+          return ( (countdownhours *-1) + " hours ago");
         else
           return ("in " + countdownhours + " hours");
       }
-
-      //let end = moment(due);
-      //let countdown = end.diff(now, 'days hours') // 1
 
   }
   
 // Show options when assignment is clicked
     showOptions(assignmentID) { // pass these to del/update functions
       
+      // Action Sheet adapted from https://ionicframework.com/docs/v2/components/#action-sheets
       let actionSheet = this.asCtrl.create({
-        //title: 'What do you want to do?',
         buttons: [
-        {
+          {
+            text: 'Edit Assignment',
+            role: 'destructive',
+            handler: () => {
+            this.editAssignment(assignmentID); // will delete and add new so function only needs to know ID
+            }
+          },{
             text: 'Delete Assignment',
             role: 'destructive',
             handler: () => {
@@ -91,47 +90,29 @@ export class Assignments {
             handler: () => {
             console.log('Cancel clicked'); //making sure it works
             }
-          
           }
         
-        ]
-      }); // end actionSheet var
+        ] // end buttons
+      }); // end actionSheet
 
     actionSheet.present(); // Displays the action sheet
 
     } // End showOptions
   
-  // Delete Assignment
+// Delete Assignment
     deleteAssignment(assignmentID){
         this.assignments.remove(assignmentID);
-        // Searches database for assignment with correct ID and deletes
+        // Searches database for assignment with corresponding ID and deletes it
     }
 
-    
+// "Edit" Assignment
+    editAssignment(assignmentID){
+      // Pass the entry key/ID to the EditAssignment page with Nav Params, adapted from
+      // http://www.gajotres.net/ionic-2-sharing-data-between-pagescomponents/
+      this.navCtrl.push(EditAssignment, {
+          assignmentID
+      });
+
+    }
 
 } // End Assignments class
-
-/*
-Edit Assignment Functionality - Taken out because taking too long to get working. User will have to delete assignment and create a new one in order to edit.
-
-Import - 
-import { EditAssignment } from '../edit-assignment/edit-assignment';
-
-
-Alert Handler - 
-
-,{
-    text: 'Edit',
-    handler: (assignmentID) => {
-    this.openEditPage(assignmentID);
-    }
-  }
-
-
-Open Edit Page method - 
-
-openEditPage(assignmentID){
-    this.navCtrl.push(EditAssignment);
-  }
-
-*/
