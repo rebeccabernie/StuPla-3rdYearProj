@@ -30,6 +30,11 @@
        <!--  -->  
     </ion-item>
 
+    <ion-item>
+      <ion-label floating>Worth (%)</ion-label>
+      <ion-input  type="number" [(ngModel)]="worth" name="worth" min=0 max=100></ion-input>
+    </ion-item>
+
     <div padding>
       <button ion-button type="submit" color="coral" block>Save</button>
     </div>

@@ -20,10 +20,9 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 export class AddUpcoming {
 
   public title: String;
-  //public due: Date;
+  public due: String = new Date().toISOString(); // set default datepicker date to today adapted from https://forum.ionicframework.com/t/datetime-default-to-todays-date/53178/2
+  public worth: number;
 
-  public due: String = new Date().toISOString();
-  // set default datepicker date to today adapted from https://forum.ionicframework.com/t/datetime-default-to-todays-date/53178/2
 
   assignments: FirebaseListObservable<any>;
 
@@ -50,6 +49,7 @@ export class AddUpcoming {
       // "title" in database = "title" in data, firebase creates object and assigns it an ID
                title: this.title,
                due: this.due,
+               worth: this.worth,
             });  
 
     this.navCtrl.push(Assignments); // go back to assignments page when user saves new

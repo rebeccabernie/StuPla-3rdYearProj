@@ -8,7 +8,7 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { AddUpcoming } from '../add-upcoming/add-upcoming';
 
 import * as moment from 'moment';
-//import 'moment-duration-format';
+//import * as format from 'moment-duration-format';
 
 /*
   Generated class for the Assignments page through CLI.
@@ -39,27 +39,39 @@ export class Assignments {
 // Using a separate page for adding/editing stuff rather than an alert pop up because Ionic 2 won't allow varied input types in one alert, i.e. has to be all radio OR all text OR all checkbox etc, can't have text and date and radio etc
 
 // Open add new assignment page when user clicks "+" button
+
   openAddPage(){
     this.navCtrl.push(AddUpcoming); // use navCtrl to open page associated with AddUpcoming import
   }
 
 // Calculate time left on assignment
-/*
+
   countdown(due){
-      this.now = moment();
+      let now = moment();
       let end = moment(due);
 
-      let countdown = moment().to(end);
-      let minutes = moment.duration(123, "minutes").format("h:mm");
-      //let seconds = moment.duration(countdown, 'seconds');
-      //return seconds; // use momentjs to get time until due, set that value to countdown variable
-      //return moment(countdown).;
+      let countdowndays = end.diff(now, 'days');
+      let countdownhours = end.diff(now, 'hours');
+      //let countdown = moment().to(due);
 
-      //let countdown = moment.duration(this.now.to(due)).asDays();
+      if (countdownhours >= 24){
+        if (countdowndays < 0)
+          return ( (countdowndays *-1) + " days ago");
+        else
+          return ("in "+ countdowndays + " days");
+      }
 
-      return countdown;
+      else{
+        if (countdownhours < 0)
+          return ( (countdownhours *-1) + " hours ago"); // displays as -X normally, looks better to display "X hours ago"
+        else
+          return ("in " + countdownhours + " hours");
+      }
 
-  }*/
+      //let end = moment(due);
+      //let countdown = end.diff(now, 'days hours') // 1
+
+  }
   
 // Show options when assignment is clicked
     showOptions(assignmentID) { // pass these to del/update functions
