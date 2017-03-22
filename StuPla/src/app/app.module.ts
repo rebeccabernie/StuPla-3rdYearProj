@@ -2,6 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { Assignments } from '../pages/assignments/assignments';
+import { LogIn } from '../pages/login/login';
 import { AddUpcoming } from '../pages/add-upcoming/add-upcoming';
 import { EditAssignment } from '../pages/edit-assignment/edit-assignment';
 import { HowTo } from '../pages/how-to/how-to';
@@ -29,6 +30,7 @@ export const firebaseConfig = {
   declarations: [   // What's part of the module / what defines it
     MyApp,
     Assignments,
+    LogIn,
     AddUpcoming,
     EditAssignment,
     HowTo
@@ -43,6 +45,7 @@ export const firebaseConfig = {
   entryComponents: [    // entryComponents tells the offline template compiler to compile the components and create factories for them
     MyApp,
     Assignments,
+    LogIn,
     AddUpcoming,
     EditAssignment,
     HowTo

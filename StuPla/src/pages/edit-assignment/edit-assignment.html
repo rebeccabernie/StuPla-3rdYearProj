@@ -17,7 +17,7 @@
   <form (submit) = "saveItem()" >
     <ion-item>
       <ion-label stacked>Assignment Title</ion-label>
-      <ion-input type="text" [(ngModel)]="title" name="title" placeholder={{aName}}></ion-input>
+      <ion-input required type="text" [(ngModel)]="title" name="title" placeholder={{aName}}></ion-input>
     </ion-item>
 
     <ion-item>
@@ -26,13 +26,13 @@
            displayFormat taken from https://ionicframework.com/docs/v2/api/components/datetime/DateTime/
            -->
       
-       <ion-datetime min={{today}} max="2019-12-31" displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="due" name="due" ></ion-datetime> 
+       <ion-datetime required min={{today}} max="2019-12-31" displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="due" name="due" ></ion-datetime> 
        <!--  -->  
     </ion-item>
 
     <ion-item>
       <ion-label stacked>Worth (%)</ion-label>
-      <ion-input  type="number" [(ngModel)]="worth" name="worth" min=0 max=100 placeholder={{aWorth}}></ion-input>
+      <ion-input required type="number" [(ngModel)]="worth" name="worth" min=0 max=100 placeholder={{aWorth}}></ion-input>
     </ion-item>
 
     <div padding>

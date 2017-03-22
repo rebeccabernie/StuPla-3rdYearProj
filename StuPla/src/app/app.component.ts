@@ -3,8 +3,7 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { Assignments } from '../pages/assignments/assignments';
-//import { Subjects } from '../pages/subjects/subjects';
-//import { Timetable } from '../pages/timetable/timetable';
+import { LogIn } from '../pages/login/login';
 import { HowTo } from '../pages/how-to/how-to';
 
 
@@ -27,7 +26,8 @@ export class MyApp {
     
     this.pages = [
       { title: 'Assignments', component: Assignments },
-      { title: 'User Guide', component: HowTo }
+      { title: 'User Guide', component: HowTo },
+      { title: 'LogIn', component: LogIn }
 
       //{ title: 'Timetable', component: Timetable },
       //{ title: 'Subjects', component: Subjects }

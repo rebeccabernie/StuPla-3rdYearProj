@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Assignments } from '../assignments/assignments';
-import { FormBuilder } from '@angular/forms';
 // Import AF2 List Observable for displaying contents of database
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { ToastController } from 'ionic-angular';
@@ -27,7 +26,7 @@ export class EditAssignment {
 // Database variable
   assignments: FirebaseListObservable<any>;
 
-  constructor(public navCtrl: NavController, private navParams: NavParams, af: AngularFire, public formBuilder: FormBuilder, public toastCtrl: ToastController ) {
+  constructor(public navCtrl: NavController, private navParams: NavParams, af: AngularFire, public toastCtrl: ToastController ) {
         // NavController allows navigation between pages, in this case the menu
         // Database reference, listens to "assignments" node in the Firebase database and adds to this.assignments variable
         this.assignments = af.database.list('/assignments');

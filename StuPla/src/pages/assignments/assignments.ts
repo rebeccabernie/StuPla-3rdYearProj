@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ActionSheetController } from 'ionic-angular';
+
 // Import AF2 List Observable for getting contents of database
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { AddUpcoming } from '../add-upcoming/add-upcoming';
@@ -29,6 +30,7 @@ export class Assignments {
 
         // Database reference, listens to "assignments" node in the Firebase database
         this.assignments = af.database.list('/assignments');
+
     } // end constructor
 
 // Basic Add / Read / Delete functions adapted from https://www.joshmorony.com/building-a-crud-ionic-2-application-with-firebase-angularfire/

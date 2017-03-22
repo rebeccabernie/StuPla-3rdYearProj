@@ -14,10 +14,10 @@
 
 
 <ion-content padding>
-  <form (submit) = "saveItem()" >
+  <form (submit)="saveItem()" >
     <ion-item>
       <ion-label stacked>Assignment Title</ion-label>
-      <ion-input  type="text" [(ngModel)]="title" name="title"></ion-input>
+      <ion-input required type="text" [(ngModel)]="title" name="title"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -25,14 +25,13 @@
        <!-- ngModel used to create two-way data bindings for reading and writing input
            displayFormat taken from https://ionicframework.com/docs/v2/api/components/datetime/DateTime/
            -->
-      
-       <ion-datetime min={{due}} max="2019-12-31" displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="due" name="due" ></ion-datetime> 
+       <ion-datetime required min={{due}} max="2019-12-31" displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="due" name="due" ></ion-datetime> 
        <!--  -->  
     </ion-item>
 
     <ion-item>
       <ion-label stacked>Worth (%)</ion-label>
-      <ion-input  type="number" [(ngModel)]="worth" name="worth" min=0 max=100></ion-input>
+      <ion-input required type="number" [(ngModel)]="worth" name="worth" min=0 max=100></ion-input>
     </ion-item>
 
     <div padding>

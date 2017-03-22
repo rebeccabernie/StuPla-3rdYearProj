@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Assignments } from '../assignments/assignments';
-import { FormBuilder } from '@angular/forms';
+//import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+//import { WorthValidator } from  '../../validators/worth';
+
 // Import AF2 List Observable for displaying contents of database
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { ToastController } from 'ionic-angular';
@@ -26,8 +28,7 @@ export class AddUpcoming {
 
   assignments: FirebaseListObservable<any>;
 
-  constructor(public navCtrl: NavController, af: AngularFire, public formBuilder: FormBuilder, public toastCtrl: ToastController ) {
-
+  constructor(public navCtrl: NavController, af: AngularFire, public toastCtrl: ToastController ) {
         // Database reference, listens to "assignments" node in the Firebase database
         this.assignments = af.database.list('/assignments');
 
