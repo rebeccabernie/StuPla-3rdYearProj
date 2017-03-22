@@ -1,21 +1,14 @@
 import { Component } from '@angular/core';
-import { NavController, ActionSheetController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ActionSheetController } from 'ionic-angular';
 
 // Import AF2 List Observable for getting contents of database
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFire, FirebaseListObservable, AngularFireAuth } from 'angularfire2';
 import { AddUpcoming } from '../add-upcoming/add-upcoming';
 import { EditAssignment } from '../edit-assignment/edit-assignment';
 
 // Import MomentJS
 import * as moment from 'moment';
 //import * as format from 'moment-duration-format'; // Doesn't seem to be working for typescript...
-
-/*
-  Generated class for the Assignments page through CLI.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 
 @Component({
   selector: 'page-assignments',
@@ -25,7 +18,9 @@ export class Assignments {
 
     assignments: FirebaseListObservable<any>; // populate assignments var
 
-    constructor(public navCtrl: NavController, public asCtrl: ActionSheetController, af: AngularFire) {
+    public uid = this.navParams.get('email');
+
+    constructor(public navCtrl: NavController, private navParams: NavParams, public asCtrl: ActionSheetController, public af: AngularFire, public auth: AngularFireAuth) {
         // NavController allows navigation between pages, in this case the menu
 
         // Database reference, listens to "assignments" node in the Firebase database
@@ -38,8 +33,11 @@ export class Assignments {
 // Using a separate page for adding/editing stuff rather than an alert pop up because Ionic 2 won't allow varied input types in one alert, i.e. has to be all radio OR all text OR all checkbox etc, can't have text and date and radio etc
 
 // Open add new assignment page when user clicks "+" button
-  openAddPage(){
-    this.navCtrl.push(AddUpcoming); // use navCtrl to open page associated with AddUpcoming import
+  openAddPage(uid){
+    // use navCtrl to open page associated with AddUpcoming import
+    this.navCtrl.push(AddUpcoming, {
+          uid
+      });
   }
 
 // Calculate time left on assignment
@@ -119,5 +117,13 @@ export class Assignments {
       });
 
     }
-
+/*
+    ngOnInit() {
+    this.auth.subscribe((assignment) => {
+      if (assignment) {
+        this.assignments = this.af.database.list('/todoList');
+      }
+    })
+  }
+*/
 } // End Assignments class

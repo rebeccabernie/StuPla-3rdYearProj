@@ -47,8 +47,9 @@ export class LogIn {
   }
 
 // User Log In
-  public login() {
+  public login(email) {
     this.showLoading();
+    
  
     // Attempt to log the user in and push to assignments page
     this.auth.login(this.user, {
@@ -57,6 +58,9 @@ export class LogIn {
     }).then((authData) => {
       this.loader.dismiss();
       this.navCtrl.setRoot(Assignments);
+      this.navCtrl.push(Assignments, {
+          email //push the email to assignments page for reference
+      });
     }).catch((error) => {
       this.showError(error); // if log in is unsuccessful show error
     });

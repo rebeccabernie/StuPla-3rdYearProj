@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { Assignments } from '../assignments/assignments';
 //import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 //import { WorthValidator } from  '../../validators/worth';
@@ -25,10 +25,12 @@ export class AddUpcoming {
   public title: String;
   public due: String = new Date().toISOString(); // set default datepicker date to today adapted from https://forum.ionicframework.com/t/datetime-default-to-todays-date/53178/2
   public worth: number;
+  //public userid: String;
+  public userid =  this.navParams.get('uid');
 
   assignments: FirebaseListObservable<any>;
 
-  constructor(public navCtrl: NavController, af: AngularFire, public toastCtrl: ToastController ) {
+  constructor(public navCtrl: NavController, private navParams: NavParams, af: AngularFire, public toastCtrl: ToastController ) {
         // Database reference, listens to "assignments" node in the Firebase database
         this.assignments = af.database.list('/assignments');
 
@@ -40,7 +42,8 @@ export class AddUpcoming {
       // "title" in database = "title" in data, firebase creates object and assigns it an ID
                title: this.title,
                due: this.due,
-               worth: this.worth
+               worth: this.worth,
+               userid: this.userid
             });  
 
     // Toast controller adapted from Ionic Docs
