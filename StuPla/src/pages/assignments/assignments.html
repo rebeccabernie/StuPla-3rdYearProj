@@ -24,7 +24,7 @@
          $key = item id in firebase
     -->
 
-    <ion-item *ngFor="let a of assignments | async" (click)="showOptions(a.$key)">
+    <ion-item *ngFor="let a of assignments | async" (click)="showOptions(a.$key, a.title, a.due, a.worth)">
       <!-- Grid adapted from https://ionicframework.com/docs/v2/components/#grid -->
 
       <ion-grid>

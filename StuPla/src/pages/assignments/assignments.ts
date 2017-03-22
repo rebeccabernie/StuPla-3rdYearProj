@@ -67,7 +67,7 @@ export class Assignments {
   }
   
 // Show options when assignment is clicked
-    showOptions(assignmentID) { // pass these to del/update functions
+    showOptions(assignmentID, aName, aDue, aWorth) { // pass these to del/update functions
       
       // Action Sheet adapted from https://ionicframework.com/docs/v2/components/#action-sheets
       let actionSheet = this.asCtrl.create({
@@ -76,7 +76,7 @@ export class Assignments {
             text: 'Edit Assignment',
             role: 'destructive',
             handler: () => {
-            this.editAssignment(assignmentID); // will delete and add new so function only needs to know ID
+            this.editAssignment(assignmentID, aName, aDue, aWorth); // will delete and add new so function only needs to know ID
             }
           },{
             text: 'Delete Assignment',
@@ -106,11 +106,14 @@ export class Assignments {
     }
 
 // "Edit" Assignment
-    editAssignment(assignmentID){
+    editAssignment(assignmentID, aName, aDue, aWorth){
       // Pass the entry key/ID to the EditAssignment page with Nav Params, adapted from
       // http://www.gajotres.net/ionic-2-sharing-data-between-pagescomponents/
       this.navCtrl.push(EditAssignment, {
-          assignmentID
+          assignmentID,
+          aName,
+          aDue,
+          aWorth
       });
 
     }

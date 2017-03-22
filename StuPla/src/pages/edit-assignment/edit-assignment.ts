@@ -6,37 +6,35 @@ import { FormBuilder } from '@angular/forms';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { ToastController } from 'ionic-angular';
 
-
-/*
-  Generated class for the EditAssignment page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
-
 @Component({
   selector: 'page-edit-assignment',
   templateUrl: 'edit-assignment.html'
 })
 export class EditAssignment {
 
+// Vars for input/pushing
   public title: String;
-  public due: String = new Date().toISOString(); // set default datepicker date to today adapted from https://forum.ionicframework.com/t/datetime-default-to-todays-date/53178/2
+  public due: String = this.navParams.get('aDue'); // set default datepicker date to original information, acts like a placeholder
   public worth: number;
 
-  assignments: FirebaseListObservable<any>;
+// Placeholder variables
+  public aName = this.navParams.get('aName');
+  public aWorth = this.navParams.get('aWorth');
 
-  //public curDate: String = new Date().toISOString();
+// Today's date
+  public today = new Date().toISOString()
+
+// Database variable
+  assignments: FirebaseListObservable<any>;
 
   constructor(public navCtrl: NavController, private navParams: NavParams, af: AngularFire, public formBuilder: FormBuilder, public toastCtrl: ToastController ) {
         // NavController allows navigation between pages, in this case the menu
-
-        // Database reference, listens to "assignments" node in the Firebase database
+        // Database reference, listens to "assignments" node in the Firebase database and adds to this.assignments variable
         this.assignments = af.database.list('/assignments');
 
     } // end constructor
 
-// Save function - only runs when user clicks Save on page so only deletes when they've saved new info
+// Save function - only runs when user clicks Save on page -> only deletes when they've saved new info
 
   saveItem(assignmentID){
     // using NavParams to pass params from one class to another adapted from
