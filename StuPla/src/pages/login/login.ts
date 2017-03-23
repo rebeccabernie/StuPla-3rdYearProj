@@ -23,6 +23,7 @@ export class LogIn {
 
   loader: any;
   user = {email: '', password: ''};
+  email: String = this.user.email;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AngularFireAuth, private alertCtrl: AlertController, private loadingCtrl: LoadingController) {}
 
