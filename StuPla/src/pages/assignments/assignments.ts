@@ -21,13 +21,8 @@ export class Assignments {
     public user = this.navParams.get('userid');
 
     public test: String = "g00320698@gmit.ie";
-    public re1 = /./gi; 
-    public re2 = /@/gi; 
-
-    test1(test){
-      let newstr = test.replace(this.re1, this.re2, ""); 
-      console.log(newstr);
-    }
+    public re1 = "."; 
+    public re2 = "@"; 
 
     constructor(public navCtrl: NavController, private navParams: NavParams, public asCtrl: ActionSheetController, public af: AngularFire, public auth: AngularFireAuth) {
         // NavController allows navigation between pages, in this case the menu
@@ -45,11 +40,12 @@ export class Assignments {
 // Open add new assignment page when user clicks "+" button
   openAddPage(){
     let userid = this.user;
-    console.log(userid);
-    //let uid = this.navParams.get('email');
+    let first = userid.replace(this.re1, ""); 
+    let databaseName = first.replace(this.re2, ""); 
+      console.log(databaseName);    //let uid = this.navParams.get('email');
     // use navCtrl to open page associated with AddUpcoming import
     this.navCtrl.push(AddUpcoming, {
-          userid,
+          databaseName,
       });
   }
 

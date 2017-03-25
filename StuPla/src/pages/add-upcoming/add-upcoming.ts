@@ -26,7 +26,7 @@ export class AddUpcoming {
   public due: String = new Date().toISOString(); // set default datepicker date to today adapted from https://forum.ionicframework.com/t/datetime-default-to-todays-date/53178/2
   public worth: number;
   //public userid: String;
-  public userid =  this.navParams.get('userid');
+  public userid =  this.navParams.get('databaseName');
 
   //public assignments = this.userid;
   assignments: FirebaseListObservable<any>;
