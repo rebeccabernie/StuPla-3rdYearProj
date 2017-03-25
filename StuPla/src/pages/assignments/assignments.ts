@@ -18,13 +18,23 @@ export class Assignments {
 
     assignments: FirebaseListObservable<any>; // populate assignments var
 
-    public email = this.navParams.get('email');
+    public user = this.navParams.get('userid');
+
+    public test: String = "g00320698@gmit.ie";
+    public re1 = /./gi; 
+    public re2 = /@/gi; 
+
+    test1(test){
+      let newstr = test.replace(this.re1, this.re2, ""); 
+      console.log(newstr);
+    }
 
     constructor(public navCtrl: NavController, private navParams: NavParams, public asCtrl: ActionSheetController, public af: AngularFire, public auth: AngularFireAuth) {
         // NavController allows navigation between pages, in this case the menu
 
         // Database reference, listens to "assignments" node in the Firebase database
         this.assignments = af.database.list('/assignments');
+
 
     } // end constructor
 
@@ -33,11 +43,13 @@ export class Assignments {
 // Using a separate page for adding/editing stuff rather than an alert pop up because Ionic 2 won't allow varied input types in one alert, i.e. has to be all radio OR all text OR all checkbox etc, can't have text and date and radio etc
 
 // Open add new assignment page when user clicks "+" button
-  openAddPage(email){
+  openAddPage(){
+    let userid = this.user;
+    console.log(userid);
     //let uid = this.navParams.get('email');
     // use navCtrl to open page associated with AddUpcoming import
     this.navCtrl.push(AddUpcoming, {
-          email,
+          userid,
       });
   }
 

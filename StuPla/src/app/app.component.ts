@@ -14,7 +14,7 @@ import { HowTo } from '../pages/how-to/how-to';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LogIn; // Want the app to start on the assignments tab so set that to the root page 
+  rootPage: any = Assignments; // Want the app to start on the assignments tab so set that to the root page 
 
   pages: Array<{title: string, component: any}>; 
   // array of pages, page has a string for title and a component - i.e. the page itself? get confirmation

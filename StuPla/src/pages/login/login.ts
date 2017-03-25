@@ -23,7 +23,6 @@ export class LogIn {
 
   loader: any;
   public user = {email: '', password: ''};
-  public email = this.user.email;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AngularFireAuth, private alertCtrl: AlertController, private loadingCtrl: LoadingController) {}
 
@@ -48,9 +47,9 @@ export class LogIn {
   }
 
 // User Log In
-  public login(email) {
+  public login() {
+    let userid = this.user.email;
     this.showLoading();
-    
  
     // Attempt to log the user in and push to assignments page
     this.auth.login(this.user, {
@@ -58,9 +57,9 @@ export class LogIn {
         method: AuthMethods.Password
     }).then((authData) => {
       this.loader.dismiss();
-      this.navCtrl.setRoot(Assignments);
+      this.navCtrl.setRoot(Assignments, {userid});
       this.navCtrl.push(Assignments, {
-          email //push the email to assignments page for reference
+          userid //push the email to assignments page for reference
       });
     }).catch((error) => {
       this.showError(error); // if log in is unsuccessful show error
