@@ -25,7 +25,7 @@ export class AddUpcoming {
   public title: String;
   public due: String = new Date().toISOString(); // set default datepicker date to today adapted from https://forum.ionicframework.com/t/datetime-default-to-todays-date/53178/2
   public worth: number;
-  //public userid: String;
+
   public databaseName =  this.navParams.get('databaseName');
   public loggedin =  this.navParams.get('loggedin');
 

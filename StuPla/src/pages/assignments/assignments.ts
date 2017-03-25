@@ -53,8 +53,65 @@ export class Assignments {
       });
   }
 
+// Show options when assignment is clicked
+    showOptions(assignmentID, aName, aDue, aWorth, databaseName, loggedin) { // pass these to del/update functions
+      databaseName = this.databaseName;
+      loggedin = this.loggedin;
+      console.log("DB: " + databaseName + "  Em: " + loggedin);
+      // Action Sheet adapted from https://ionicframework.com/docs/v2/components/#action-sheets
+      let actionSheet = this.asCtrl.create({
+        buttons: [
+          {
+            text: 'Edit Assignment',
+            role: 'destructive',
+            handler: () => {
+            this.editAssignment(assignmentID, aName, aDue, aWorth, databaseName, loggedin); // will delete and add new so function only needs to know ID
+            }
+          },{
+            text: 'Delete Assignment',
+            role: 'destructive',
+            handler: () => {
+            this.deleteAssignment(assignmentID); // delete function only needs to know id
+            }
+          },{
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+            console.log('Cancel clicked'); // making sure it works
+            }
+          }
+        
+        ] // end buttons
+      }); // end actionSheet
+
+    actionSheet.present(); // Displays the action sheet
+
+    } // End showOptions
+  
+// Delete Assignment
+    deleteAssignment(assignmentID){
+        this.assignments.remove(assignmentID);
+        // Searches database for assignment with corresponding ID and deletes it
+    }
+
+// "Edit" Assignment
+    editAssignment(assignmentID, aName, aDue, aWorth, databaseName, loggedin){
+      console.log("DB: " + databaseName + "  Em: " + loggedin);
+      // Pass the entry key/ID to the EditAssignment page with Nav Params, adapted from
+      // http://www.gajotres.net/ionic-2-sharing-data-between-pagescomponents/
+      this.navCtrl.push(EditAssignment, {
+          assignmentID,
+          aName,
+          aDue,
+          aWorth,
+          databaseName,
+          loggedin
+      });
+
+    }
+
 // Calculate time left on assignment
-  countdown(due){
+    countdown(due){
       let now = moment(); // Gets current time
       let end = moment(due);  //Convert due var into a momentjs var
 
@@ -77,66 +134,7 @@ export class Assignments {
           return ("in " + countdownhours + " hours");
       }
 
-  }
-  
-// Show options when assignment is clicked
-    showOptions(assignmentID, aName, aDue, aWorth) { // pass these to del/update functions
-      
-      // Action Sheet adapted from https://ionicframework.com/docs/v2/components/#action-sheets
-      let actionSheet = this.asCtrl.create({
-        buttons: [
-          {
-            text: 'Edit Assignment',
-            role: 'destructive',
-            handler: () => {
-            this.editAssignment(assignmentID, aName, aDue, aWorth); // will delete and add new so function only needs to know ID
-            }
-          },{
-            text: 'Delete Assignment',
-            role: 'destructive',
-            handler: () => {
-            this.deleteAssignment(assignmentID); // delete function only needs to know id
-            }
-          },{
-            text: 'Cancel',
-            role: 'cancel',
-            handler: () => {
-            console.log('Cancel clicked'); //making sure it works
-            }
-          }
-        
-        ] // end buttons
-      }); // end actionSheet
-
-    actionSheet.present(); // Displays the action sheet
-
-    } // End showOptions
-  
-// Delete Assignment
-    deleteAssignment(assignmentID){
-        this.assignments.remove(assignmentID);
-        // Searches database for assignment with corresponding ID and deletes it
     }
+  
 
-// "Edit" Assignment
-    editAssignment(assignmentID, aName, aDue, aWorth){
-      // Pass the entry key/ID to the EditAssignment page with Nav Params, adapted from
-      // http://www.gajotres.net/ionic-2-sharing-data-between-pagescomponents/
-      this.navCtrl.push(EditAssignment, {
-          assignmentID,
-          aName,
-          aDue,
-          aWorth
-      });
-
-    }
-/*
-    ngOnInit() {
-    this.auth.subscribe((assignment) => {
-      if (assignment) {
-        this.assignments = this.af.database.list('/todoList');
-      }
-    })
-  }
-*/
 } // End Assignments class

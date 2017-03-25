@@ -23,13 +23,17 @@ export class EditAssignment {
 // Today's date
   public today = new Date().toISOString()
 
+// Database stuff
+  public databaseName =  this.navParams.get('databaseName');
+  public loggedin =  this.navParams.get('loggedin');
+
 // Database variable
   assignments: FirebaseListObservable<any>;
 
   constructor(public navCtrl: NavController, private navParams: NavParams, af: AngularFire, public toastCtrl: ToastController ) {
         // NavController allows navigation between pages, in this case the menu
         // Database reference, listens to "assignments" node in the Firebase database and adds to this.assignments variable
-        this.assignments = af.database.list('/assignments');
+        this.assignments = af.database.list('/' + this.databaseName);
 
     } // end constructor
 
@@ -41,6 +45,9 @@ export class EditAssignment {
 
     let ID = this.navParams.get('assignmentID');
     this.assignments.remove(ID); // delete old assignmentID
+
+    let databaseName = this.databaseName;
+    let loggedin = this.loggedin;
 
     this.assignments.push({      // push new data to database
                title: this.title,
@@ -55,7 +62,9 @@ export class EditAssignment {
 
     toast.present();
 
-    this.navCtrl.push(Assignments); // go back to assignments page when user saves
+    this.navCtrl.push(Assignments, {
+      databaseName, loggedin
+    }); // go back to assignments page when user saves
 
   }
 
