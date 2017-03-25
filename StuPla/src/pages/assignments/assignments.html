@@ -4,28 +4,25 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Assignments</ion-title>
-    <p>Logged in as: {{loggedin}}</p>
 
 <!-- ion-buttons end: button displayed at end/right of navbar -->
     <ion-buttons end>
       <button ion-button (click)="openAddPage()">
         <ion-icon name="md-add"></ion-icon>
       </button>
-      <button ion-button (click)="test1()">TEST</button>
     </ion-buttons>
 
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-
+      <p color="tea-rose" margin-left="10">Logged in as: {{loggedin}}</p>
   <ion-list>
     <!-- list of all assignments found in the array
          use async pipe - retrieve list of assignments and display when they become available
          click handler for options to delete or update, only needs to know item ID
          $key = item id in firebase
     -->
-
     <ion-item *ngFor="let a of assignments | async" (click)="showOptions(a.$key, a.title, a.due, a.worth)">
       <!-- Grid adapted from https://ionicframework.com/docs/v2/components/#grid -->
 

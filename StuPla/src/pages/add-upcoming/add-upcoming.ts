@@ -26,6 +26,7 @@ export class AddUpcoming {
   public due: String = new Date().toISOString(); // set default datepicker date to today adapted from https://forum.ionicframework.com/t/datetime-default-to-todays-date/53178/2
   public worth: number;
 
+// NavParams from the Assignment page
   public databaseName =  this.navParams.get('databaseName');
   public loggedin =  this.navParams.get('loggedin');
 
@@ -33,24 +34,21 @@ export class AddUpcoming {
   assignments: FirebaseListObservable<any>;
 
   constructor(public navCtrl: NavController, private navParams: NavParams, af: AngularFire, public toastCtrl: ToastController ) {
-        // Database reference, listens to "assignments" node in the Firebase database
-         // console.log(this.userid);
-        this.assignments = af.database.list('/' + this.databaseName);
+    this.assignments = af.database.list('/' + this.databaseName);
 
-    } // end constructor
+  } // end constructor
 
   saveItem(){
     let databaseName = this.databaseName;
     let loggedin = this.loggedin;
-    console.log(databaseName, loggedin);
-    //let userid = this.navParams.get('uid');
+    console.log("DB: " + databaseName + "  Em: " + loggedin); // testing
 
     this.assignments.push({
-      // "title" in database = "title" in data, firebase creates object and assigns it an ID
-                 title:this.title,
-                 due: this.due,
-                 worth: this.worth,
-            });  
+      // "title" in database = "title" in data, push to firebase creates object and assigns it an ID
+      title: this.title,
+      due: this.due,
+      worth: this.worth,
+    });  
 
     // Toast controller adapted from Ionic Docs
     // https://ionicframework.com/docs/v2/api/components/toast/ToastController/
@@ -63,8 +61,8 @@ export class AddUpcoming {
 
     this.navCtrl.push(Assignments, {
       databaseName, loggedin
-    }); // go back to assignments page when user saves new
+    }); // go back to assignments page when user saves new, push user info back
 
   }
 
-}
+} // End Add class

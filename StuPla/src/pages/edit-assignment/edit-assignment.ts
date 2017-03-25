@@ -31,11 +31,11 @@ export class EditAssignment {
   assignments: FirebaseListObservable<any>;
 
   constructor(public navCtrl: NavController, private navParams: NavParams, af: AngularFire, public toastCtrl: ToastController ) {
-        // NavController allows navigation between pages, in this case the menu
-        // Database reference, listens to "assignments" node in the Firebase database and adds to this.assignments variable
-        this.assignments = af.database.list('/' + this.databaseName);
+    // NavController allows navigation between pages, in this case the menu
+    // Database reference, listens to "assignments" node in the Firebase database and adds to this.assignments variable
+    this.assignments = af.database.list('/' + this.databaseName);
 
-    } // end constructor
+  } // end constructor
 
 // Save function - only runs when user clicks Save on page -> only deletes when they've saved new info
 
@@ -50,10 +50,10 @@ export class EditAssignment {
     let loggedin = this.loggedin;
 
     this.assignments.push({      // push new data to database
-               title: this.title,
-               due: this.due,
-               worth: this.worth,
-            });  
+      title: this.title,
+      due: this.due,
+      worth: this.worth,
+    });  
 
     let toast = this.toastCtrl.create({
       message: 'Assignment saved successfully!', // lying a bit but no harm...
@@ -68,4 +68,4 @@ export class EditAssignment {
 
   }
 
-}
+} // End edit class
