@@ -18,18 +18,23 @@ export class Assignments {
 
     assignments: FirebaseListObservable<any>; // populate assignments var
 
-    public user = this.navParams.get('userid');
+// From the Log In page
+    public loggedin = this.navParams.get('email') || this.navParams.get('loggedin');
+    public databaseName = this.navParams.get('newemail') || this.navParams.get('databaseName');
 
-    public test: String = "g00320698@gmit.ie";
-    public re1 = "."; 
-    public re2 = "@"; 
+// From Add Page
+    
+
+
+    //public test: String = "g00320698@gmit.ie";
+   // public re1 = "."; 
+    //public re2 = "@";     
 
     constructor(public navCtrl: NavController, private navParams: NavParams, public asCtrl: ActionSheetController, public af: AngularFire, public auth: AngularFireAuth) {
         // NavController allows navigation between pages, in this case the menu
-
         // Database reference, listens to "assignments" node in the Firebase database
-        this.assignments = af.database.list('/assignments');
-
+        this.assignments = af.database.list('/' + this.databaseName);
+        console.log(this.databaseName, this.loggedin);
 
     } // end constructor
 
@@ -38,14 +43,13 @@ export class Assignments {
 // Using a separate page for adding/editing stuff rather than an alert pop up because Ionic 2 won't allow varied input types in one alert, i.e. has to be all radio OR all text OR all checkbox etc, can't have text and date and radio etc
 
 // Open add new assignment page when user clicks "+" button
-  openAddPage(){
-    let userid = this.user;
-    let first = userid.replace(this.re1, ""); 
-    let databaseName = first.replace(this.re2, ""); 
-      console.log(databaseName);    //let uid = this.navParams.get('email');
+  openAddPage(databaseName, loggedin){
+    databaseName = this.databaseName;
+    loggedin = this.loggedin;
     // use navCtrl to open page associated with AddUpcoming import
+    console.log("DB: " + databaseName + "  Em: " + loggedin);
     this.navCtrl.push(AddUpcoming, {
-          databaseName,
+          databaseName, loggedin
       });
   }
 

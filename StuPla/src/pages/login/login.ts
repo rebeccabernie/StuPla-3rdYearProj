@@ -48,8 +48,16 @@ export class LogIn {
 
 // User Log In
   public login() {
-    let userid = this.user.email;
+    let email = this.user.email; // example@email.com - with @/.
     this.showLoading();
+
+    // Get Database name
+    // Firebase doesn't allow fullstops, got rid of @ too - just letters/numbers looks better
+    let re1 = "."; 
+    let re2 = "@"; 
+    let original = email;
+    let first = original.replace(re1, ""); 
+    let newemail = first.replace(re2, ""); 
  
     // Attempt to log the user in and push to assignments page
     this.auth.login(this.user, {
@@ -57,9 +65,9 @@ export class LogIn {
         method: AuthMethods.Password
     }).then((authData) => {
       this.loader.dismiss();
-      this.navCtrl.setRoot(Assignments, {userid});
+      this.navCtrl.setRoot(Assignments);
       this.navCtrl.push(Assignments, {
-          userid //push the email to assignments page for reference
+          email, newemail //push the email and database name to assignments page for reference
       });
     }).catch((error) => {
       this.showError(error); // if log in is unsuccessful show error

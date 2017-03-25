@@ -26,21 +26,23 @@ export class AddUpcoming {
   public due: String = new Date().toISOString(); // set default datepicker date to today adapted from https://forum.ionicframework.com/t/datetime-default-to-todays-date/53178/2
   public worth: number;
   //public userid: String;
-  public userid =  this.navParams.get('databaseName');
+  public databaseName =  this.navParams.get('databaseName');
+  public loggedin =  this.navParams.get('loggedin');
 
   //public assignments = this.userid;
   assignments: FirebaseListObservable<any>;
 
   constructor(public navCtrl: NavController, private navParams: NavParams, af: AngularFire, public toastCtrl: ToastController ) {
         // Database reference, listens to "assignments" node in the Firebase database
-          console.log(this.userid);
-        let userid = this.userid;
-        this.assignments = af.database.list('/' + userid);
+         // console.log(this.userid);
+        this.assignments = af.database.list('/' + this.databaseName);
 
     } // end constructor
 
-  saveItem(userid){
-    console.log(userid);
+  saveItem(){
+    let databaseName = this.databaseName;
+    let loggedin = this.loggedin;
+    console.log(databaseName, loggedin);
     //let userid = this.navParams.get('uid');
 
     this.assignments.push({
@@ -59,7 +61,9 @@ export class AddUpcoming {
 
     toast.present();
 
-    this.navCtrl.push(Assignments); // go back to assignments page when user saves new
+    this.navCtrl.push(Assignments, {
+      databaseName, loggedin
+    }); // go back to assignments page when user saves new
 
   }
 
