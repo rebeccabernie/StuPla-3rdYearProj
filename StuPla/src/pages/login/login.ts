@@ -57,7 +57,7 @@ export class LogIn {
     let re2 = "@"; 
     let original = email;
     let first = original.replace(re1, ""); 
-    let newemail = first.replace(re2, ""); 
+    let newemail = first.replace(re2, "").toLowerCase(); 
  
     // Attempt to log the user in and push to assignments page
     this.auth.login(this.user, {
