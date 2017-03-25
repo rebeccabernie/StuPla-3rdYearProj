@@ -18,7 +18,7 @@ export class Assignments {
 
     assignments: FirebaseListObservable<any>; // populate assignments var
 
-    public email: String = this.navParams.get('email');
+    public email = this.navParams.get('email');
 
     constructor(public navCtrl: NavController, private navParams: NavParams, public asCtrl: ActionSheetController, public af: AngularFire, public auth: AngularFireAuth) {
         // NavController allows navigation between pages, in this case the menu
@@ -34,10 +34,10 @@ export class Assignments {
 
 // Open add new assignment page when user clicks "+" button
   openAddPage(email){
-    let uid = this.navParams.get('email');
+    //let uid = this.navParams.get('email');
     // use navCtrl to open page associated with AddUpcoming import
     this.navCtrl.push(AddUpcoming, {
-          uid,
+          email,
       });
   }
 
