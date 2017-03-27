@@ -27,7 +27,7 @@ export class MyApp {
     this.pages = [
       { title: 'Assignments', component: Assignments },
       { title: 'User Guide', component: HowTo },
-      { title: 'LogIn', component: LogIn }
+      //{ title: 'LogIn', component: LogIn } don't need log in page on the menu
 
       //{ title: 'Timetable', component: Timetable },
       //{ title: 'Subjects', component: Subjects }

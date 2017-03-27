@@ -5,6 +5,7 @@ import { NavController, NavParams, AlertController, ActionSheetController } from
 import { AngularFire, FirebaseListObservable, AngularFireAuth } from 'angularfire2';
 import { AddUpcoming } from '../add-upcoming/add-upcoming';
 import { EditAssignment } from '../edit-assignment/edit-assignment';
+import { LogIn } from '../login/login';
 
 // Import MomentJS
 import * as moment from 'moment';
@@ -22,18 +23,29 @@ export class Assignments {
   public loggedin = this.navParams.get('email') || this.navParams.get('loggedin');
   public databaseName = this.navParams.get('newemail') || this.navParams.get('databaseName');   
 
+// Nav Params function adapted from http://www.gajotres.net/ionic-2-sharing-data-between-pagescomponents/
+
   constructor(public navCtrl: NavController, private navParams: NavParams, public asCtrl: ActionSheetController, public af: AngularFire, public auth: AngularFireAuth) {
     // Database reference, listens to "assignments" node in the Firebase database
     this.assignments = af.database.list('/' + this.databaseName);
     console.log("DB: " + this.databaseName + "  Em: " + this.loggedin); // for testing navparams between pages
-
+    
   } // end constructor
 
-// Nav Params function adapted from http://www.gajotres.net/ionic-2-sharing-data-between-pagescomponents/
 
 // Basic Add / Read / Delete functions adapted from https://www.joshmorony.com/building-a-crud-ionic-2-application-with-firebase-angularfire/
 
 // Using a separate page for adding/editing info because Ionic 2 won't allow varied input types in one alert pop up, i.e. has to be all radio OR all text OR all checkbox etc, can't have text and date and radio etc
+
+/* Log Out / return to login screen
+   When log out button is clicked, userAuth is set to false and passed to log in screen
+   If userAuth is false on log in page then the root is set to Log In page - user can't return to pages using back button */
+  logOut(){
+    let userAuth: boolean = false;
+    this.navCtrl.push(LogIn, {
+      userAuth
+    });
+  }
 
 // Open add new assignment page when user clicks "+" button
   openAddPage(databaseName, loggedin){

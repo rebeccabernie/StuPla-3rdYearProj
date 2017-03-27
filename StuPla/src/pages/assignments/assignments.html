@@ -16,7 +16,17 @@
 </ion-header>
 
 <ion-content>
-      <p color="tea-rose" margin-left="10">Logged in as: {{loggedin}}</p>
+  <ion-grid>
+    <ion-row>
+      <ion-col width-80>
+        <p color="tea-rose">Logged in as: {{loggedin}}</p>
+      </ion-col>
+      <ion-col width-20>
+        <p color="tea-rose" (click)="logOut()" horizontal-alignment="right"><u>Log Out</u></p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+      
   <ion-list>
     <!-- list of all assignments found in the array
          use async pipe - retrieve list of assignments and display when they become available

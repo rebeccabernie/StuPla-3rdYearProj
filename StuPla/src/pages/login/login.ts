@@ -5,13 +5,6 @@ import {Assignments} from '../assignments/assignments';
 
 // AngularFireAuth allows log in / sign up features
 
-/*
-  Generated class for the Login page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
-
 // Log In functions adapted from 
 // https://devdactic.com/ionic-2-firebase/
 
@@ -23,11 +16,20 @@ export class LogIn {
 
   loader: any;
   public user = {email: '', password: ''};
+  public userAuth: boolean = this.navParams.get('userAuth'); // from Assignments page
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AngularFireAuth, private alertCtrl: AlertController, private loadingCtrl: LoadingController) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AngularFireAuth, private alertCtrl: AlertController, private loadingCtrl: LoadingController) {
+    this.logOut();
+  }
 
+// Determine if user is logged in - 
+  public logOut(){
+    if (this.userAuth == false)    // i.e. user isn't logged in
+      this.navCtrl.setRoot(LogIn); // prevent user going back - should work with hardware back buttons on android?
+  }
+    
 // Register a user
- public registerUser() {
+  public registerUser() {
     this.showLoading() // Let user know stuff is loading
  
     this.auth.createUser(this.user).then((authData) => {
@@ -67,7 +69,7 @@ export class LogIn {
       this.loader.dismiss();
       this.navCtrl.setRoot(Assignments);
       this.navCtrl.push(Assignments, {
-          email, newemail //push the email and database name to assignments page for reference
+          email, newemail //push the email and database name (newemail) to assignments page for reference
       });
     }).catch((error) => {
       this.showError(error); // if log in is unsuccessful show error
