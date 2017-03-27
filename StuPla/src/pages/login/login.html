@@ -6,28 +6,30 @@
 -->
 
 <ion-header>
-  <ion-navbar >
+  <ion-navbar color="blue">
     <ion-title>
-      Log In or Sign Up
+      Log In
     </ion-title>
   </ion-navbar>
 </ion-header>
  
-<ion-content padding>
+<ion-content>
   <form>
+    <p align="center">Email</p>
     <ion-item>
-      <ion-label fixed>Email</ion-label>
       <ion-input type="email" name="email" [(ngModel)]="user.email"></ion-input>
     </ion-item>
  
+    <p align="center" padding-top="150px">Password</p>
     <ion-item>
-      <ion-label fixed>Password</ion-label>
       <ion-input type="password" name="password" [(ngModel)]="user.password"></ion-input>
     </ion-item>
- 
-    <div padding>
-      <button block (click)="login(user.email)">Login</button>
-      <button block (click)="registerUser()">Create New Account</button>
-    </div>
   </form>
+
+  <button class="login" ion-button color="dark-raspberry" (click)="login(user.email)">Login</button>
+
+  <div class="create">
+    <a color="coral" (click)="registerUser()"><u>Create New Account</u></a>
+  </div>
+
 </ion-content>
