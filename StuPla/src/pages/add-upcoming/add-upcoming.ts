@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { Assignments } from '../assignments/assignments';
-//import { FormBuilder, FormGroup, Validators} from '@angular/forms';
-//import { WorthValidator } from  '../../validators/worth';
 
 // Import AF2 List Observable for displaying contents of database
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
-import { ToastController } from 'ionic-angular';
-
 
 /*
   Generated class for the AddUpcoming page.

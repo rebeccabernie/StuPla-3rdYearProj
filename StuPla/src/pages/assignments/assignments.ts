@@ -3,6 +3,7 @@ import { NavController, NavParams, AlertController, ActionSheetController } from
 
 // Import AF2 List Observable for getting contents of database
 import { AngularFire, FirebaseListObservable, AngularFireAuth } from 'angularfire2';
+
 import { AddUpcoming } from '../add-upcoming/add-upcoming';
 import { EditAssignment } from '../edit-assignment/edit-assignment';
 import { LogIn } from '../login/login';
