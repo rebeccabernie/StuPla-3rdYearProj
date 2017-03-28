@@ -1,7 +1,7 @@
 <ion-menu [content]="content">
   <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu</ion-title>
+    <ion-toolbar color="blue">
+      <ion-title class="menu">Menu</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -9,9 +9,9 @@
     - automatic sidemenu close on link click taken from the Ionic 2 docs
 
 -->
-  <ion-content>
+  <ion-content class="no-scroll">
     <ion-list> 
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+      <button margin-top="10px" margin-bottom="10px"menuClose ion-item class="pages" *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
       </button>
     </ion-list>

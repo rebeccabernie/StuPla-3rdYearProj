@@ -2,7 +2,28 @@ ion-navbar {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-p, a {
-    font-size: 12px;
-    margin-top: 5px;
+.logged{
+    height: 30px;
+    margin-top: 0px;
+    padding: 0px;
+    margin-bottom: 0px;
+}
+
+.blue{
+    background-color: #7BB4D1;
+}
+
+
+.whitetext {
+    color: white;
+}
+
+.title {
+    text-align: left; 
+    margin-left: 0px;
+    padding-left: 0px;
+    color: white;
+    background-color: #7BB4D1;
+    font-size: large;
+    
 }

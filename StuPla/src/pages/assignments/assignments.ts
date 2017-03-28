@@ -22,7 +22,8 @@ export class Assignments {
 
 // NavParams from the Log In or Add / Edit pages
   public loggedin = this.navParams.get('email') || this.navParams.get('loggedin');
-  public databaseName = this.navParams.get('newemail') || this.navParams.get('databaseName');   
+  public databaseName = this.navParams.get('newemail') || this.navParams.get('databaseName');
+  public complete: boolean = false; // default not complete
 
 // Nav Params function adapted from http://www.gajotres.net/ionic-2-sharing-data-between-pagescomponents/
 
@@ -61,7 +62,7 @@ export class Assignments {
   }
 
 // Show options when assignment is clicked
-  showOptions(assignmentID, aName, aDue, aWorth, databaseName, loggedin) { // pass these to del/update functions
+  showOptions(assignmentID, aName, aDue, aWorth, databaseName, loggedin, complete) { // pass these to del/update functions
     databaseName = this.databaseName;
     loggedin = this.loggedin;
     console.log("DB: " + databaseName + "  Em: " + loggedin); // testing

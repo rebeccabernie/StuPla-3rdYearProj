@@ -14,3 +14,18 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.pages {
+    //padding: 20px;
+    font-family: Helvetica;
+    font-size: large;
+    font-style: italic;
+    text-align: center;
+    color: #EC7263; //coral
+}
+
+// Hide scrollbar adapted from 
+//http://stackoverflow.com/questions/35952538/how-can-i-disable-or-hide-the-scrollbar-within-an-ionic-2-ion-content
+.no-scroll .scroll-content{
+     overflow: hidden;
+}

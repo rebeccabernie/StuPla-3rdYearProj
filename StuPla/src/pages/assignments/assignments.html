@@ -1,32 +1,38 @@
-<ion-header>
-  <ion-navbar hideBackButton color="taupe">
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Assignments</ion-title>
+<ion-header class="blue">
+  <ion-grid>
+    <ion-row>
 
-<!-- ion-buttons end: button displayed at end/right of navbar -->
-    <ion-buttons end>
-      <button ion-button (click)="openAddPage()">
-        <ion-icon name="md-add"></ion-icon>
+      <ion-col width-10>
+        <button ion-button clear menuToggle class="whitetext">
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-col>
+
+      <ion-col width-70>
+        <button ion-button clear class="title">Assignments</button>
+      </ion-col>
+
+      <ion-col width-20>
+        <button ion-button clear class="whitetext" (click)="logOut()"><u>Log Out</u></button>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+    <!--<div style="float: left; vertical-align: center">-->
+  
+
+    
+<!--
+<div style="width:40%; float:right">
+ button displayed at end/right of navbar 
+      <button ion-button block color="coral">{{loggedin}} 
+        <ion-icon name="md-arrow-dropdown"></ion-icon>
       </button>
-    </ion-buttons>
-
-  </ion-navbar>
+</div>
+-->
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col width-80>
-        <p color="tea-rose">Logged in as: {{loggedin}}</p>
-      </ion-col>
-      <ion-col width-20>
-        <p color="tea-rose" (click)="logOut()" horizontal-alignment="right"><u>Log Out</u></p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-      
   <ion-list>
     <!-- list of all assignments found in the array
          use async pipe - retrieve list of assignments and display when they become available
@@ -45,6 +51,11 @@
              <!--Using pipe to display date, adapted from
             https://forum.ionicframework.com/t/formatting-date-time-for-display/60671/6
             answer from user "spera" 
+
+            <ion-col width-20>
+            <ion-checkbox color="dark" checked="true"></ion-checkbox>
+          </ion-col>
+
             
              -->
           </ion-col>
@@ -67,3 +78,11 @@
   </ion-list>
 
 </ion-content>
+
+<!-- Use of footer with toolbar for sizing adapted from 
+     https://ionicframework.com/docs/v2/api/components/toolbar/Footer/ -->
+<ion-footer>
+  <ion-toolbar color="dark-raspberry">
+    <button ion-button block full clear color="dark-raspberry" class="whitetext"(click)="openAddPage()">Add New Assignment</button>
+  </ion-toolbar>
+</ion-footer>
