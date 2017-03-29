@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, LoadingController, ToastController } from 'ionic-angular';
-import {AngularFireAuth, AuthProviders, AuthMethods} from 'angularfire2';
-import {Assignments} from '../assignments/assignments';
+import { AngularFireAuth, AuthProviders, AuthMethods } from 'angularfire2';
+import { Assignments } from '../assignments/assignments';
+import { CreateUser } from '../create-user/create-user';
 
 import firebase from 'firebase'; // for password reset
 
@@ -33,24 +34,9 @@ export class LogIn {
   }
     
 // Register a user
-  public registerUser() {
-    this.showLoading() // Let user know stuff is loading
- 
-    this.auth.createUser(this.user).then((authData) => {
-      setTimeout(() => {
-        this.loader.dismiss();
-      });
-      // If account is successfully created display success prompt
-      let prompt = this.alertCtrl.create({
-        title: 'Success!',
-        subTitle: 'Your new account was created!',
-        buttons: ['OK']
-      });
-      prompt.present();
-    }).catch((error) => { //if not successful, display error
-      this.showError(error);
-    });
-  }
+public openRegisterPage(){
+  this.navCtrl.push(CreateUser);
+}
 
 // User Log In
   public login() {
@@ -59,11 +45,10 @@ export class LogIn {
 
     // Get Database name
     // Firebase doesn't allow fullstops, got rid of @ too - just letters/numbers looks better
-    let re1 = "."; 
-    let re2 = "@"; 
+    let re1 = ".";
     let original = email;
-    let first = original.replace(re1, ""); 
-    let newemail = first.replace(re2, "").toLowerCase(); 
+    let first = original.replace(/re1/gi, "x"); 
+    let newemail = first.replace(/@/, "").toLowerCase(); 
  
     // Attempt to log the user in and push to assignments page
     this.auth.login(this.user, {

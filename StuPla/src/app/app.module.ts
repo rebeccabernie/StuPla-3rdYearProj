@@ -4,6 +4,8 @@ import { MyApp } from './app.component';
 
 import { Assignments } from '../pages/assignments/assignments';
 import { LogIn } from '../pages/login/login';
+import { CreateUser } from '../pages/create-user/create-user';
+
 import { AddUpcoming } from '../pages/add-upcoming/add-upcoming';
 import { EditAssignment } from '../pages/edit-assignment/edit-assignment';
 
@@ -30,6 +32,7 @@ export const firebaseConfig = {
     MyApp,
     Assignments,
     LogIn,
+    CreateUser,
     AddUpcoming,
     EditAssignment
     //Timetable,
@@ -44,6 +47,7 @@ export const firebaseConfig = {
     MyApp,
     Assignments,
     LogIn,
+    CreateUser,
     AddUpcoming,
     EditAssignment
     //Timetable,
