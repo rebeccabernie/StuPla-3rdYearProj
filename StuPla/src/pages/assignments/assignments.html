@@ -1,35 +1,22 @@
-<ion-header class="blue">
-  <ion-grid>
-    <ion-row>
+<ion-header>
+  <ion-navbar color="blue" hideBackButton>
 
-      <ion-col width-10>
-        <button ion-button clear menuToggle class="whitetext">
-          <ion-icon name="menu"></ion-icon>
-        </button>
-      </ion-col>
+   <ion-title>
+      Assignments
+    </ion-title>
 
-      <ion-col width-70>
-        <button ion-button clear class="title">Assignments</button>
-      </ion-col>
-
-      <ion-col width-20>
-        <button ion-button clear class="whitetext" (click)="logOut()"><u>Log Out</u></button>
-      </ion-col>
-
-    </ion-row>
-  </ion-grid>
-    <!--<div style="float: left; vertical-align: center">-->
-  
-
-    
-<!--
-<div style="width:40%; float:right">
- button displayed at end/right of navbar 
-      <button ion-button block color="coral">{{loggedin}} 
-        <ion-icon name="md-arrow-dropdown"></ion-icon>
+      <button ion-button clear class="whitetext" icon-only (click)="openMenu()">
+        <u>Help</u>
+        <!--<ion-icon name="md-help"></ion-icon>-->
       </button>
-</div>
--->
+
+    <!-- ion-buttons end: button displayed at end/right of navbar -->
+    <ion-buttons end>
+      <button ion-button clear class="whitetext" (click)="logOut()"><u>Log Out</u></button>
+    </ion-buttons>
+
+  </ion-navbar>
+  
 </ion-header>
 
 <ion-content>

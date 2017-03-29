@@ -1,12 +1,11 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+
 import { Assignments } from '../pages/assignments/assignments';
 import { LogIn } from '../pages/login/login';
 import { AddUpcoming } from '../pages/add-upcoming/add-upcoming';
 import { EditAssignment } from '../pages/edit-assignment/edit-assignment';
-import { HowTo } from '../pages/how-to/how-to';
-
 
 // Firebase / AngularFire2 Stuff
 // Adapted from https://www.joshmorony.com/building-a-crud-ionic-2-application-with-firebase-angularfire/
@@ -32,8 +31,7 @@ export const firebaseConfig = {
     Assignments,
     LogIn,
     AddUpcoming,
-    EditAssignment,
-    HowTo
+    EditAssignment
     //Timetable,
     //Subjects
   ],
@@ -47,8 +45,7 @@ export const firebaseConfig = {
     Assignments,
     LogIn,
     AddUpcoming,
-    EditAssignment,
-    HowTo
+    EditAssignment
     //Timetable,
     //Subjects
   ],

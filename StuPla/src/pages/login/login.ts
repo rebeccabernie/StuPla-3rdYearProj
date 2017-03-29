@@ -78,7 +78,8 @@ export class LogIn {
     }).catch((error) => {
       this.showError(error); // if log in is unsuccessful show error
     });
-  }
+
+  } // end log in
 
 // Forgot password
   forgotPassword(){
@@ -114,6 +115,7 @@ export class LogIn {
       buttons: ['OK']
     });
     prompt.present();
+    
   }
 
 }

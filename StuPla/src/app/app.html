@@ -1,7 +1,7 @@
 <ion-menu [content]="content">
   <ion-header>
     <ion-toolbar color="blue">
-      <ion-title class="menu">Menu</ion-title>
+      <ion-title class="menu">User Guide</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -10,11 +10,22 @@
 
 -->
   <ion-content class="no-scroll">
-    <ion-list> 
-      <button margin-top="10px" margin-bottom="10px"menuClose ion-item class="pages" *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
-      </button>
-    </ion-list>
+
+    <p class="title">Add A New Assignment</p>
+    <p class="info">Tap "Add New Assignment" and enter your information, click save.</p>
+
+    <p class="title">Delete An Existing Assignment</p>
+    <p class="info">Tap on the assignment you want to delete and select "Delete Assignment" on the prompt.</p>
+ 
+
+    <p class="title">Edit An Assignment</p>
+    <p class="info">Tap on the assignment you want to edit and select "Edit Assignment" from the prompt.</p>
+    <p class="info">Enter the updated information into the fields and click the save button.</p>
+    <p class="info">If you change your mind before saving simply tap the back button in the top left corner.</p>
+    <p class="warn"><em>Be careful when editing - once you save the changes, old information can't be retrieved!</em></p>
+
+    <button ion-button clear block menuClose class="title"><u>Got it!</u></button>
+
   </ion-content>
 
 </ion-menu>

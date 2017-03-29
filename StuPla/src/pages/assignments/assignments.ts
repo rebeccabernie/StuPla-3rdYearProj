@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, ActionSheetController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ActionSheetController, MenuController } from 'ionic-angular';
 
 // Import AF2 List Observable for getting contents of database
 import { AngularFire, FirebaseListObservable, AngularFireAuth } from 'angularfire2';
@@ -27,11 +27,12 @@ export class Assignments {
 
 // Nav Params function adapted from http://www.gajotres.net/ionic-2-sharing-data-between-pagescomponents/
 
-  constructor(public navCtrl: NavController, private navParams: NavParams, public asCtrl: ActionSheetController, public af: AngularFire, public auth: AngularFireAuth) {
+  constructor(public navCtrl: NavController, private navParams: NavParams, public asCtrl: ActionSheetController, public menuCtrl: MenuController, public af: AngularFire, public auth: AngularFireAuth) {
     // Database reference, listens to "assignments" node in the Firebase database
+
     this.assignments = af.database.list('/' + this.databaseName);
     console.log("DB: " + this.databaseName + "  Em: " + this.loggedin); // for testing navparams between pages
-    
+
   } // end constructor
 
 
@@ -47,6 +48,12 @@ export class Assignments {
     this.navCtrl.push(LogIn, {
       userAuth
     });
+  }
+
+// Open menu with MenuController adapted from
+//https://ionicframework.com/docs/v2/api/components/menu/MenuController/
+  openMenu(){
+    this.menuCtrl.open();
   }
 
 // Open add new assignment page when user clicks "+" button
@@ -114,7 +121,6 @@ export class Assignments {
       databaseName,
       loggedin
     });
-
   }
 
 // Calculate time left on assignment
