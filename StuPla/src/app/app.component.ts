@@ -1,10 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
-import { Assignments } from '../pages/assignments/assignments';
 import { LogIn } from '../pages/login/login';
-import { CreateUser } from '../pages/create-user/create-user';
 
 
 

@@ -40,15 +40,14 @@ public openRegisterPage(){
 
 // User Log In
   public login() {
-    let email = this.user.email; // example@email.com - with @/.
+    let email = this.user.email; // example@email.com, original email address
     this.showLoading();
 
-    // Get Database name
-    // Firebase doesn't allow fullstops, got rid of @ too - just letters/numbers looks better
-    //let re = /./gi;
-    let original = email;
-    //let first = original.replace(/@/, ""); // get rid of initial @
-    let newemail = original.replace(/\./g, "@").toLowerCase(); // can't have second @ in any email username - name.name@email.com becomes name@nameemailcom - no possibility of duplicate databases
+    // Get Database name - Firebase doesn't allow $ [ ] # @ . chars, got rid of @ too
+    // can't have [] within character class[] for replacing so just took it out, [] aren't valid in emails anyway (from quick online research)
+    let newemail = email.replace(/[$#@\.]/g, ",").toLowerCase(); // commas aren't valid in any email address but are allowed in firebase, credit to http://stackoverflow.com/questions/31904123/good-way-to-replace-invalid-characters-in-firebase-keys
+    // Replace multiple chars in one go adapted from http://stackoverflow.com/questions/16576983/replace-multiple-characters-in-one-replace-call
+    // toLowerCase used to prevent duplicate databases - emails aren't case sensitive, firebase DB names are
 
  
     // Attempt to log the user in and push to assignments page
