@@ -45,10 +45,11 @@ public openRegisterPage(){
 
     // Get Database name
     // Firebase doesn't allow fullstops, got rid of @ too - just letters/numbers looks better
-    let re1 = ".";
+    //let re = /./gi;
     let original = email;
-    let first = original.replace(/re1/gi, "x"); 
-    let newemail = first.replace(/@/, "").toLowerCase(); 
+    //let first = original.replace(/@/, ""); // get rid of initial @
+    let newemail = original.replace(/\./g, "@").toLowerCase(); // can't have second @ in any email username - name.name@email.com becomes name@nameemailcom - no possibility of duplicate databases
+
  
     // Attempt to log the user in and push to assignments page
     this.auth.login(this.user, {
