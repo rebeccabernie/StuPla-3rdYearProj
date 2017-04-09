@@ -17,7 +17,7 @@ import { LogIn } from '../login/login';
 export class CreateUser {
 
   loader: any;
-  public user = {name: '', email: '', password: ''};
+  public user = {email: '', password: ''};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AngularFireAuth, private alertCtrl: AlertController, private loadingCtrl: LoadingController, public toastCtrl: ToastController) {}
 
@@ -63,7 +63,7 @@ export class CreateUser {
     });
  
     let prompt = this.alertCtrl.create({
-      title: 'Fail',
+      title: 'Whoops!',
       subTitle: text,
       buttons: ['OK']
     });

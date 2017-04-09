@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, ActionSheetController, MenuController } from 'ionic-angular';
+import { NavController, NavParams, ActionSheetController, MenuController } from 'ionic-angular';
 
 // Import AF2 List Observable for getting contents of database
 import { AngularFire, FirebaseListObservable, AngularFireAuth } from 'angularfire2';
@@ -23,7 +23,6 @@ export class Assignments {
 // NavParams from the Log In or Add / Edit pages
   public loggedin = this.navParams.get('email') || this.navParams.get('loggedin');
   public databaseName = this.navParams.get('newemail') || this.navParams.get('databaseName');
-  public complete: boolean = false; // default not complete
 
 // Nav Params function adapted from http://www.gajotres.net/ionic-2-sharing-data-between-pagescomponents/
 
@@ -69,40 +68,100 @@ export class Assignments {
   }
 
 // Show options when assignment is clicked
-  showOptions(assignmentID, aName, aDue, aWorth, databaseName, loggedin, complete) { // pass these to del/update functions
+  showOptions(assignmentID, aName, aDue, aWorth, aStatus, databaseName, loggedin) { // pass these to del/update functions
     databaseName = this.databaseName;
     loggedin = this.loggedin;
     console.log("DB: " + databaseName + "  Em: " + loggedin); // testing
 
-    // Action Sheet adapted from https://ionicframework.com/docs/v2/components/#action-sheets
-    let actionSheet = this.asCtrl.create({
-      buttons: [
-        {
-          text: 'Edit Assignment',
-          role: 'destructive',
-          handler: () => {
-          this.editAssignment(assignmentID, aName, aDue, aWorth, databaseName, loggedin);
+    if (aStatus == "Incomplete"){
+      // Action Sheet adapted from https://ionicframework.com/docs/v2/components/#action-sheets
+      let actionSheet = this.asCtrl.create({
+    
+        buttons: [
+          {
+            text: 'Mark Complete',
+            role: 'destructive',
+            handler: () => {
+            this.changeStatus(assignmentID, aName, aDue, aWorth, aStatus);
+            }
+          },{
+            text: 'Edit Assignment',
+            role: 'destructive',
+            handler: () => {
+            this.editAssignment(assignmentID, aName, aDue, aWorth, aStatus, databaseName, loggedin);
+            }
+          },{
+            text: 'Delete Assignment',
+            role: 'destructive',
+            handler: () => {
+            this.deleteAssignment(assignmentID); // delete function only needs to know id
+            }
+          },{
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+            console.log('Cancel clicked'); // making sure it works
+            }
           }
-        },{
-          text: 'Delete Assignment',
-          role: 'destructive',
-          handler: () => {
-          this.deleteAssignment(assignmentID); // delete function only needs to know id
-          }
-        },{
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-          console.log('Cancel clicked'); // making sure it works
-          }
-        }
-      
-      ] // end buttons
-    }); // end actionSheet
+        ] // end buttons
+      }); // end actionSheet
+      actionSheet.present(); // Displays the action sheet
+    }// end if complete
 
-  actionSheet.present(); // Displays the action sheet
+    else { // else assignment is marked "complete"
+      let actionSheet = this.asCtrl.create({
+        buttons: [
+          {
+            text: 'Mark Incomplete',
+            role: 'destructive',
+            handler: () => {
+            this.changeStatus(assignmentID, aName, aDue, aWorth, aStatus);
+            }
+          },{
+            text: 'Edit Assignment',
+            role: 'destructive',
+            handler: () => {
+            this.editAssignment(assignmentID, aName, aDue, aWorth, aStatus, databaseName, loggedin);
+            }
+          },{
+            text: 'Delete Assignment',
+            role: 'destructive',
+            handler: () => {
+            this.deleteAssignment(assignmentID);
+            }
+          },{
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+            console.log('Cancel clicked');
+            }
+          }
+        ] // end buttons
+      }); // end actionSheet
+      actionSheet.present();
+    } // end else
 
   } // End showOptions
+
+ changeStatus(assignmentID, aName, aDue, aWorth, aStatus){
+    if (aStatus == "Incomplete"){
+      status = "Complete";
+    }
+    else {
+      status = "Incomplete";
+    }
+
+  // Currently working the same as editing assignment, all done in the background
+    this.assignments.remove(assignmentID); // delete old assignmentID
+
+    this.assignments.push({      // push new data to database
+      title: aName,
+      due: aDue,
+      worth: aWorth,
+      status: status,
+    });  
+
+ }
 
 // Delete Assignment
   deleteAssignment(assignmentID){
@@ -110,7 +169,7 @@ export class Assignments {
   }
 
 // "Edit" Assignment
-  editAssignment(assignmentID, aName, aDue, aWorth, databaseName, loggedin){
+  editAssignment(assignmentID, aName, aDue, aWorth, aStatus, databaseName, loggedin){
     console.log("DB: " + databaseName + "  Em: " + loggedin); // testing
     
     this.navCtrl.push(EditAssignment, {
@@ -118,6 +177,7 @@ export class Assignments {
       aName,
       aDue,
       aWorth,
+      aStatus,
       databaseName,
       loggedin
     });

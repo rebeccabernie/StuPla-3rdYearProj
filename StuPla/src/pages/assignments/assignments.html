@@ -26,13 +26,13 @@
          click handler for options to delete or update, only needs to know item ID
          $key = item id in firebase
     -->
-    <ion-item *ngFor="let a of assignments | async" (click)="showOptions(a.$key, a.title, a.due, a.worth)">
+    <ion-item *ngFor="let a of assignments | async" (click)="showOptions(a.$key, a.title, a.due, a.worth, a.status)">
       <!-- Grid adapted from https://ionicframework.com/docs/v2/components/#grid -->
 
       <ion-grid>
         <ion-row>
           
-          <ion-col width-50>
+          <ion-col width-45>
             <h2 color="blue">{{a.title}}</h2>
             <p>{{a.due | date: 'MMM dd, yyyy HH:mm'}}</p>
              <!--Using pipe to display date, adapted from
@@ -42,8 +42,6 @@
             <ion-col width-20>
             <ion-checkbox color="dark" checked="true"></ion-checkbox>
           </ion-col>
-
-            
              -->
           </ion-col>
           
@@ -52,9 +50,14 @@
             <p>{{countdown(a.due)}}</p>
           </ion-col>
 
-          <ion-col width-20>
+          <ion-col width-15>
             <h3 color="blue">Worth:</h3>
             <p>{{a.worth}}%</p>
+          </ion-col>
+
+          <ion-col width-10>
+            <h3 color="blue">Status:</h3>
+            <p>{{a.status}}</p>
           </ion-col>
 
         </ion-row>

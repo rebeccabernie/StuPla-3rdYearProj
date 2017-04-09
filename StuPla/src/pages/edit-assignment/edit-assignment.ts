@@ -15,6 +15,7 @@ export class EditAssignment {
   public title: String;
   public due: String = this.navParams.get('aDue'); // set default datepicker date to original information, acts like a placeholder
   public worth: number;
+  public status: String = this.navParams.get('aStatus'); 
 
 // Placeholder variables
   public aName = this.navParams.get('aName');
@@ -53,6 +54,7 @@ export class EditAssignment {
       title: this.title,
       due: this.due,
       worth: this.worth,
+      status: this.status
     });  
 
     let toast = this.toastCtrl.create({

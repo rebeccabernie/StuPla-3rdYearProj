@@ -44,6 +44,7 @@ export class AddUpcoming {
       title: this.title,
       due: this.due,
       worth: this.worth,
+      status: "Incomplete"
     });  
 
     // Toast controller adapted from Ionic Docs
