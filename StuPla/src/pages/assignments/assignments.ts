@@ -34,11 +34,6 @@ export class Assignments {
 
   } // end constructor
 
-
-// Basic Add / Read / Delete functions adapted from https://www.joshmorony.com/building-a-crud-ionic-2-application-with-firebase-angularfire/
-
-// Using a separate page for adding/editing info because Ionic 2 won't allow varied input types in one alert pop up, i.e. has to be all radio OR all text OR all checkbox etc, can't have text and date and radio etc
-
 /* Log Out / return to login screen
    When log out button is clicked, userAuth is set to false and passed to log in screen
    If userAuth is false on log in page then the root is set to Log In page - user can't return to pages using back button */
@@ -54,6 +49,11 @@ export class Assignments {
   openMenu(){
     this.menuCtrl.open();
   }
+
+// Basic Add / Read / Delete functions adapted from https://www.joshmorony.com/building-a-crud-ionic-2-application-with-firebase-angularfire/
+
+// Using a separate page for adding/editing info because Ionic 2 won't allow varied input types in one alert pop up, i.e. has to be all radio OR all text OR all checkbox etc, can't have text and date and radio etc
+
 
 // Open add new assignment page when user clicks "+" button
   openAddPage(databaseName, loggedin){
