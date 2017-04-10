@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { Assignments } from '../assignments/assignments';
+import { LocalNotifications } from 'ionic-native';
 
 // Import AF2 List Observable for displaying contents of database
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
+// Import MomentJS
+import * as moment from 'moment';
 
 /*
   Generated class for the AddUpcoming page.
@@ -26,11 +29,22 @@ export class AddUpcoming {
   public databaseName =  this.navParams.get('databaseName');
   public loggedin =  this.navParams.get('loggedin');
 
+// Notification stuff
+  notifyWeek: any;
+  notifyDay: any;
+  notifications: any[] = [];
+  // Active or not
+  weekRem: boolean;   // remind user a week before due date
+  dayRem: boolean;    // remind user day before due
+
   //public assignments = this.userid;
   assignments: FirebaseListObservable<any>;
 
   constructor(public navCtrl: NavController, private navParams: NavParams, af: AngularFire, public toastCtrl: ToastController ) {
     this.assignments = af.database.list('/' + this.databaseName);
+
+    this.notifyWeek = moment(this.due).subtract(7,'d').format(); // notify user 7 days before due?
+    this.notifyWeek = moment(this.due).subtract(7,'d').format(); // notify user 1 day before due
 
   } // end constructor
 
@@ -44,7 +58,9 @@ export class AddUpcoming {
       title: this.title,
       due: this.due,
       worth: this.worth,
-      status: "Incomplete"
+      status: "Incomplete",
+      notifyWeek: this.notifyWeek, //just testing
+      notifyDay: this.notifyDay
     });  
 
     // Toast controller adapted from Ionic Docs

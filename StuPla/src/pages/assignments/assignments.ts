@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ActionSheetController, MenuController } from 'ionic-angular';
-
+import { LocalNotifications } from 'ionic-native';
 // Import AF2 List Observable for getting contents of database
 import { AngularFire, FirebaseListObservable, AngularFireAuth } from 'angularfire2';
 
@@ -24,6 +24,15 @@ export class Assignments {
   public loggedin = this.navParams.get('email') || this.navParams.get('loggedin');
   public databaseName = this.navParams.get('newemail') || this.navParams.get('databaseName');
 
+// Notification stuff
+  notifyTime: any;
+  notifications: any[] = [];
+  //days: any[];
+  chosenHours: number;
+  chosenMinutes: number;
+  weekRem: boolean;   // remind user a week before due date
+  dayRem: boolean;    // remind user day before due
+
 // Nav Params function adapted from http://www.gajotres.net/ionic-2-sharing-data-between-pagescomponents/
 
   constructor(public navCtrl: NavController, private navParams: NavParams, public asCtrl: ActionSheetController, public menuCtrl: MenuController, public af: AngularFire, public auth: AngularFireAuth) {
@@ -31,6 +40,12 @@ export class Assignments {
 
     this.assignments = af.database.list('/' + this.databaseName);
     console.log("DB: " + this.databaseName + "  Em: " + this.loggedin); // for testing navparams between pages
+
+    // Notifications
+    this.notifyTime = moment(new Date()).format();
+
+    this.chosenHours = new Date().getHours();
+    this.chosenMinutes = new Date().getMinutes();
 
   } // end constructor
 
