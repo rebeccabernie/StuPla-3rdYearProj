@@ -41,12 +41,6 @@ export class Assignments {
     this.assignments = af.database.list('/' + this.databaseName);
     console.log("DB: " + this.databaseName + "  Em: " + this.loggedin); // for testing navparams between pages
 
-    // Notifications
-    this.notifyTime = moment(new Date()).format();
-
-    this.chosenHours = new Date().getHours();
-    this.chosenMinutes = new Date().getMinutes();
-
   } // end constructor
 
 /* Log Out / return to login screen
@@ -201,10 +195,10 @@ export class Assignments {
 // Calculate time left on assignment
   countdown(due){
     let now = moment(); // Gets current time
-    let end = moment(due);  //Convert due var into a momentjs var
+    let end = moment(due).add(1, 'h');  //Convert due var into a momentjs var
 
     let countdowndays = end.diff(now, 'days');  // Get the difference between end and now (current time) in days
-    let countdownhours = end.diff(now, 'hours');  // Same as above but in hours
+    let countdownhours = end.subtract(1,'h').diff(now, 'hours');  // Same as above but in hours, Moment rounds to whole hour so subtract an hour for better understanding - eg. current time = 3pm, due at 4:15pm - "due in 1 hour" better than "due in 2"?
 
     // Display in Days if more than 24 hours left
     if (countdownhours >= 24) {
@@ -218,6 +212,8 @@ export class Assignments {
     else {
       if (countdownhours < 0)
         return ( (countdownhours *-1) + " hours ago");
+      else if (countdownhours == 0)
+        return ("less than an hour"); 
       else
         return ("in " + countdownhours + " hours");
     }

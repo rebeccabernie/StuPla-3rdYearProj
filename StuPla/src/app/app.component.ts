@@ -3,6 +3,8 @@ import { Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { LogIn } from '../pages/login/login';
+import { Assignments } from '../pages/assignments/assignments';
+
 
 
 
@@ -11,7 +13,7 @@ import { LogIn } from '../pages/login/login';
 })
 export class MyApp {
 
-  rootPage: any = LogIn; // Want the app to start on the assignments tab so set that to the root page 
+  rootPage: any = Assignments; // Want the app to start on the assignments tab so set that to the root page 
 
   constructor(public platform: Platform) {
     this.initializeApp();

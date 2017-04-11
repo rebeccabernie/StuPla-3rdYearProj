@@ -5,6 +5,8 @@ import { Assignments } from '../assignments/assignments';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { ToastController } from 'ionic-angular';
 
+import * as moment from 'moment';
+
 @Component({
   selector: 'page-edit-assignment',
   templateUrl: 'edit-assignment.html'
@@ -50,9 +52,11 @@ export class EditAssignment {
     let databaseName = this.databaseName;
     let loggedin = this.loggedin;
 
+    let newDue = moment(this.due).subtract(1, 'h').toISOString(); // set to UTC time in database, can't figure out why but an hour gets added when pulling from database, counteract by subtracting an hour before adding
+
     this.assignments.push({      // push new data to database
       title: this.title,
-      due: this.due,
+      due: newDue,
       worth: this.worth,
       status: this.status
     });  
