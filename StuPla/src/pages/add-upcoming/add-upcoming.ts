@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, Platform, AlertController } from 'ionic-angular';
 import { Assignments } from '../assignments/assignments';
 import { LocalNotifications } from 'ionic-native';
 
@@ -33,7 +33,9 @@ export class AddUpcoming {
 // Notification stuff
   notifyWeek: any;
   notifyDay: any;
+
   notifications: any[] = [];
+  reminders: any[];
   // Active or not
   weekRem: boolean;   // remind user a week before due date
   dayRem: boolean;    // remind user day before due
@@ -41,17 +43,91 @@ export class AddUpcoming {
   //public assignments = this.userid;
   assignments: FirebaseListObservable<any>;
 
-  constructor(public navCtrl: NavController, private navParams: NavParams, af: AngularFire, public toastCtrl: ToastController ) {
+  constructor(public navCtrl: NavController, private navParams: NavParams, af: AngularFire, public toastCtrl: ToastController, public alCtrl: AlertController, public platform: Platform, ) {
     this.assignments = af.database.list('/' + this.databaseName);
 
-    this.notifyWeek = moment(this.due).subtract(7,'d').format(); // notify user 7 days before due?
+    this.notifyWeek = moment(this.due).subtract(7,'d').format(); // notify user 7 days before due
     this.notifyDay = moment(this.due).subtract(1,'d').format(); // notify user 1 day before due
-    console.log("W: " + moment(this.notifyWeek));
-    console.log("D: " + moment(this.notifyDay));
+
+     this.reminders = [
+            {title: '1 Week', remCode: 1, checked: false},
+            {title: '1 Day', remCode: 2, checked: false},
+     ]
 
   } // end constructor
 
+  addNotifications(){
+
+    for(let rem of this.reminders){
+ 
+      if(rem.checked){
+
+        if(rem.remCode == 1){
+          let weekNotification = moment(this.notifyWeek).toDate();
+
+          console.log("Reminded on " + weekNotification.toISOString())
+
+          // Create notification object
+          let notification = {
+              id: rem.remCode,
+              title: "Don't forget!",
+              text: 'You have an assignment due in one week',
+              at: this.notifyWeek,
+          };
+
+          this.notifications.push(notification);
+
+        }
+
+        else if(rem.remCode == 2){
+          //let day = 
+          let dayNotification = moment(this.notifyDay).toDate();
+
+          console.log("Reminded on " + dayNotification.toISOString())
+
+          // Create notification object
+          let notification = {
+              id: rem.remCode,
+              title: "Don't forget!",
+              text: 'You have an assignment due in one day',
+              at: this.notifyDay,
+          };
+
+          this.notifications.push(notification);
+
+          }
+  
+        }
+    }
+ 
+    console.log("Notifications to be scheduled: ", this.notifications);
+ 
+    if(this.platform.is('cordova')){
+ 
+        // Cancel any existing notifications
+        LocalNotifications.cancelAll().then(() => {
+ 
+            // Schedule the new notifications
+            LocalNotifications.schedule(this.notifications);
+ 
+            this.notifications = [];
+ 
+            let alert = this.alCtrl.create({
+                title: 'Notifications active!',
+                buttons: ['Ok']
+            });
+ 
+            alert.present();
+ 
+        });
+ 
+    }
+ 
+    }
+
   saveItem(){
+    this.addNotifications();
+
     let databaseName = this.databaseName;
     let loggedin = this.loggedin;
     console.log("DB: " + databaseName + "  Em: " + loggedin); // testing

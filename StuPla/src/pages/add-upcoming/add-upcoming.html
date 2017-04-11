@@ -34,8 +34,19 @@
       <ion-input required type="number" [(ngModel)]="worth" name="worth" min=0 max=100></ion-input>
     </ion-item>
 
+    <ion-item>
+      <ion-label>When would you like to be reminded?</ion-label>
+    </ion-item>
+
+    <ion-item *ngFor="let rem of reminders">
+      <ion-label>{{rem.title}}</ion-label>
+      <ion-checkbox [(ngModel)]="rem.checked" name="reminders" color="primary"></ion-checkbox>
+    </ion-item>
+
     <div padding>
       <button ion-button type="submit" color="coral" block>Save</button>
     </div>
+
   </form>
+
 </ion-content>

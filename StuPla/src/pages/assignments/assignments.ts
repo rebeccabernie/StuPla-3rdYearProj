@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ActionSheetController, MenuController } from 'ionic-angular';
+import { NavController, NavParams, ActionSheetController, MenuController, AlertController } from 'ionic-angular';
 import { LocalNotifications } from 'ionic-native';
 // Import AF2 List Observable for getting contents of database
 import { AngularFire, FirebaseListObservable, AngularFireAuth } from 'angularfire2';
@@ -24,22 +24,14 @@ export class Assignments {
   public loggedin = this.navParams.get('email') || this.navParams.get('loggedin');
   public databaseName = this.navParams.get('newemail') || this.navParams.get('databaseName');
 
-// Notification stuff
-  notifyTime: any;
-  notifications: any[] = [];
-  //days: any[];
-  chosenHours: number;
-  chosenMinutes: number;
-  weekRem: boolean;   // remind user a week before due date
-  dayRem: boolean;    // remind user day before due
-
 // Nav Params function adapted from http://www.gajotres.net/ionic-2-sharing-data-between-pagescomponents/
 
-  constructor(public navCtrl: NavController, private navParams: NavParams, public asCtrl: ActionSheetController, public menuCtrl: MenuController, public af: AngularFire, public auth: AngularFireAuth) {
+  constructor(public navCtrl: NavController, private navParams: NavParams, public asCtrl: ActionSheetController, public alCtrl: AlertController, public menuCtrl: MenuController, public af: AngularFire, public auth: AngularFireAuth) {
     // Database reference, listens to "assignments" node in the Firebase database
 
     this.assignments = af.database.list('/' + this.databaseName);
     console.log("DB: " + this.databaseName + "  Em: " + this.loggedin); // for testing navparams between pages
+
 
   } // end constructor
 
@@ -151,6 +143,38 @@ export class Assignments {
     } // end else
 
   } // End showOptions
+
+/*
+  editReminders() {
+    let alert = this.alCtrl.create();
+    alert.setTitle('When would you like to be reminded?');
+
+    alert.addInput({
+      type: 'checkbox',
+      label: '1 Week',
+      value: 'weekRem',
+      checked: false
+    });
+
+    alert.addInput({
+      type: 'checkbox',
+      label: '1 Day',
+      value: 'dayRem',
+      checked: false
+    });
+
+    alert.addButton('Cancel');
+    alert.addButton({
+      text: 'Okay',
+      handler: data => {
+        console.log('Checkbox data:', data);
+        this.checkboxOpen = false;
+        this.checkboxResult = data;
+      }
+    });
+    alert.present();
+  }
+  */ // moving reminder stuff to edit page for now
 
  changeStatus(assignmentID, aName, aDue, aWorth, aStatus){
     if (aStatus == "Incomplete"){
