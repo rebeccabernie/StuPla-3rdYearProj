@@ -48,6 +48,8 @@ export class AddUpcoming {
 
     this.notifyWeek = moment(this.due).subtract(7,'d').format(); // notify user 7 days before due
     this.notifyDay = moment(this.due).subtract(1,'d').format(); // notify user 1 day before due
+    console.log("W: " + this.notifyWeek);
+    console.log("D: " + this.notifyDay);
 
      this.reminders = [
             {title: '1 Week', remCode: 1, checked: false},
