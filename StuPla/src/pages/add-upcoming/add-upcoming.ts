@@ -89,12 +89,14 @@ export class AddUpcoming {
 }// end add
 
   saveItem(due){
-    this.notifyWeek = moment(due).subtract(8,'d').format(); // notify user 7 days before due
-    this.notifyDay = moment(due).subtract(25,'h').format(); // notify user 1 day before due
+    let notifyWeek = moment(due).subtract(7,'d').format(); // notify user 7 days before due
+    notifyWeek = moment(notifyWeek).subtract(1,'h').format();
 
-    this.addNotifications(this.notifyWeek, this.notifyDay);
-    console.log("W: " + this.notifyWeek);
-    console.log("D: " + this.notifyDay);
+    let notifyDay = moment(due).subtract(25,'h').format(); // notify user 1 day before due
+
+    this.addNotifications(notifyWeek, notifyDay);
+    console.log("W: " + notifyWeek);
+    console.log("D: " + notifyDay);
 
     let databaseName = this.databaseName;
     let loggedin = this.loggedin;
@@ -106,9 +108,7 @@ export class AddUpcoming {
       title: this.title,
       due: newDue,
       worth: this.worth,
-      status: "Incomplete",
-      notifyWeek: this.notifyWeek, //just testing
-      notifyDay: this.notifyDay
+      status: "Incomplete"
     });  
 
     // Toast controller adapted from Ionic Docs
