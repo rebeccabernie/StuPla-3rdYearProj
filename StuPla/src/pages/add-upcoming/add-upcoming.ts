@@ -43,7 +43,7 @@ export class AddUpcoming {
   //public assignments = this.userid;
   assignments: FirebaseListObservable<any>;
 
-  constructor(public navCtrl: NavController, private navParams: NavParams, af: AngularFire, public toastCtrl: ToastController, public alCtrl: AlertController, public platform: Platform, ) {
+  constructor(public navCtrl: NavController, private navParams: NavParams, af: AngularFire, public toastCtrl: ToastController, public alCtrl: AlertController, public platform: Platform) {
     this.assignments = af.database.list('/' + this.databaseName);
 
     this.notifyWeek = moment(this.due).subtract(7,'d').format(); // notify user 7 days before due
@@ -65,67 +65,33 @@ export class AddUpcoming {
       if(rem.checked){
 
         if(rem.remCode == 1){
-          let weekNotification = moment(this.notifyWeek).toDate();
-
-          console.log("Reminded on " + weekNotification.toISOString())
 
           // Create notification object
-          let notification = {
-              id: rem.remCode,
-              title: "Don't forget!",
-              text: 'You have an assignment due in one week',
-              at: this.notifyWeek,
-          };
-
-          this.notifications.push(notification);
+          LocalNotifications.schedule({
+            id: rem.remCode,
+            title: "Don't forget!",
+            text: 'You have an assignment due in one week',
+            at: this.notifyWeek,
+            //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
+            //data: { secret: key }
+          });
 
         }
 
         else if(rem.remCode == 2){
           //let day = 
-          let dayNotification = moment(this.notifyDay).toDate();
-
-          console.log("Reminded on " + dayNotification.toISOString())
-
-          // Create notification object
-          let notification = {
-              id: rem.remCode,
-              title: "Don't forget!",
-              text: 'You have an assignment due in one day',
-              at: this.notifyDay,
-          };
-
-          this.notifications.push(notification);
-
-          }
-  
-        }
-    }
- 
-    console.log("Notifications to be scheduled: ", this.notifications);
- 
-    if(this.platform.is('cordova')){
- 
-        // Cancel any existing notifications
-        LocalNotifications.cancelAll().then(() => {
- 
-            // Schedule the new notifications
-            LocalNotifications.schedule(this.notifications);
- 
-            this.notifications = [];
- 
-            let alert = this.alCtrl.create({
-                title: 'Notifications active!',
-                buttons: ['Ok']
-            });
- 
-            alert.present();
- 
-        });
- 
-    }
- 
-    }
+          LocalNotifications.schedule({
+            id: rem.remCode,
+            title: "Don't forget!",
+            text: 'You have an assignment due in one day',
+            at: this.notifyDay,
+            //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
+            //data: { secret: key }
+          });
+        } // end else
+      } // end checked
+    } // end for
+}// end add
 
   saveItem(){
     this.addNotifications();
