@@ -46,11 +46,6 @@ export class AddUpcoming {
   constructor(public navCtrl: NavController, private navParams: NavParams, af: AngularFire, public toastCtrl: ToastController, public alCtrl: AlertController, public platform: Platform) {
     this.assignments = af.database.list('/' + this.databaseName);
 
-    this.notifyWeek = moment(this.due).subtract(7,'d').format(); // notify user 7 days before due
-    this.notifyDay = moment(this.due).subtract(1,'d').format(); // notify user 1 day before due
-    console.log("W: " + this.notifyWeek);
-    console.log("D: " + this.notifyDay);
-
      this.reminders = [
             {title: '1 Week', remCode: 1, checked: false},
             {title: '1 Day', remCode: 2, checked: false},
@@ -58,7 +53,7 @@ export class AddUpcoming {
 
   } // end constructor
 
-  addNotifications(){
+  addNotifications(week, day){
 
     for(let rem of this.reminders){
  
@@ -71,7 +66,7 @@ export class AddUpcoming {
             id: rem.remCode,
             title: "Don't forget!",
             text: 'You have an assignment due in one week',
-            at: this.notifyWeek,
+            at: week,
             //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
             //data: { secret: key }
           });
@@ -84,7 +79,7 @@ export class AddUpcoming {
             id: rem.remCode,
             title: "Don't forget!",
             text: 'You have an assignment due in one day',
-            at: this.notifyDay,
+            at: day,
             //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
             //data: { secret: key }
           });
@@ -93,8 +88,13 @@ export class AddUpcoming {
     } // end for
 }// end add
 
-  saveItem(){
-    this.addNotifications();
+  saveItem(due){
+    this.notifyWeek = moment(due).subtract(8,'d').format(); // notify user 7 days before due
+    this.notifyDay = moment(due).subtract(25,'h').format(); // notify user 1 day before due
+
+    this.addNotifications(this.notifyWeek, this.notifyDay);
+    console.log("W: " + this.notifyWeek);
+    console.log("D: " + this.notifyDay);
 
     let databaseName = this.databaseName;
     let loggedin = this.loggedin;

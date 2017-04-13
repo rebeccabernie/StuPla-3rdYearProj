@@ -14,7 +14,7 @@
 
 
 <ion-content padding>
-  <form (submit)="saveItem()" >
+  <form (submit)="saveItem(due)" >
     <ion-item>
       <ion-label stacked>Assignment Title</ion-label>
       <ion-input required type="text" [(ngModel)]="title" name="title"></ion-input>
