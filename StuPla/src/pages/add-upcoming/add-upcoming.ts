@@ -90,11 +90,13 @@ export class AddUpcoming {
 
   saveItem(due){
     let notifyWeek = moment(due).subtract(7,'d').format(); // notify user 7 days before due
-    notifyWeek = moment(notifyWeek).subtract(1,'h').format();
+    let notifyW = moment(notifyWeek).subtract(1,'h').format();
+    let week = moment(notifyW).toDate();
 
     let notifyDay = moment(due).subtract(25,'h').format(); // notify user 1 day before due
+    let day = moment(notifyDay).toDate();
 
-    this.addNotifications(notifyWeek, notifyDay);
+    this.addNotifications(week, day);
     console.log("W: " + notifyWeek);
     console.log("D: " + notifyDay);
 
