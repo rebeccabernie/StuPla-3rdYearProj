@@ -53,7 +53,10 @@ export class AddUpcoming {
 
   } // end constructor
 
-  addNotifications(week, day){
+/*
+  addNotifications(week, day, atitle){
+
+    let assignment = atitle;
 
     for(let rem of this.reminders){
  
@@ -87,30 +90,32 @@ export class AddUpcoming {
       } // end checked
     } // end for
 }// end add
-
+*/
   saveItem(due){
     let notifyWeek = moment(due).subtract(7,'d').format(); // notify user 7 days before due
-    let notifyW = moment(notifyWeek).subtract(1,'h').format();
-    let week = moment(notifyW).toDate();
+    let nW = moment(notifyWeek).subtract(1,'h').format();
+    let weekNotif = moment(nW).toDate();
 
     let notifyDay = moment(due).subtract(25,'h').format(); // notify user 1 day before due
-    let day = moment(notifyDay).toDate();
+    let dayNotif = moment(notifyDay).toDate();
 
-    this.addNotifications(week, day);
-    console.log("W: " + notifyWeek);
-    console.log("D: " + notifyDay);
+    //this.addNotifications(week, day, this.title);
+    //console.log("W: " + notifyWeek);
+    //console.log("D: " + notifyDay);
 
     let databaseName = this.databaseName;
     let loggedin = this.loggedin;
     console.log("DB: " + databaseName + "  Em: " + loggedin); // testing
-    let newDue = moment(this.due).subtract(1, 'h').toISOString(); // set to UTC time in database, can't figure out why but an hour gets added when pulling from database, counteract by subtracting an hour before adding
+    let newDue = moment(this.due).subtract(1, 'h').toISOString(); // set to UTC time in database, can't figure out why but an hour gets added when pulling from database (something to do with Daylight Savings?), counteract by subtracting an hour before adding
 
     this.assignments.push({
       // "title" in database = "title" in data, push to firebase creates object and assigns it an ID
       title: this.title,
       due: newDue,
       worth: this.worth,
-      status: "Incomplete"
+      status: "Incomplete",
+      dayRem: dayNotif,
+      weekRem: weekNotif
     });  
 
     // Toast controller adapted from Ionic Docs

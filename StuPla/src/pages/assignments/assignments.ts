@@ -20,6 +20,9 @@ export class Assignments {
 
   assignments: FirebaseListObservable<any>; // populate assignments var
 
+  notifications: any[] = [];
+  reminders: any[];
+
 // NavParams from the Log In or Add / Edit pages
   public loggedin = this.navParams.get('email') || this.navParams.get('loggedin');
   public databaseName = this.navParams.get('newemail') || this.navParams.get('databaseName');
@@ -31,6 +34,11 @@ export class Assignments {
 
     this.assignments = af.database.list('/' + this.databaseName);
     console.log("DB: " + this.databaseName + "  Em: " + this.loggedin); // for testing navparams between pages
+
+    this.reminders = [
+            {title: '1 Week', remCode: 1, checked: false},
+            {title: '1 Day', remCode: 2, checked: false},
+     ]
 
 
   } // end constructor
@@ -244,4 +252,40 @@ export class Assignments {
 
   }
 
+  addNotifications(week, day, atitle){
+
+    let assignment = atitle;
+
+    for(let rem of this.reminders){
+ 
+      if(rem.checked){
+
+        if(rem.remCode == 1){
+
+          // Create notification object
+          LocalNotifications.schedule({
+            id: rem.remCode,
+            title: "Don't forget!",
+            text: 'You have an assignment due in one week',
+            at: week,
+            //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
+            //data: { secret: key }
+          });
+
+        }
+
+        else if(rem.remCode == 2){
+          //let day = 
+          LocalNotifications.schedule({
+            id: rem.remCode,
+            title: "Don't forget!",
+            text: 'You have an assignment due in one day',
+            at: day,
+            //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
+            //data: { secret: key }
+          });
+        } // end else
+      } // end checked
+    } // end for
+}// end add
 } // End Assignments class
