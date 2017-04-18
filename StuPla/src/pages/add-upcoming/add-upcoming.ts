@@ -45,12 +45,12 @@ export class AddUpcoming {
 
   constructor(public navCtrl: NavController, private navParams: NavParams, af: AngularFire, public toastCtrl: ToastController, public alCtrl: AlertController, public platform: Platform) {
     this.assignments = af.database.list('/' + this.databaseName);
-
+    /*
      this.reminders = [
             {title: '1 Week', remCode: 1, checked: false},
             {title: '1 Day', remCode: 2, checked: false},
      ]
-
+*/
   } // end constructor
 
 /*

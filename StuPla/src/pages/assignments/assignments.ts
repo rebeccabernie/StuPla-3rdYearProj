@@ -26,7 +26,7 @@ export class Assignments {
   reminders: any[];
 
   notificationSettingsOpen: boolean = false;
-  notifSettings;
+  notifSettings: any[];
 
 // NavParams from the Log In or Add / Edit pages
   public loggedin = this.navParams.get('email') || this.navParams.get('loggedin');
@@ -41,10 +41,10 @@ export class Assignments {
     console.log("DB: " + this.databaseName + "  Em: " + this.loggedin); // for testing navparams between pages
 
     this.reminders = [
-            {title: '1 Week', remCode: 1, checked: false},
-            {title: '1 Day', remCode: 2, checked: false},
-     ]
-
+            {title: '1 Day', remCode: 1, checked: false},
+            {title: '1 Week', remCode: 2, checked: false},
+     ]    
+     
   } // end constructor
 
 /* Log Out / return to login screen
@@ -60,20 +60,20 @@ export class Assignments {
 // Open menu with MenuController adapted from
 //https://ionicframework.com/docs/v2/api/components/menu/MenuController/
 
-openSettings(databaseName, loggedin){
-   let actionSheet = this.asCtrl.create({
+  openSettings(dayRem, weekRem){
+    let actionSheet = this.asCtrl.create({
      title: 'Settings',
      buttons: [ 
        {
          text: 'User Guide',
          handler: () =>{
-            this.openUserguide(databaseName, loggedin);
+            this.openUserguide();
          }
        },{
          text: 'Edit Notifications',
          //role: 'destructive',
          handler: () =>{
-            this.logOut();
+            this.notificationSettings(dayRem, weekRem);
          }
        },{
          text: 'Log Out',
@@ -91,42 +91,88 @@ openSettings(databaseName, loggedin){
    });
 
    actionSheet.present();
- }
-
-openUserguide(databaseName, loggedin){
-  this.navCtrl.push(Userguide, {
-    databaseName, loggedin
-  });
-}
-
-notificationSettings() {
-    let alert = this.alCtrl.create();
-    alert.setTitle('Which planets have you visited?');
-
-    alert.addInput({
-      type: 'checkbox',
-      label: '1 Week Before',
-      value: 'weekRem',
-      checked: true
-    });
-
-    alert.addInput({
-      type: 'checkbox',
-      label: '1 Day Before',
-      value: 'dayRem'
-    });
-
-    alert.addButton('Cancel');
-    alert.addButton({
-      text: 'Save',
-      handler: data => {
-        console.log('Checkbox data:', data);
-        this.notificationSettingsOpen = false;
-        this.notifSettings = data;
-      }
-    });
-    alert.present();
   }
+
+  openUserguide(){
+    this.navCtrl.push(Userguide, {
+      
+    });
+  }
+
+  notificationSettings(dayRem, weekRem) {
+    // Checkbox Alert adapted from https://ionicframework.com/docs/components/#alert-checkbox
+      let alert = this.alCtrl.create();
+      alert.setTitle('When would you like reminders?');
+
+      alert.addInput({
+        type: 'checkbox',
+        label: '1 Week Before',
+        value: 'weekRem',
+        checked: true
+      });
+
+      alert.addInput({
+        type: 'checkbox',
+        label: '1 Day Before',
+        value: 'dayRem'
+      });
+
+      alert.addButton('Cancel');
+      alert.addButton({
+        text: 'Save',
+        handler: data => {
+          console.log('Checkbox data:', data);
+          this.notificationSettingsOpen = false;
+          this.notifSettings = data;
+          this.addNotifications(this.notifSettings, dayRem, weekRem);
+        }
+      });
+      alert.present();
+    }
+
+    addNotifications(notifSettings, day, week){
+      let dayRem = false;
+      let weekRem = false;
+      let none = false;
+
+      // Get notification settings
+      notifSettings.forEach(element => {
+        if (element == "dayRem")
+          dayRem = true;
+        else if (element == "weekRem")
+          weekRem = true;
+        else if (element == null)
+          none = true;
+      });
+
+        // Set a notification for each 
+        this.assignments.forEach(element => {
+
+          if (dayRem == true){
+            LocalNotifications.schedule({
+              id: 1,
+              title: "StuPla Reminder",
+              text: 'You have an assignment due in one day!',
+              at: day,
+              //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
+              //data: { secret: key }
+            });
+          }
+
+          if (weekRem == true){
+            LocalNotifications.schedule({
+              id: 2,
+              title: "Don't forget!",
+              text: 'You have an assignment due in one week',
+              at: week,
+              //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
+              //data: { secret: key }
+            });
+          }
+            
+        });
+  
+    }// end add
 
 // Basic Add / Read / Delete functions adapted from https://www.joshmorony.com/building-a-crud-ionic-2-application-with-firebase-angularfire/
 
@@ -321,40 +367,4 @@ notificationSettings() {
 
   }
 
-  addNotifications(week, day, atitle){
-
-    let assignment = atitle;
-
-    for(let rem of this.reminders){
- 
-      if(rem.checked){
-
-        if(rem.remCode == 1){
-
-          // Create notification object
-          LocalNotifications.schedule({
-            id: rem.remCode,
-            title: "Don't forget!",
-            text: 'You have an assignment due in one week',
-            at: week,
-            //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
-            //data: { secret: key }
-          });
-
-        }
-
-        else if(rem.remCode == 2){
-          //let day = 
-          LocalNotifications.schedule({
-            id: rem.remCode,
-            title: "Don't forget!",
-            text: 'You have an assignment due in one day',
-            at: day,
-            //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
-            //data: { secret: key }
-          });
-        } // end else
-      } // end checked
-    } // end for
-}// end add
 } // End Assignments class
