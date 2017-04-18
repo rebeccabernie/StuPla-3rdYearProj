@@ -36,21 +36,21 @@ export class AddUpcoming {
 
   notifications: any[] = [];
   reminders: any[];
+
   // Active or not
   weekRem: boolean;   // remind user a week before due date
   dayRem: boolean;    // remind user day before due
 
-  //public assignments = this.userid;
   assignments: FirebaseListObservable<any>;
 
   constructor(public navCtrl: NavController, private navParams: NavParams, af: AngularFire, public toastCtrl: ToastController, public alCtrl: AlertController, public platform: Platform) {
     this.assignments = af.database.list('/' + this.databaseName);
-    /*
+    
      this.reminders = [
             {title: '1 Week', remCode: 1, checked: false},
             {title: '1 Day', remCode: 2, checked: false},
      ]
-*/
+
   } // end constructor
 
   addNotifications(week, day, atitle){
@@ -94,7 +94,7 @@ export class AddUpcoming {
     let notifyDay = moment(due).subtract(25,'h').format(); // notify user 1 day before due
     let dayNotif = moment(notifyDay).toDate();
 
-    //this.addNotifications(week, day, this.title);
+    this.addNotifications(weekNotif, dayNotif, this.title);
     //console.log("W: " + notifyWeek);
     //console.log("D: " + notifyDay);
 

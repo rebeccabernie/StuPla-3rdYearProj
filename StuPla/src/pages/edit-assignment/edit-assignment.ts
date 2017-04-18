@@ -4,6 +4,8 @@ import { Assignments } from '../assignments/assignments';
 // Import AF2 List Observable for displaying contents of database
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { ToastController } from 'ionic-angular';
+import { LocalNotifications } from 'ionic-native';
+
 
 import * as moment from 'moment';
 
@@ -30,6 +32,17 @@ export class EditAssignment {
   public databaseName =  this.navParams.get('databaseName');
   public loggedin =  this.navParams.get('loggedin');
 
+// Notification stuff
+  notifyWeek: any;
+  notifyDay: any;
+
+  notifications: any[] = [];
+  reminders: any[];
+
+  // Active or not
+  weekRem: boolean;   // remind user a week before due date
+  dayRem: boolean;    // remind user day before due
+
 // Database variable
   assignments: FirebaseListObservable<any>;
 
@@ -38,6 +51,11 @@ export class EditAssignment {
     // Database reference, listens to "assignments" node in the Firebase database and adds to this.assignments variable
     this.assignments = af.database.list('/' + this.databaseName);
 
+    this.reminders = [
+            {title: '1 Week', remCode: 1, checked: false},
+            {title: '1 Day', remCode: 2, checked: false},
+     ]
+
   } // end constructor
 
 // Save function - only runs when user clicks Save on page -> only deletes when they've saved new info
@@ -45,6 +63,17 @@ export class EditAssignment {
   saveItem(assignmentID){
     // using NavParams to pass params from one class to another adapted from
     // http://www.gajotres.net/ionic-2-sharing-data-between-pagescomponents/
+
+    let notifyWeek = moment(this.due).subtract(7,'d').format(); // notify user 7 days before due
+    let nW = moment(notifyWeek).subtract(1,'h').format();
+    let weekNotif = moment(nW).toDate();
+
+    let notifyDay = moment(this.due).subtract(25,'h').format(); // notify user 1 day before due
+    let dayNotif = moment(notifyDay).toDate();
+
+    this.addNotifications(weekNotif, dayNotif, this.title);
+    console.log("W: " + notifyWeek);
+    console.log("D: " + notifyDay);
 
     let ID = this.navParams.get('assignmentID');
     this.assignments.remove(ID); // delete old assignmentID
@@ -73,5 +102,38 @@ export class EditAssignment {
     }); // go back to assignments page when user saves
 
   }
+
+  addNotifications(week, day, atitle){
+
+    let assignment = atitle;
+
+    for(let rem of this.reminders){
+ 
+      if(rem.checked){
+
+        if(rem.remCode == 1){
+
+          // Create notification object
+          LocalNotifications.schedule({
+            id: rem.remCode,
+            title: "Don't forget!",
+            text: 'You have an assignment due in one week',
+            at: week
+          });
+
+        }
+
+        else if(rem.remCode == 2){
+          //let day = 
+          LocalNotifications.schedule({
+            id: rem.remCode,
+            title: "Don't forget!",
+            text: 'You have an assignment due in one day',
+            at: day
+          });
+        } // end else
+      } // end checked
+    } // end for
+}// end add
 
 } // End edit class
