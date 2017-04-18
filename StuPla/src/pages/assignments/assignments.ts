@@ -70,12 +70,6 @@ export class Assignments {
             this.openUserguide();
          }
        },{
-         text: 'Edit Notifications',
-         //role: 'destructive',
-         handler: () =>{
-            this.notificationSettings(dayRem, weekRem);
-         }
-       },{
          text: 'Log Out',
          handler: () =>{
             this.logOut();

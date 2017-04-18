@@ -53,7 +53,6 @@ export class AddUpcoming {
 */
   } // end constructor
 
-/*
   addNotifications(week, day, atitle){
 
     let assignment = atitle;
@@ -69,9 +68,7 @@ export class AddUpcoming {
             id: rem.remCode,
             title: "Don't forget!",
             text: 'You have an assignment due in one week',
-            at: week,
-            //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
-            //data: { secret: key }
+            at: week
           });
 
         }
@@ -82,15 +79,13 @@ export class AddUpcoming {
             id: rem.remCode,
             title: "Don't forget!",
             text: 'You have an assignment due in one day',
-            at: day,
-            //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
-            //data: { secret: key }
+            at: day
           });
         } // end else
       } // end checked
     } // end for
 }// end add
-*/
+
   saveItem(due){
     let notifyWeek = moment(due).subtract(7,'d').format(); // notify user 7 days before due
     let nW = moment(notifyWeek).subtract(1,'h').format();
