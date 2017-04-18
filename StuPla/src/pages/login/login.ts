@@ -34,9 +34,9 @@ export class LogIn {
   }
     
 // Register a user
-public openRegisterPage(){
-  this.navCtrl.push(CreateUser);
-}
+  openRegisterPage(){
+    this.navCtrl.push(CreateUser);
+  }
 
 // User Log In
   public login() {
@@ -93,10 +93,10 @@ public openRegisterPage(){
 
               if (email == ""){
                 let prompt = this.alertCtrl.create({
-                title: 'Whoops!',
-                subTitle: "Please enter your email.",
-                buttons: ['OK']
-              });
+                  title: 'Whoops!',
+                  subTitle: "Please enter your email.",
+                  buttons: ['OK']
+                });
 
               prompt.present();
 
@@ -115,7 +115,7 @@ public openRegisterPage(){
                     title: 'Whoops!',
                     subTitle: "Something went wrong... Make sure you entered the right email!",
                     buttons: ['OK']
-                    });
+                  });
 
                 this.fireauth.sendPasswordResetEmail(email).then(function() {
 
@@ -129,10 +129,11 @@ public openRegisterPage(){
                 }); 
               } // end if
           } // end handler
-        }
-      ]
-    });
-    prompt.present();
+        } // end save functions
+      ] // end buttons
+    }); // end create alert
+    
+    prompt.present(); // show reset prompt
 
   }
 

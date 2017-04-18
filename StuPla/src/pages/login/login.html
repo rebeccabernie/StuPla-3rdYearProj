@@ -6,7 +6,7 @@
 -->
 
 <ion-header>
-  <ion-navbar color="blue">
+  <ion-navbar color="dark-magenta">
     <ion-title style="width: 100%">
       StuPla :<em class="tracker"> The Assignment Tracker</em>
     </ion-title>
@@ -16,23 +16,23 @@
 <ion-content>
   <form class="logform">
 
-    <p class ="heading">Email</p>
+    <p class ="heading" color="blue">Email</p>
     <ion-item>
       <ion-input type="email" name="email" [(ngModel)]="user.email"></ion-input>
     </ion-item>
  
-    <p class ="heading" padding-top="150px">Password</p>
+    <p class ="heading" color="blue" padding-top="150px">Password</p>
     <ion-item>
       <ion-input type="password" name="password" [(ngModel)]="user.password"></ion-input>
     </ion-item>
   </form>
 
-  <button class="login" ion-button color="dark-raspberry" (click)="login(user.email)">Login</button>
+  <button class="login" ion-button color="coral" (click)="login(user.email)">Login</button>
 
   <div class="create">
     <a color="blue" (click)="openRegisterPage()"><u>Create New Account</u></a>
     <p>  </p>
-    <a color="coral" (click)="forgotPassword()"><u>Forgot password?</u></a>
+    <a color="dark-raspberry" (click)="forgotPassword()"><u>Forgot password?</u></a>
   </div>
 
   <!--<p class="help">To create an account, enter your information in the fields above and click "Create New Account"</p>-->

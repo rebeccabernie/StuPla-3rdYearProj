@@ -1,22 +1,17 @@
 <ion-header>
-  <ion-navbar color="blue" hideBackButton>
+  <ion-navbar color="dark-magenta" hideBackButton>
 
     <ion-title>
       StuPla
     </ion-title>
 
     <!-- ion-buttons end: button displayed at end/right of navbar-->
-<ion-buttons end>
+    <ion-buttons end>
       <button ion-button clear class="whitetext" icon-only (click)="openSettings()">
         <ion-icon name="settings"></ion-icon>
       </button>
-</ion-buttons>
+    </ion-buttons>
 
-    <!--
-      <button ion-button clear class="whitetext" (click)="logOut()"><u>Log Out</u></button>
-      <ion-menu side="right" [content]="mycontent">...</ion-menu>
-    
- -->
   </ion-navbar>
   
 </ion-header>
@@ -34,10 +29,10 @@
       <ion-grid>
         <ion-row>
           <ion-col>
-            <h2 color="blue">{{a.title}}</h2>
+            <p style="font-size: large" color="blue">{{a.title}}</p>
           </ion-col>
           <ion-col>
-            <h3 class="date">{{a.due | date: 'MMM dd, yyyy HH:mm'}}</h3>
+            <p style="font-size: medium" class="date" color="blue">{{a.due | date: 'MMM dd, yyyy HH:mm'}}</p>
              <!--Using pipe to display date, adapted from
             https://forum.ionicframework.com/t/formatting-date-time-for-display/60671/6
             answer from user "spera" 
@@ -48,20 +43,21 @@
 
         <ion-row>
           <ion-col width-40>
-            <h4 color="blue">Due:</h4>
-            <p class="info">{{countdown(a.due)}}</p>
+            <h4 color="coral">Due:</h4>
+            <p>{{countdown(a.due)}}</p>
           </ion-col>
 
           <ion-col width-40>
-            <h4 color="blue">Status:</h4>
-            <p class="info">{{a.status}}</p>
+            <h4 color="coral">Status:</h4>
+            <p>{{a.status}}</p>
           </ion-col>
 
           <ion-col width-20>
-            <h4 color="blue">Worth:</h4>
-            <p class="info">{{a.worth}}%</p>
+            <h4 color="coral">Worth:</h4>
+            <p>{{a.worth}}%</p>
           </ion-col>
         </ion-row>
+        
 
       </ion-grid>
 

@@ -24,6 +24,14 @@
     color: #EC7263; //coral
 }
 
+.title {
+    text-align: left; 
+    margin-left: 0px;
+    padding-left: 0px;
+    color: white;
+    font-size: large; 
+}
+
 // Hide scrollbar adapted from 
 //http://stackoverflow.com/questions/35952538/how-can-i-disable-or-hide-the-scrollbar-within-an-ionic-2-ion-content
 .no-scroll .scroll-content{

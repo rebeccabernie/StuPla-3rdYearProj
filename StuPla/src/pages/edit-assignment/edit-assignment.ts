@@ -15,15 +15,12 @@ import * as moment from 'moment';
 })
 export class EditAssignment {
 
-// Vars for input/pushing
-  public title: String;
-  public due: String = this.navParams.get('aDue'); // set default datepicker date to original information, acts like a placeholder
-  public worth: number;
-  public status: String = this.navParams.get('aStatus'); 
-
-// Placeholder variables
-  public aName = this.navParams.get('aName');
-  public aWorth = this.navParams.get('aWorth');
+// Vars for placeholders/input/pushing
+  public title = this.navParams.get('aName');;
+  public aDue: String = this.navParams.get('aDue'); // set default datepicker date to original information, acts like a placeholder
+  public due = moment(this.aDue).add(1,'h').toISOString();
+  public worth = this.navParams.get('aWorth');
+  public status: String = this.navParams.get('aStatus');
 
 // Today's date
   public today = new Date().toISOString()

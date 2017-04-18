@@ -1,6 +1,6 @@
 <ion-header>
 
-  <ion-navbar color="blue">
+  <ion-navbar color="dark-magenta">
     <ion-title>Account Set Up</ion-title>
   </ion-navbar>
 
@@ -11,17 +11,17 @@
 
   <form class="createform">
     
-    <p class ="heading">Email</p>
+    <p class ="heading" color="blue">Email</p>
     <ion-item>
       <ion-input type="email" name="email" [(ngModel)]="user.email"></ion-input>
     </ion-item>
  
-    <p class ="heading" padding-top="150px">Password</p>
+    <p class ="heading" color="blue" padding-top="150px">Password</p>
     <ion-item>
       <ion-input type="password" name="password" [(ngModel)]="user.password"></ion-input>
     </ion-item>
   </form>
 
-  <button class="create" ion-button color="dark-raspberry" (click)="registerUser()">Create Account</button>
+  <button class="create" ion-button color="coral" (click)="registerUser()">Create Account</button>
 
 </ion-content>

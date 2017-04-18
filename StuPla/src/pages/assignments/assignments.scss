@@ -2,18 +2,6 @@ ion-navbar {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.logged{
-    height: 30px;
-    margin-top: 0px;
-    padding: 0px;
-    margin-bottom: 0px;
-}
-
-.blue{
-    background-color: #7BB4D1;
-}
-
-
 .whitetext {
     color: white;
     margin-left: 5px;
@@ -21,24 +9,6 @@ ion-navbar {
     font-size: small;
 }
 
-.title {
-    text-align: left; 
-    margin-left: 0px;
-    padding-left: 0px;
-    color: white;
-    background-color: #7BB4D1;
-    font-size: large;
-    
-}
-.info {
-    //font-size: small;
-    color: #71808C;
-    padding-left: 0px;
-    text-align: left;
-    align-content: left;
-}
-
 .date {
-    color: #7BB4D1;
     text-align: right;
 }
