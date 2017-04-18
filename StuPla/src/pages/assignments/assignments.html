@@ -5,16 +5,18 @@
       Assignments
     </ion-title>
 
-      <button ion-button clear class="whitetext" icon-only (click)="openMenu()">
-        <u>Help</u>
-        <!--<ion-icon name="md-help"></ion-icon>-->
+    <!-- ion-buttons end: button displayed at end/right of navbar-->
+<ion-buttons end>
+      <button ion-button clear class="whitetext" icon-only (click)="openSettings()">
+        <ion-icon name="settings"></ion-icon>
       </button>
+</ion-buttons>
 
-    <!-- ion-buttons end: button displayed at end/right of navbar -->
-    <ion-buttons end>
+    <!--
       <button ion-button clear class="whitetext" (click)="logOut()"><u>Log Out</u></button>
-    </ion-buttons>
-
+      <ion-menu side="right" [content]="mycontent">...</ion-menu>
+    
+ -->
   </ion-navbar>
   
 </ion-header>
@@ -73,7 +75,6 @@
      https://ionicframework.com/docs/v2/api/components/toolbar/Footer/ -->
 <ion-footer>
   <ion-toolbar color="dark-raspberry">
-    <button ion-button block full clear color="dark-raspberry" class="whitetext"(click)="openAddPage()">Add New Assignment</button>
-    
+    <button ion-button block clear color="dark-raspberry" class="whitetext"(click)="openAddPage()">Add New Assignment</button>
   </ion-toolbar>
 </ion-footer>

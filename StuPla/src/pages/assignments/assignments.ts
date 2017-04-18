@@ -55,9 +55,39 @@ export class Assignments {
 
 // Open menu with MenuController adapted from
 //https://ionicframework.com/docs/v2/api/components/menu/MenuController/
-  openMenu(){
-    this.menuCtrl.open();
-  }
+
+openSettings (){
+   let actionSheet = this.asCtrl.create({
+     title: 'Settings',
+     buttons: [ 
+       {
+         text: 'User Guide',
+         handler: function() {
+           this.openUserguide();
+         }
+       },
+       {
+         text: 'Log Out',
+         role: 'destructive',
+         handler: function() {
+           this.logOut();
+         }
+       },{
+         text: 'Cancel',
+         role: 'cancel',
+         handler: () => {
+           console.log('Cancel clicked');
+         }
+       }
+     ]
+   });
+
+   actionSheet.present();
+ }
+
+openUserguide(){
+
+}
 
 // Basic Add / Read / Delete functions adapted from https://www.joshmorony.com/building-a-crud-ionic-2-application-with-firebase-angularfire/
 

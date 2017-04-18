@@ -8,6 +8,7 @@ import { CreateUser } from '../pages/create-user/create-user';
 
 import { AddUpcoming } from '../pages/add-upcoming/add-upcoming';
 import { EditAssignment } from '../pages/edit-assignment/edit-assignment';
+import { Userguide } from '../pages/userguide/userguide';
 
 // Firebase / AngularFire2 Stuff
 // Adapted from https://www.joshmorony.com/building-a-crud-ionic-2-application-with-firebase-angularfire/
@@ -34,7 +35,8 @@ export const firebaseConfig = {
     LogIn,
     CreateUser,
     AddUpcoming,
-    EditAssignment
+    EditAssignment,
+    Userguide
     //Timetable,
     //Subjects
   ],
@@ -49,7 +51,8 @@ export const firebaseConfig = {
     LogIn,
     CreateUser,
     AddUpcoming,
-    EditAssignment
+    EditAssignment,
+    Userguide
     //Timetable,
     //Subjects
   ],
