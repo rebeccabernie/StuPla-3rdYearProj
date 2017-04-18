@@ -7,10 +7,12 @@ import { AngularFire, FirebaseListObservable, AngularFireAuth } from 'angularfir
 import { AddUpcoming } from '../add-upcoming/add-upcoming';
 import { EditAssignment } from '../edit-assignment/edit-assignment';
 import { LogIn } from '../login/login';
+import { Userguide } from '../userguide/userguide';
 
 // Import MomentJS
 import * as moment from 'moment';
 //import * as format from 'moment-duration-format'; // Doesn't seem to be working for typescript...
+
 
 @Component({
   selector: 'page-assignments',
@@ -40,7 +42,6 @@ export class Assignments {
             {title: '1 Day', remCode: 2, checked: false},
      ]
 
-
   } // end constructor
 
 /* Log Out / return to login screen
@@ -56,21 +57,20 @@ export class Assignments {
 // Open menu with MenuController adapted from
 //https://ionicframework.com/docs/v2/api/components/menu/MenuController/
 
-openSettings (){
+openSettings(databaseName, loggedin){
    let actionSheet = this.asCtrl.create({
      title: 'Settings',
      buttons: [ 
        {
          text: 'User Guide',
-         handler: function() {
-           this.openUserguide();
+         handler: () =>{
+            this.openUserguide(databaseName, loggedin);
          }
-       },
-       {
+       },{
          text: 'Log Out',
-         role: 'destructive',
-         handler: function() {
-           this.logOut();
+         //role: 'destructive',
+         handler: () =>{
+            this.logOut();
          }
        },{
          text: 'Cancel',
@@ -85,8 +85,10 @@ openSettings (){
    actionSheet.present();
  }
 
-openUserguide(){
-
+openUserguide(databaseName, loggedin){
+  this.navCtrl.push(Userguide, {
+    databaseName, loggedin
+  });
 }
 
 // Basic Add / Read / Delete functions adapted from https://www.joshmorony.com/building-a-crud-ionic-2-application-with-firebase-angularfire/

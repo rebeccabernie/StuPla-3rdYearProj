@@ -12,6 +12,11 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class Userguide {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+    public loggedin = this.navParams.get('loggedin');
+    public databaseName = this.navParams.get('databaseName');
+
+
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  }
 
 }
