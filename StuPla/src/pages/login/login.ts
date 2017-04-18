@@ -48,7 +48,6 @@ public openRegisterPage(){
     let newemail = email.replace(/[$#@\.]/g, ",").toLowerCase(); // commas aren't valid in any email address but are allowed in firebase, credit to http://stackoverflow.com/questions/31904123/good-way-to-replace-invalid-characters-in-firebase-keys
     // Replace multiple chars in one go adapted from http://stackoverflow.com/questions/16576983/replace-multiple-characters-in-one-replace-call
     // toLowerCase used to prevent duplicate databases - emails aren't case sensitive, firebase DB names are
-
  
     // Attempt to log the user in and push to assignments page
     this.auth.login(this.user, {
@@ -68,7 +67,6 @@ public openRegisterPage(){
 
 // Forgot password
   forgotPassword(){
-    let email;
 
     let prompt = this.alertCtrl.create({
       title: 'Forgotten Password',
@@ -89,46 +87,52 @@ public openRegisterPage(){
         {
           text: 'Save',
           handler: data => {
-            console.log('OK');
-            email = data;
-          }
+            console.log(data.email);
+
+            let email = data.email;
+
+              if (email == ""){
+                let prompt = this.alertCtrl.create({
+                title: 'Whoops!',
+                subTitle: "Please enter your email.",
+                buttons: ['OK']
+              });
+
+              prompt.present();
+
+              }
+
+              if (email != null){
+                // Set up toast if successful
+                 let toast = this.toastCtrl.create({
+                    message: 'Reset link sent! Check your emails.',
+                    duration: 5000  // lasts 3 seconds
+                  });
+
+                // Set up an alert in case of error
+                console.log("Email: " + email);
+                let prompt = this.alertCtrl.create({
+                    title: 'Whoops!',
+                    subTitle: "Something went wrong... Make sure you entered the right email!",
+                    buttons: ['OK']
+                    });
+
+                this.fireauth.sendPasswordResetEmail(email).then(function() {
+
+                  toast.present();
+
+                }, function(error) {
+                  console.log("Something went wrong");
+
+                  prompt.present();
+
+                }); 
+              } // end if
+          } // end handler
         }
       ]
     });
     prompt.present();
-
-    //let email = this.user.email;
-
-    if (email == ""){
-      let prompt = this.alertCtrl.create({
-      title: 'Whoops!',
-      subTitle: "Please enter your email.",
-      buttons: ['OK']
-     });
-
-    prompt.present();
-
-    }
-
-    console.log(email)
-
-    if (email != null){
-
-      let prompt = this.alertCtrl.create({
-          title: 'Whoops!',
-          subTitle: "Something went wrong... Make sure you entered the right email!",
-          buttons: ['OK']
-          });
-
-      this.fireauth.sendPasswordResetEmail(this.user.email).then(function() {
-
-      }, function(error) {
-        console.log("Something went wrong");
-
-        prompt.present();
-
-      }); 
-    }
 
   }
 
