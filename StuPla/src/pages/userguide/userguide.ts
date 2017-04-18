@@ -12,6 +12,7 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class Userguide {
 
+// Passing database stuff back and forth, might not be needed, will comment out if not
     public loggedin = this.navParams.get('loggedin');
     public databaseName = this.navParams.get('databaseName');
 

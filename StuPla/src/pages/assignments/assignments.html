@@ -2,7 +2,7 @@
   <ion-navbar color="blue" hideBackButton>
 
     <ion-title>
-      Assignments
+      StuPla
     </ion-title>
 
     <!-- ion-buttons end: button displayed at end/right of navbar-->
@@ -33,10 +33,10 @@
 
       <ion-grid>
         <ion-row>
-          
-          <ion-col width-45>
+          <ion-col>
             <h2 color="blue">{{a.title}}</h2>
-            <p>{{a.due | date: 'MMM dd, yyyy HH:mm'}}</p>
+        
+            <p class="info">{{a.due | date: 'MMM dd, yyyy HH:mm'}}</p>
              <!--Using pipe to display date, adapted from
             https://forum.ionicframework.com/t/formatting-date-time-for-display/60671/6
             answer from user "spera" 
@@ -47,22 +47,25 @@
              -->
           </ion-col>
           
-          <ion-col width-30>
-            <h3 color="blue">Due:</h3>
-            <p>{{countdown(a.due)}}</p>
-          </ion-col>
-
-          <ion-col width-15>
-            <h3 color="blue">Worth:</h3>
-            <p>{{a.worth}}%</p>
-          </ion-col>
-
-          <ion-col width-10>
-            <h3 color="blue">Status:</h3>
-            <p>{{a.status}}</p>
-          </ion-col>
-
         </ion-row>
+
+        <ion-row>
+          <ion-col width-40>
+            <h4 color="blue">Due:</h4>
+            <p class="info">{{countdown(a.due)}}</p>
+          </ion-col>
+
+          <ion-col width-40>
+            <h4 color="blue">Status:</h4>
+            <p class="info">{{a.status}}</p>
+          </ion-col>
+
+          <ion-col width-20>
+            <h4 color="blue">Worth:</h4>
+            <p class="info">{{a.worth}}%</p>
+          </ion-col>
+        </ion-row>
+
       </ion-grid>
 
     </ion-item>
