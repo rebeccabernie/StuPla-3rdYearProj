@@ -68,15 +68,67 @@ public openRegisterPage(){
 
 // Forgot password
   forgotPassword(){
-    let email = this.user.email;
+    let email;
+
+    let prompt = this.alertCtrl.create({
+      title: 'Forgotten Password',
+      message: "Send Reset Link to:",
+      inputs: [
+        {
+          name: 'email',
+          placeholder: 'your@email.com'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            console.log('OK');
+            email = data;
+          }
+        }
+      ]
+    });
+    prompt.present();
+
+    //let email = this.user.email;
+
+    if (email == ""){
+      let prompt = this.alertCtrl.create({
+      title: 'Whoops!',
+      subTitle: "Please enter your email.",
+      buttons: ['OK']
+     });
+
+    prompt.present();
+
+    }
+
     console.log(email)
 
-    this.fireauth.sendPasswordResetEmail(this.user.email).then(function() {
+    if (email != null){
 
-    }, function(error) {
-      console.log("Something went wrong");
-    }); 
+      let prompt = this.alertCtrl.create({
+          title: 'Whoops!',
+          subTitle: "Something went wrong... Make sure you entered the right email!",
+          buttons: ['OK']
+          });
 
+      this.fireauth.sendPasswordResetEmail(this.user.email).then(function() {
+
+      }, function(error) {
+        console.log("Something went wrong");
+
+        prompt.present();
+
+      }); 
+    }
 
   }
 
