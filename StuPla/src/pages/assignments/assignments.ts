@@ -25,6 +25,9 @@ export class Assignments {
   notifications: any[] = [];
   reminders: any[];
 
+  notificationSettingsOpen: boolean = false;
+  notifSettings;
+
 // NavParams from the Log In or Add / Edit pages
   public loggedin = this.navParams.get('email') || this.navParams.get('loggedin');
   public databaseName = this.navParams.get('newemail') || this.navParams.get('databaseName');
@@ -67,8 +70,13 @@ openSettings(databaseName, loggedin){
             this.openUserguide(databaseName, loggedin);
          }
        },{
-         text: 'Log Out',
+         text: 'Edit Notifications',
          //role: 'destructive',
+         handler: () =>{
+            this.logOut();
+         }
+       },{
+         text: 'Log Out',
          handler: () =>{
             this.logOut();
          }
@@ -90,6 +98,35 @@ openUserguide(databaseName, loggedin){
     databaseName, loggedin
   });
 }
+
+notificationSettings() {
+    let alert = this.alCtrl.create();
+    alert.setTitle('Which planets have you visited?');
+
+    alert.addInput({
+      type: 'checkbox',
+      label: '1 Week Before',
+      value: 'weekRem',
+      checked: true
+    });
+
+    alert.addInput({
+      type: 'checkbox',
+      label: '1 Day Before',
+      value: 'dayRem'
+    });
+
+    alert.addButton('Cancel');
+    alert.addButton({
+      text: 'Save',
+      handler: data => {
+        console.log('Checkbox data:', data);
+        this.notificationSettingsOpen = false;
+        this.notifSettings = data;
+      }
+    });
+    alert.present();
+  }
 
 // Basic Add / Read / Delete functions adapted from https://www.joshmorony.com/building-a-crud-ionic-2-application-with-firebase-angularfire/
 
