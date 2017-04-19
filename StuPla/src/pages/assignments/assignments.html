@@ -23,6 +23,7 @@
          click handler for options to delete or update, only needs to know item ID
          $key = item id in firebase
     -->
+    <!-- Using word wrap for ion-item in case assignment title is long, adapted from http://stackoverflow.com/questions/32335101/how-to-wordwrap-a-long-string-in-ion-item -->
     <ion-item text-wrap  *ngFor="let a of assignments | async" (click)="showOptions(a.$key, a.title, a.due, a.worth, a.status)">
       <!-- Grid adapted from https://ionicframework.com/docs/v2/components/#grid -->
 
