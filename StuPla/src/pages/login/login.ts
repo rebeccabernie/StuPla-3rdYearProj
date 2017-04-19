@@ -85,49 +85,36 @@ export class LogIn {
           }
         },
         {
-          text: 'Save',
+          text: 'Send',
           handler: data => {
             console.log(data.email);
 
             let email = data.email;
+            
+            // Set up toast if successful
+              let toast = this.toastCtrl.create({
+                message: 'Reset link sent! Check your emails.',
+                duration: 5000  // lasts 3 seconds
+              });
 
-              if (email == ""){
-                let prompt = this.alertCtrl.create({
-                  title: 'Whoops!',
-                  subTitle: "Please enter your email.",
-                  buttons: ['OK']
-                });
+            // Set up an alert in case of error
+            console.log("Email: " + email);
+            let prompt = this.alertCtrl.create({
+                title: 'Whoops!',
+                subTitle: "Something went wrong... Make sure you entered the right email!",
+                buttons: ['OK']
+              });
+
+            this.fireauth.sendPasswordResetEmail(email).then(function() {
+
+              toast.present();
+
+            }, function(error) {
+              console.log("Something went wrong");
 
               prompt.present();
 
-              }
-
-              if (email != null){
-                // Set up toast if successful
-                 let toast = this.toastCtrl.create({
-                    message: 'Reset link sent! Check your emails.',
-                    duration: 5000  // lasts 3 seconds
-                  });
-
-                // Set up an alert in case of error
-                console.log("Email: " + email);
-                let prompt = this.alertCtrl.create({
-                    title: 'Whoops!',
-                    subTitle: "Something went wrong... Make sure you entered the right email!",
-                    buttons: ['OK']
-                  });
-
-                this.fireauth.sendPasswordResetEmail(email).then(function() {
-
-                  toast.present();
-
-                }, function(error) {
-                  console.log("Something went wrong");
-
-                  prompt.present();
-
-                }); 
-              } // end if
+            }); 
           } // end handler
         } // end save functions
       ] // end buttons

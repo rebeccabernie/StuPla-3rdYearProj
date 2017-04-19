@@ -17,26 +17,26 @@
   <form (submit)="saveItem(due)" >
 
     <p class="input" color="blue">Assignment Title</p>
-    <ion-item style="margin-bottom: 25px">
+    <ion-item class="add" style="margin-bottom: 25px">
       <ion-input required type="text" [(ngModel)]="title" name="title"></ion-input>
     </ion-item>
 
     <p class="input" color="blue">Date</p>
-    <ion-item style="margin-bottom: 25px">
+    <ion-item class="add" style="margin-bottom: 25px">
        <!-- ngModel used to create two-way data bindings for reading and writing input
            displayFormat taken from https://ionicframework.com/docs/v2/api/components/datetime/DateTime/
            -->
-       <ion-datetime required min={{due}} max="2019-12-31" displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="due" name="due" ></ion-datetime> 
+       <ion-datetime required min={{today}} max="2019-12-31" displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="due" name="due" ></ion-datetime> 
        <!--  -->  
     </ion-item>
 
     <p class="input" color="blue">Worth (%)</p>
-    <ion-item style="margin-bottom: 25px">
+    <ion-item class="add" style="margin-bottom: 25px">
       <ion-input required type="number" [(ngModel)]="worth" name="worth" min=0 max=100></ion-input>
     </ion-item>
 
     <div padding>
-      <button ion-button type="submit" color="coral" block>Save</button>
+      <button class="save" ion-button type="submit" color="coral" block>Save</button>
     </div>
 
   </form>

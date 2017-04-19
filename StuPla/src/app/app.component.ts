@@ -13,7 +13,7 @@ import { Assignments } from '../pages/assignments/assignments';
 })
 export class MyApp {
 
-  rootPage: any = Assignments; // Want the app to start on the assignments tab so set that to the root page 
+  rootPage: any = LogIn; // Want the app to start on the assignments tab so set that to the root page 
 
   constructor(public platform: Platform) {
     this.initializeApp();

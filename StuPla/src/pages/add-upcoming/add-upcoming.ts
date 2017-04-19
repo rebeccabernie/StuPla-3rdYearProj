@@ -29,6 +29,9 @@ export class AddUpcoming {
   public databaseName =  this.navParams.get('databaseName');
   public loggedin =  this.navParams.get('loggedin');
 
+// Today's date
+  public today = new Date().toISOString();
+
   assignments: FirebaseListObservable<any>;
 
   constructor(public navCtrl: NavController, private navParams: NavParams, af: AngularFire, public toastCtrl: ToastController, public alCtrl: AlertController, public platform: Platform) {
@@ -38,12 +41,10 @@ export class AddUpcoming {
 
   saveItem(due){
     // For notifications - saves when to notify in the database, doesn't actually schedule anything, just makes it easier to schedule
-    let notifyWeek = moment(due).subtract(7,'d').format(); // notify user 7 days before due
-    let nW = moment(notifyWeek).subtract(1,'h').format();
-    let weekNotif = moment(nW).toDate();
+    let nW = moment(due).subtract(7,'d').format(); // notify user 7 days before due
+    let notifyWeek = moment(nW).subtract(1,'h').format();
 
     let notifyDay = moment(due).subtract(25,'h').format(); // notify user 1 day before due
-    let dayNotif = moment(notifyDay).toDate();
 
     // Database name/user info
     let databaseName = this.databaseName;
@@ -58,8 +59,8 @@ export class AddUpcoming {
       due: newDue,
       worth: this.worth,
       status: "Incomplete",
-      dayRem: dayNotif,
-      weekRem: weekNotif
+      xdayRem: notifyDay,
+      xweekRem: notifyWeek,
     });  
 
     // Toast controller adapted from Ionic Docs
