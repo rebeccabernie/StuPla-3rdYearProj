@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ActionSheetController, MenuController, AlertController } from 'ionic-angular';
-import { LocalNotifications } from 'ionic-native';
+
 // Import AF2 List Observable for getting contents of database
 import { AngularFire, FirebaseListObservable, AngularFireAuth } from 'angularfire2';
 
@@ -22,12 +22,6 @@ export class Assignments {
 
   assignments: FirebaseListObservable<any>; // populate assignments var
 
-  notifications: any[] = [];
-  reminders: any[];
-
-  notificationSettingsOpen: boolean = false;
-  notifSettings: any[];
-
 // NavParams from the Log In or Add / Edit pages
   public loggedin = this.navParams.get('email') || this.navParams.get('loggedin');
   public databaseName = this.navParams.get('newemail') || this.navParams.get('databaseName');
@@ -40,11 +34,6 @@ export class Assignments {
     this.assignments = af.database.list('/' + this.databaseName);
     console.log("DB: " + this.databaseName + "  Em: " + this.loggedin); // for testing navparams between pages
 
-    this.reminders = [
-            {title: '1 Day', remCode: 1, checked: false},
-            {title: '1 Week', remCode: 2, checked: false},
-     ]    
-     
   } // end constructor
 
 /* Log Out / return to login screen
@@ -92,81 +81,6 @@ export class Assignments {
       
     });
   }
-
-  notificationSettings(dayRem, weekRem) {
-    // Checkbox Alert adapted from https://ionicframework.com/docs/components/#alert-checkbox
-      let alert = this.alCtrl.create();
-      alert.setTitle('When would you like reminders?');
-
-      alert.addInput({
-        type: 'checkbox',
-        label: '1 Week Before',
-        value: 'weekRem',
-        checked: true
-      });
-
-      alert.addInput({
-        type: 'checkbox',
-        label: '1 Day Before',
-        value: 'dayRem'
-      });
-
-      alert.addButton('Cancel');
-      alert.addButton({
-        text: 'Save',
-        handler: data => {
-          console.log('Checkbox data:', data);
-          this.notificationSettingsOpen = false;
-          this.notifSettings = data;
-          this.addNotifications(this.notifSettings, dayRem, weekRem);
-        }
-      });
-      alert.present();
-    }
-
-    addNotifications(notifSettings, day, week){
-      let dayRem = false;
-      let weekRem = false;
-      let none = false;
-
-      // Get notification settings
-      notifSettings.forEach(element => {
-        if (element == "dayRem")
-          dayRem = true;
-        else if (element == "weekRem")
-          weekRem = true;
-        else if (element == null)
-          none = true;
-      });
-
-        // Set a notification for each 
-        this.assignments.forEach(element => {
-
-          if (dayRem == true){
-            LocalNotifications.schedule({
-              id: 1,
-              title: "StuPla Reminder",
-              text: 'You have an assignment due in one day!',
-              at: day,
-              //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
-              //data: { secret: key }
-            });
-          }
-
-          if (weekRem == true){
-            LocalNotifications.schedule({
-              id: 2,
-              title: "Don't forget!",
-              text: 'You have an assignment due in one week',
-              at: week,
-              //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
-              //data: { secret: key }
-            });
-          }
-            
-        });
-  
-    }// end add
 
 // Basic Add / Read / Delete functions adapted from https://www.joshmorony.com/building-a-crud-ionic-2-application-with-firebase-angularfire/
 
@@ -260,38 +174,6 @@ export class Assignments {
     } // end else
 
   } // End showOptions
-
-/*
-  editReminders() {
-    let alert = this.alCtrl.create();
-    alert.setTitle('When would you like to be reminded?');
-
-    alert.addInput({
-      type: 'checkbox',
-      label: '1 Week',
-      value: 'weekRem',
-      checked: false
-    });
-
-    alert.addInput({
-      type: 'checkbox',
-      label: '1 Day',
-      value: 'dayRem',
-      checked: false
-    });
-
-    alert.addButton('Cancel');
-    alert.addButton({
-      text: 'Okay',
-      handler: data => {
-        console.log('Checkbox data:', data);
-        this.checkboxOpen = false;
-        this.checkboxResult = data;
-      }
-    });
-    alert.present();
-  }
-  */ // moving reminder stuff to edit page for now
 
  changeStatus(assignmentID, aName, aDue, aWorth, aStatus){
     if (aStatus == "Incomplete"){
