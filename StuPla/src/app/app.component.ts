@@ -3,7 +3,7 @@ import { Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { LogIn } from '../pages/login/login';
-import { Assignments } from '../pages/assignments/assignments';
+//import { Assignments } from '../pages/assignments/assignments';
 
 
 

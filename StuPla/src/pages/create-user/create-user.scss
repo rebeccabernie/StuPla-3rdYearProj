@@ -1,8 +1,5 @@
-button.create {
-    margin-top: 75px;
-    width: 60%;
-    margin-left: 20%;    
-    margin-right: 20%;
+.createform {
+    margin-top: 50px;
 }
 
 .inputfield {
@@ -13,12 +10,15 @@ button.create {
     padding: 0px;
 }
 
-.createform {
-    margin-top: 50px;
-}
-
 .heading {
     font-size: large;
     margin: 20px;
     text-align: center;
+}
+
+button.create {
+    margin-top: 75px;
+    width: 60%;
+    margin-left: 20%;    
+    margin-right: 20%;
 }

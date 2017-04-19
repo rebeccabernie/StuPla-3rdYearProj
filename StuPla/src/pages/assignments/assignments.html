@@ -23,15 +23,15 @@
          click handler for options to delete or update, only needs to know item ID
          $key = item id in firebase
     -->
-    <ion-item *ngFor="let a of assignments | async" (click)="showOptions(a.$key, a.title, a.due, a.worth, a.status)">
+    <ion-item text-wrap  *ngFor="let a of assignments | async" (click)="showOptions(a.$key, a.title, a.due, a.worth, a.status)">
       <!-- Grid adapted from https://ionicframework.com/docs/v2/components/#grid -->
 
       <ion-grid>
         <ion-row>
-          <ion-col>
+          <ion-col width-60>
             <p style="font-size: large" color="blue">{{a.title}}</p>
           </ion-col>
-          <ion-col>
+          <ion-col width-40>
             <p style="font-size: medium" class="date" color="blue">{{a.due | date: 'MMM dd, yyyy HH:mm'}}</p>
              <!--Using pipe to display date, adapted from
             https://forum.ionicframework.com/t/formatting-date-time-for-display/60671/6
