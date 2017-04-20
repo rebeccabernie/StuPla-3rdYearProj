@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController, Platform, AlertController } from 'ionic-angular';
 import { Assignments } from '../assignments/assignments';
+import { LocalNotifications } from 'ionic-native';
 
 // Import AF2 List Observable for displaying contents of database
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
@@ -32,10 +33,26 @@ export class AddUpcoming {
 // Today's date
   public today = new Date().toISOString();
 
+// Notification Stuff
+  notifyWeek: any;
+  notifyDay: any;
+
+  notifications: any[] = [];
+  reminders: any[];
+
+  // Active or not
+  weekRem: boolean;   // remind user a week before due date
+  dayRem: boolean;    // remind user day before due
+
   assignments: FirebaseListObservable<any>;
 
   constructor(public navCtrl: NavController, private navParams: NavParams, af: AngularFire, public toastCtrl: ToastController, public alCtrl: AlertController, public platform: Platform) {
     this.assignments = af.database.list('/' + this.databaseName);
+
+    this.reminders = [
+						{title: '1 Week', remCode: 1, checked: false},
+						{title: '1 Day', remCode: 2, checked: false},
+				 ]
 
   } // end constructor
 
@@ -43,9 +60,13 @@ export class AddUpcoming {
     // For notifications - saves when to notify in the database, doesn't actually schedule anything, just makes it easier to schedule
     let nW = moment(due).subtract(7,'d').format(); // notify user 7 days before due
     let notifyWeek = moment(nW).subtract(1,'h').format();
+    let weekNotif = moment(notifyWeek).toDate();
 
     let notifyDay = moment(due).subtract(25,'h').format(); // notify user 1 day before due
+    let dayNotif = moment(notifyDay).toDate();
 
+
+     this.addNotifications(weekNotif, dayNotif, this.title);
     // Database name/user info
     let databaseName = this.databaseName;
     let loggedin = this.loggedin;
@@ -77,5 +98,36 @@ export class AddUpcoming {
     }); // go back to assignments page when user saves new, push user info back
 
   }
+
+  addNotifications(week, day, atitle){
+
+    for(let rem of this.reminders){
+ 
+      if(rem.checked){
+
+        if(rem.remCode == 1){
+
+          // Create notification object
+          LocalNotifications.schedule({
+            id: rem.remCode,
+            title: "Don't forget!",
+            text: 'You have an assignment due in one week',
+            at: week
+          });
+
+        }
+
+        else if(rem.remCode == 2){
+          //let day = 
+          LocalNotifications.schedule({
+            id: rem.remCode,
+            title: "Don't forget!",
+            text: 'You have an assignment due in one day',
+            at: day
+          });
+        } // end else
+      } // end checked
+    } // end for
+}// end add
 
 } // End Add class
