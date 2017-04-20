@@ -36,13 +36,8 @@ export class AddUpcoming {
 // Notification Stuff
   notifyWeek: any;
   notifyDay: any;
-
   notifications: any[] = [];
   reminders: any[];
-
-  // Active or not
-  weekRem: boolean;   // remind user a week before due date
-  dayRem: boolean;    // remind user day before due
 
   assignments: FirebaseListObservable<any>;
 
@@ -118,7 +113,6 @@ export class AddUpcoming {
         }
 
         else if(rem.remCode == 2){
-          //let day = 
           LocalNotifications.schedule({
             id: rem.remCode,
             title: "Don't forget!",
