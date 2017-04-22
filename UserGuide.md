@@ -4,7 +4,8 @@ StuPla was created with the intent of being an app that is super simple to use, 
 
 ### Create an Account
 
-Tap "Create Account" on the log in screen. Enter your details - make sure your email is valid! Click the "Create Account" button.  
+Tap "Create Account" on the log in screen. Enter your details - make sure your email is valid!  
+Click the "Create Account" button.  
 The screen should show a prompt to let you know that you've successfully created an account.
 
 ### Log In
