@@ -15,11 +15,14 @@ For the definitive guide on how to use StuPla, see the [User Guide](https://gith
 The [Design Document](https://github.com/danielcregggmit/3rd-year-software-project-rebeccabernie/wiki) contains an in-depth account of features, technology behind the app and design methodology, as well as other useful information such as system setup/requirements.  
 
 
-### Download the App
+## Download the App
 
 You can download StuPla from the Google Play Store [here](https://play.google.com/store/apps/details?id=com.ionicframework.stupla106948).  
 
 We do not send out emails (except for password reset requests) - your email is only used for authentication and database set up. We also do not pass on any emails to any third parties.
+
+## The Future of StuPla
+I aim to keep growing this app, and I hope to have a remember-user function as well as notifications implemented before September 2017.
 
 ![splogo](https://cloud.githubusercontent.com/assets/14957616/25309206/7a66e7fe-27be-11e7-94a8-ec762c9dc44a.png "StuPla Portrait Logo")
 
