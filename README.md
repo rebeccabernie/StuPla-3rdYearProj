@@ -1,7 +1,11 @@
 # StuPla - ReadMe
 This is an independent project for 3rd Year Software Development in GMIT. The project (including Design Document) was worth 100% of a 5-credit module. The module ran for one semester, from January to late April.
 
-View the Video Demonstration on [Youtube](https://youtu.be/it6oKGZY2Kg) or download it by clicking "View Raw" on the StuPlaDemoVideo file(https://github.com/danielcregggmit/3rd-year-software-project-rebeccabernie/blob/master/StuPlaDemoVideo.avi).
+View the Video Demonstration on [Youtube](https://youtu.be/it6oKGZY2Kg) or download it by clicking "View Raw" on the [StuPlaDemoVideo](https://github.com/danielcregggmit/3rd-year-software-project-rebeccabernie/blob/master/StuPlaDemoVideo.avi) file.
+
+For the definitive guide on how to use StuPla, see the [User Guide](https://github.com/danielcregggmit/3rd-year-software-project-rebeccabernie/blob/master/UserGuide.md).
+
+The [Design Document](https://github.com/danielcregggmit/3rd-year-software-project-rebeccabernie/wiki) contains an in-depth account of features, technology behind the app and design methodology, as well as other useful information such as system setup/requirements.  
 
 
 ## What is StuPla?
@@ -12,10 +16,6 @@ StuPla is an app developed by a student, for students. Currently the main featur
 - Mark an existing assignment as "Complete" or "Incomplete"
 
 StuPla also has countdowns displayed with each assignment, making it easy for users to see how long is left for each assignment and plan out their time accordingly. User authentication coupled with a cloud-based database means the user can view their assignments from any device - the app also takes up very little space when installed.
-
-For the definitive guide on how to use StuPla, see the [User Guide](https://github.com/danielcregggmit/3rd-year-software-project-rebeccabernie/blob/master/UserGuide.md).
-
-The [Design Document](https://github.com/danielcregggmit/3rd-year-software-project-rebeccabernie/wiki) contains an in-depth account of features, technology behind the app and design methodology, as well as other useful information such as system setup/requirements.  
 
 ## Download the App
 
