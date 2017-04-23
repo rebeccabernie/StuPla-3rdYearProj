@@ -1,9 +1,9 @@
 # StuPla - ReadMe
-This is an independent project for 3rd Year Software Development in GMIT. The project (including Design Document) was worth 100% of a 5-credit module. The module ran for one semester, from January to late April.
+This is an independent project for 3rd Year Software Development in GMIT. The project (including Design Document, Video, ReadMe and UserGuide) was worth 100% of a 5-credit module. The module ran for one semester, from January to late April.
 
 View the Video Demonstration on [Youtube](https://youtu.be/it6oKGZY2Kg) or download it by clicking "View Raw" on the [StuPlaDemoVideo](https://github.com/danielcregggmit/3rd-year-software-project-rebeccabernie/blob/master/StuPlaDemoVideo.avi) file.
 
-For the definitive guide on how to use StuPla, see the [User Guide](https://github.com/danielcregggmit/3rd-year-software-project-rebeccabernie/blob/master/UserGuide.md).
+For the definitive guide on how to use StuPla, see the [User Guide](https://github.com/danielcregggmit/3rd-year-software-project-rebeccabernie/blob/master/UserGuide.md). If you want to run the app by means other than downloading from the Google Play Store, see the [System Requirements and Setup](https://github.com/danielcregggmit/3rd-year-software-project-rebeccabernie/wiki/2.-System-Requirements-and-Setup) in the Design Document. This is a detailed explanation  of what needs to be installed, how to install it, and various ways of running the app.
 
 The [Design Document](https://github.com/danielcregggmit/3rd-year-software-project-rebeccabernie/wiki) contains an in-depth account of features, technology behind the app and design methodology, as well as other useful information such as system setup/requirements.  
 
