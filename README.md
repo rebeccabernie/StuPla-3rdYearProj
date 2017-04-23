@@ -14,6 +14,7 @@ For the definitive guide on how to use StuPla, see the [User Guide](https://gith
 
 The [Design Document](https://github.com/danielcregggmit/3rd-year-software-project-rebeccabernie/wiki) contains an in-depth account of features, technology behind the app and design methodology, as well as other useful information such as system setup/requirements.  
 
+View the Video Demonstration on [Youtube](https://youtu.be/it6oKGZY2Kg).
 
 ## Download the App
 
