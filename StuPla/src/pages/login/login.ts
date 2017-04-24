@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, LoadingController, ToastController } from 'ionic-angular';
-import { AngularFire, AngularFireAuth, AuthProviders, AuthMethods } from 'angularfire2';
+import { AngularFireAuth, AuthProviders, AuthMethods } from 'angularfire2';
 import { Assignments } from '../assignments/assignments';
 import { CreateUser } from '../create-user/create-user';
 
@@ -19,37 +19,13 @@ export class LogIn {
 
   loader: any;
   public user = {email: '', password: ''};
-  public loggedIn: boolean = this.navParams.get('userAuth'); // from Assignments page
+  public userAuth: boolean = this.navParams.get('userAuth'); // from Assignments page
   public fireauth = firebase.auth();
-  //public loggedIn = true;
+  public loggedIn = true;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AngularFireAuth, private alertCtrl: AlertController, private loadingCtrl: LoadingController, public toastCtrl: ToastController, public af: AngularFire) {
-      this.logStatus();
+  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AngularFireAuth, private alertCtrl: AlertController, private loadingCtrl: LoadingController, public toastCtrl: ToastController, ) {
   }
 
-// Determine if user is logged in - 
-  public logStatus(){
-    this.af.auth.subscribe( user => {
-    if (user)
-      this.logExisting(user.uid);
-    else if (!user)
-    {
-      console.log("No user")
-      this.navCtrl.setRoot(LogIn);
-      this.loggedIn = false;
-    }
-    });
-  }
-
-  public logExisting(uid){
-    let users = this.af.database.object('users/' + uid);
-    this.loggedIn = true;
-    this.navCtrl.push(Assignments, {
-          uid
-        }); // go back to assignments page when user saves     
-  }
-
-    
 // Register a user
   openRegisterPage(){
     this.navCtrl.push(CreateUser);
@@ -61,7 +37,7 @@ export class LogIn {
     this.showLoading();
 
     // Get Database name - Firebase doesn't allow $ [ ] # @ . chars, got rid of @ too
-    // can't have [] within character class[] for replacing so just took it out, [] aren't valid in emails anyway (from quick online research)
+    // can't have [] within character class[$#@\.] for replacing so just took it out, [] aren't valid in emails anyway (from quick online research)
     let newemail = email.replace(/[$#@\.]/g, ",").toLowerCase(); // commas aren't valid in any email address but are allowed in firebase, credit to http://stackoverflow.com/questions/31904123/good-way-to-replace-invalid-characters-in-firebase-keys
     // Replace multiple chars in one go adapted from http://stackoverflow.com/questions/16576983/replace-multiple-characters-in-one-replace-call
     // toLowerCase used to prevent duplicate databases - emails aren't case sensitive, firebase DB names are
