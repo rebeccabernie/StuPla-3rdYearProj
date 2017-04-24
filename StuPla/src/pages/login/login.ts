@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, LoadingController, ToastController } from 'ionic-angular';
-import { AngularFireAuth, AuthProviders, AuthMethods } from 'angularfire2';
+import { AngularFire, AngularFireAuth, AuthProviders, AuthMethods } from 'angularfire2';
 import { Assignments } from '../assignments/assignments';
 import { CreateUser } from '../create-user/create-user';
 
@@ -19,19 +19,36 @@ export class LogIn {
 
   loader: any;
   public user = {email: '', password: ''};
-  public userAuth: boolean = this.navParams.get('userAuth'); // from Assignments page
+  public loggedIn: boolean = this.navParams.get('userAuth'); // from Assignments page
   public fireauth = firebase.auth();
+  //public loggedIn = true;
 
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AngularFireAuth, private alertCtrl: AlertController, private loadingCtrl: LoadingController, public toastCtrl: ToastController) {
-    this.logOut();
+  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AngularFireAuth, private alertCtrl: AlertController, private loadingCtrl: LoadingController, public toastCtrl: ToastController, public af: AngularFire) {
+      this.logStatus();
   }
 
 // Determine if user is logged in - 
-  public logOut(){
-    if (this.userAuth == false)    // i.e. user isn't logged in
-      this.navCtrl.setRoot(LogIn); // prevent user going back - should work with hardware back buttons on android?
+  public logStatus(){
+    this.af.auth.subscribe( user => {
+    if (user)
+      this.logExisting(user.uid);
+    else if (!user)
+    {
+      console.log("No user")
+      this.navCtrl.setRoot(LogIn);
+      this.loggedIn = false;
+    }
+    });
   }
+
+  public logExisting(uid){
+    let users = this.af.database.object('users/' + uid);
+    this.loggedIn = true;
+    this.navCtrl.push(Assignments, {
+          uid
+        }); // go back to assignments page when user saves     
+  }
+
     
 // Register a user
   openRegisterPage(){

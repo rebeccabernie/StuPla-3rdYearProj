@@ -26,6 +26,10 @@ export class Assignments {
   public loggedin = this.navParams.get('email') || this.navParams.get('loggedin');
   public databaseName = this.navParams.get('newemail') || this.navParams.get('databaseName');
 
+// Get UID of whoever's logged in
+  public uid = this.navParams.get('uid');
+
+
 // Nav Params function adapted from http://www.gajotres.net/ionic-2-sharing-data-between-pagescomponents/
 
   constructor(public navCtrl: NavController, private navParams: NavParams, public asCtrl: ActionSheetController, public alCtrl: AlertController, public menuCtrl: MenuController, public af: AngularFire, public auth: AngularFireAuth) {
@@ -217,11 +221,6 @@ export class Assignments {
     });
     confirm.present();
   }
-
-// Delete Assignment
-  /*deleteAssignment(assignmentID){
-    this.assignments.remove(assignmentID); // Searches database for assignment with corresponding ID and deletes it
-  }*/
 
 // "Edit" Assignment
   editAssignment(assignmentID, aName, aDue, aWorth, aStatus, databaseName, loggedin){
