@@ -126,7 +126,7 @@ export class Assignments {
             text: 'Delete Assignment',
             role: 'destructive',
             handler: () => {
-            this.deleteAssignment(assignmentID); // delete function only needs to know id
+            this.confirmDelete(assignmentID); // delete function only needs to know id
             }
           },{
             text: 'Cancel',
@@ -159,7 +159,7 @@ export class Assignments {
             text: 'Delete Assignment',
             role: 'destructive',
             handler: () => {
-            this.deleteAssignment(assignmentID);
+            this.confirmDelete(assignmentID);
             }
           },{
             text: 'Cancel',
@@ -195,10 +195,33 @@ export class Assignments {
 
  }
 
-// Delete Assignment
-  deleteAssignment(assignmentID){
-    this.assignments.remove(assignmentID); // Searches database for assignment with corresponding ID and deletes it
+ confirmDelete(assignmentID) {
+    let confirm = this.alCtrl.create({
+      title: 'Delete this assignment?',
+      message: 'It cannot be retrieved once you do!',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.assignments.remove(assignmentID);
+            console.log('Assignment deleted');
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
+
+// Delete Assignment
+  /*deleteAssignment(assignmentID){
+    this.assignments.remove(assignmentID); // Searches database for assignment with corresponding ID and deletes it
+  }*/
 
 // "Edit" Assignment
   editAssignment(assignmentID, aName, aDue, aWorth, aStatus, databaseName, loggedin){
