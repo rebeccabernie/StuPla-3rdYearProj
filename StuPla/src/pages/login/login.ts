@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, LoadingController, ToastController } from 'ionic-angular';
+import { Platform, NavController, NavParams, AlertController, LoadingController, ToastController } from 'ionic-angular';
 import { AngularFireAuth, AuthProviders, AuthMethods } from 'angularfire2';
 import { Assignments } from '../assignments/assignments';
 import { CreateUser } from '../create-user/create-user';
@@ -23,7 +23,10 @@ export class LogIn {
   public fireauth = firebase.auth();
   public loggedIn = true;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AngularFireAuth, private alertCtrl: AlertController, private loadingCtrl: LoadingController, public toastCtrl: ToastController, ) {
+  constructor(public platform: Platform, public navCtrl: NavController, public navParams: NavParams, public auth: AngularFireAuth, private alertCtrl: AlertController, private loadingCtrl: LoadingController, public toastCtrl: ToastController, ) {
+    platform.registerBackButtonAction(() => {
+        this.platform.exitApp();
+    });
   }
 
 // Register a user

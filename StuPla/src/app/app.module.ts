@@ -56,6 +56,6 @@ export const firebaseConfig = {
     //Timetable,
     //Subjects
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler} ]
 })
 export class AppModule {}
